@@ -1,18 +1,18 @@
 {
-    "name": "fschmtt/keycloak-rest-api-client-php",
+    "name": "overtrue/keycloak-rest-api-client-php",
     "description": "PHP client to interact with Keycloak's Admin REST API.",
     "type": "library",
     "require": {
         "php": "^8.4",
         "ext-json": "*",
-        "guzzlehttp/guzzle": "^7.3",
-        "lcobucci/jwt": "^5.2",
-        "symfony/serializer": "^7.1",
-        "symfony/property-access": "^7.1"
+        "guzzlehttp/guzzle": "^7.9",
+        "lcobucci/jwt": "^5.5",
+        "symfony/serializer": "^7.2",
+        "symfony/property-access": "^7.2"
     },
     "require-dev": {
-        "phpmetrics/phpmetrics": "^2.7",
-        "phpstan/phpstan": "^2.0",
+        "phpmetrics/phpmetrics": "^2.8",
+        "phpstan/phpstan": "^2.1",
         "ramsey/uuid": "^4.7",
         "phpunit/phpunit": "^10",
         "phpstan/phpstan-deprecation-rules": "^2.0",
