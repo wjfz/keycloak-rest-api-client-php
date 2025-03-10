@@ -1,4 +1,4 @@
-[![codecov](https://codecov.io/gh/overtrue/keycloak-rest-api-client-php/graph/badge.svg?token=uDlQdqBF5V)](https://codecov.io/gh/overtrue/keycloak-rest-api-client-php)
+[![codecov](https://codecov.io/gh/overtrue/keycloak-rest-api-client-php/graph/badge.svg?token=JSP1TB12UD)](https://codecov.io/gh/overtrue/keycloak-rest-api-client-php)
 ![PHP Analysis](https://github.com/overtrue/keycloak-rest-api-client-php/actions/workflows/php-analysis.yml/badge.svg?branch=main)
 ![PHP Unit](https://github.com/overtrue/keycloak-rest-api-client-php/actions/workflows/php-unit.yml/badge.svg?branch=main)
 ![PHP Integration (Keycloak compatibility)](https://github.com/overtrue/keycloak-rest-api-client-php/actions/workflows/php-integration.yml/badge.svg?branch=main)
@@ -24,7 +24,7 @@ composer require overtrue/keycloak-rest-api-client-php
 Example:
 
 ```php
-$keycloak = new \Fschmtt\Keycloak\Keycloak(
+$keycloak = new \Overtrue\Keycloak\Keycloak(
     baseUrl: 'http://keycloak:8080',
     username: 'admin',
     password: 'admin'
@@ -62,7 +62,7 @@ More examples can be found in the [examples](examples) directory.
 You can register and use custom resources by providing your own representations and resources, e.g.:
 
 ```php
-class MyCustomRepresentation extends \Fschmtt\Keycloak\Representation\Representation
+class MyCustomRepresentation extends \Overtrue\Keycloak\Representation\Representation
 {
     public function __construct(
         protected ?string $id = null,
@@ -71,12 +71,12 @@ class MyCustomRepresentation extends \Fschmtt\Keycloak\Representation\Representa
     }
 }
 
-class MyCustomResource extends \Fschmtt\Keycloak\Resource\Resource
+class MyCustomResource extends \Overtrue\Keycloak\Resource\Resource
 {
     public function myCustomEndpoint(): MyCustomRepresentation
     {
         return $this->queryExecutor->executeQuery(
-            new \Fschmtt\Keycloak\Http\Query(
+            new \Overtrue\Keycloak\Http\Query(
                 '/my-custom-endpoint',
                 MyCustomRepresentation::class,
             )
