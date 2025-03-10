@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Integration\Resource;
+namespace Overtrue\Keycloak\Test\Integration\Resource;
 
 use Exception;
-use Fschmtt\Keycloak\Http\Criteria;
-use Fschmtt\Keycloak\Representation\Group;
-use Fschmtt\Keycloak\Test\Integration\IntegrationTestBehaviour;
+use Overtrue\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Representation\Group;
+use Overtrue\Keycloak\Test\Integration\IntegrationTestBehaviour;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
@@ -15,7 +15,7 @@ class GroupsTest extends TestCase
 {
     use IntegrationTestBehaviour;
 
-    public function testImportSearchUpdateDeleteGroup(): void
+    public function test_import_search_update_delete_group(): void
     {
         $groups = $this->getKeycloak()->groups();
 
@@ -55,7 +55,7 @@ class GroupsTest extends TestCase
         }
     }
 
-    public function testCreateChildGroup(): void
+    public function test_create_child_group(): void
     {
         $this->skipIfKeycloakVersionIsLessThan('23.0.0');
 
@@ -79,7 +79,7 @@ class GroupsTest extends TestCase
         static::assertSame($childGroupName, $childGroup->getName());
 
         // get child group by path
-        $pathGroup = $groups->byPath('master', $importedGroupName . '/' . $childGroupName);
+        $pathGroup = $groups->byPath('master', $importedGroupName.'/'.$childGroupName);
         static::assertInstanceOf(Group::class, $pathGroup);
         static::assertSame($childGroup->getId(), $pathGroup->getId());
     }

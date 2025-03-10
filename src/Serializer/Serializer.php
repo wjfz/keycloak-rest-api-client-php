@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Serializer;
+namespace Overtrue\Keycloak\Serializer;
 
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
@@ -26,7 +26,7 @@ class Serializer
         ?string $keycloakVersion = null,
     ) {
         $classMetadataFactory = new ClassMetadataFactory(
-            new AttributeLoader(),
+            new AttributeLoader,
         );
 
         $metadataAwareNameConverter = new MetadataAwareNameConverter($classMetadataFactory);
@@ -40,15 +40,15 @@ class Serializer
         );
 
         $this->serializer = new SymfonySerializer([
-            new BackedEnumNormalizer(),
-            new ArrayDenormalizer(),
+            new BackedEnumNormalizer,
+            new ArrayDenormalizer,
             new CollectionDenormalizer($propertyNormalizer),
-            new MapNormalizer(),
-            new MapDenormalizer(),
+            new MapNormalizer,
+            new MapDenormalizer,
             new AttributeNormalizer($propertyNormalizer, $keycloakVersion),
             $propertyNormalizer,
         ], [
-            new JsonEncoder(),
+            new JsonEncoder,
         ]);
     }
 

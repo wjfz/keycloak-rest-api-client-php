@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak;
+namespace Overtrue\Keycloak;
 
-use Fschmtt\Keycloak\Http\Client;
-use Fschmtt\Keycloak\Http\CommandExecutor;
-use Fschmtt\Keycloak\Http\QueryExecutor;
-use Fschmtt\Keycloak\OAuth\TokenStorage\InMemory;
-use Fschmtt\Keycloak\OAuth\TokenStorageInterface;
-use Fschmtt\Keycloak\Resource\AttackDetection;
-use Fschmtt\Keycloak\Resource\Clients;
-use Fschmtt\Keycloak\Resource\Groups;
-use Fschmtt\Keycloak\Resource\Organizations;
-use Fschmtt\Keycloak\Resource\Realms;
-use Fschmtt\Keycloak\Resource\Resource;
-use Fschmtt\Keycloak\Resource\Roles;
-use Fschmtt\Keycloak\Resource\ServerInfo;
-use Fschmtt\Keycloak\Resource\Users;
-use Fschmtt\Keycloak\Serializer\Serializer;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\ClientInterface;
+use Overtrue\Keycloak\Http\Client;
+use Overtrue\Keycloak\Http\CommandExecutor;
+use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\OAuth\TokenStorage\InMemory;
+use Overtrue\Keycloak\OAuth\TokenStorageInterface;
+use Overtrue\Keycloak\Resource\AttackDetection;
+use Overtrue\Keycloak\Resource\Clients;
+use Overtrue\Keycloak\Resource\Groups;
+use Overtrue\Keycloak\Resource\Organizations;
+use Overtrue\Keycloak\Resource\Realms;
+use Overtrue\Keycloak\Resource\Resource;
+use Overtrue\Keycloak\Resource\Roles;
+use Overtrue\Keycloak\Resource\ServerInfo;
+use Overtrue\Keycloak\Resource\Users;
+use Overtrue\Keycloak\Serializer\Serializer;
 
 /**
  * @codeCoverageIgnore
@@ -28,17 +28,21 @@ use GuzzleHttp\ClientInterface;
 class Keycloak
 {
     private ?string $version = null;
+
     private Client $client;
+
     private Serializer $serializer;
+
     private CommandExecutor $commandExecutor;
+
     private QueryExecutor $queryExecutor;
 
     public function __construct(
         private readonly string $baseUrl,
         private readonly string $username,
         private readonly string $password,
-        private readonly TokenStorageInterface $tokenStorage = new InMemory(),
-        ?ClientInterface $guzzleClient = new GuzzleClient(),
+        private readonly TokenStorageInterface $tokenStorage = new InMemory,
+        ?ClientInterface $guzzleClient = new GuzzleClient,
     ) {
         $this->client = new Client($this, $guzzleClient, $this->tokenStorage);
         $this->serializer = new Serializer($this->version);
@@ -123,8 +127,7 @@ class Keycloak
     }
 
     /**
-     * @param class-string<Resource> $resource
-     * @return Resource
+     * @param  class-string<resource>  $resource
      */
     public function resource(string $resource): Resource
     {

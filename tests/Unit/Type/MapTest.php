@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Type;
+namespace Overtrue\Keycloak\Test\Unit\Type;
 
-use Fschmtt\Keycloak\Type\Map;
 use OutOfBoundsException;
+use Overtrue\Keycloak\Type\Map;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Map::class)]
 class MapTest extends TestCase
 {
-    public function testCanBeConstructedFromEmptyArray(): void
+    public function test_can_be_constructed_from_empty_array(): void
     {
-        $map = new Map();
+        $map = new Map;
 
         self::assertEquals(
             (object) [],
@@ -22,7 +22,7 @@ class MapTest extends TestCase
         );
     }
 
-    public function testBeConstructedFromFilledArray(): void
+    public function test_be_constructed_from_filled_array(): void
     {
         $array = [
             'key-1' => 'value-1',
@@ -38,7 +38,7 @@ class MapTest extends TestCase
         );
     }
 
-    public function testCanBeIterated(): void
+    public function test_can_be_iterated(): void
     {
         $map = new Map([
             'key-1' => 'value-1',
@@ -52,7 +52,7 @@ class MapTest extends TestCase
         }
     }
 
-    public function testCanBeCounted(): void
+    public function test_can_be_counted(): void
     {
         $map = new Map([
             'key-1' => 'value-1',
@@ -63,7 +63,7 @@ class MapTest extends TestCase
         static::assertCount(3, $map);
     }
 
-    public function testContains(): void
+    public function test_contains(): void
     {
         $map = new Map(['key-1' => 'value-1', 'key-2' => 'value-2']);
 
@@ -72,7 +72,7 @@ class MapTest extends TestCase
         static::assertFalse($map->contains('key-3'));
     }
 
-    public function testGet(): void
+    public function test_get(): void
     {
         $map = new Map(['key-1' => 'value-1', 'key-2' => 'value-2']);
 
@@ -80,7 +80,7 @@ class MapTest extends TestCase
         static::assertSame('value-2', $map->get('key-2'));
     }
 
-    public function testGetThrows(): void
+    public function test_get_throws(): void
     {
         $map = new Map(['key-1' => 'value-1', 'key-2' => 'value-2']);
 
@@ -90,7 +90,7 @@ class MapTest extends TestCase
         $map->get('key-3');
     }
 
-    public function testWith(): void
+    public function test_with(): void
     {
         $map = new Map(['key-1' => 'value-1', 'key-2' => 'value-2']);
 
@@ -101,7 +101,7 @@ class MapTest extends TestCase
         static::assertCount(3, $updatedMap);
     }
 
-    public function testWithout(): void
+    public function test_without(): void
     {
         $map = new Map(['key-1' => 'value-1', 'key-2' => 'value-2']);
 
@@ -112,7 +112,7 @@ class MapTest extends TestCase
         static::assertCount(1, $updatedMap);
     }
 
-    public function testGetMap(): void
+    public function test_get_map(): void
     {
         $inner = ['key-1' => 'value-1', 'key-2' => 'value-2'];
         $map = new Map($inner);

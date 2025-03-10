@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Integration\Resource;
+namespace Overtrue\Keycloak\Test\Integration\Resource;
 
-use Fschmtt\Keycloak\Collection\RealmCollection;
-use Fschmtt\Keycloak\Representation\Realm;
-use Fschmtt\Keycloak\Test\Integration\IntegrationTestBehaviour;
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Collection\RealmCollection;
+use Overtrue\Keycloak\Representation\Realm;
+use Overtrue\Keycloak\Test\Integration\IntegrationTestBehaviour;
+use Overtrue\Keycloak\Type\Map;
 use PHPUnit\Framework\TestCase;
 
 class RealmsTest extends TestCase
 {
     use IntegrationTestBehaviour;
 
-    public function testCanGetAllRealms(): void
+    public function test_can_get_all_realms(): void
     {
         $realms = $this->getKeycloak()->realms()->all();
 
@@ -22,21 +22,21 @@ class RealmsTest extends TestCase
         static::assertGreaterThanOrEqual(1, $realms->count());
     }
 
-    public function testCanGetRealm(): void
+    public function test_can_get_realm(): void
     {
         $realm = $this->getKeycloak()->realms()->get(realm: 'master');
 
         static::assertEquals('master', $realm->getRealm());
     }
 
-    public function testCanGetRealmKeys(): void
+    public function test_can_get_realm_keys(): void
     {
         $realmkeys = $this->getKeycloak()->realms()->keys(realm: 'master');
         static::assertArrayHasKey('AES', $realmkeys->getActive());
         static::assertGreaterThan(1, $realmkeys->getKeys()->count());
     }
 
-    public function testCanUpdateRealm(): void
+    public function test_can_update_realm(): void
     {
         $realm = $this->getKeycloak()->realms()->get(realm: 'master');
 
@@ -48,7 +48,7 @@ class RealmsTest extends TestCase
         static::assertTrue($realm->getRegistrationAllowed());
     }
 
-    public function testCanImportRealm(): void
+    public function test_can_import_realm(): void
     {
         $realm = new Realm(id: 'testing-id', realm: 'testing-realm');
         $realm = $this->getKeycloak()->realms()->import(realm: $realm);
@@ -59,7 +59,7 @@ class RealmsTest extends TestCase
         static::assertCount(2, $this->keycloak->realms()->all());
     }
 
-    public function testCanClearCaches(): void
+    public function test_can_clear_caches(): void
     {
         $this->expectNotToPerformAssertions();
 
@@ -70,42 +70,42 @@ class RealmsTest extends TestCase
         $this->getKeycloak()->realms()->clearUserCache($realm->getRealm());
     }
 
-    public function testCanClearKeysCache(): void
+    public function test_can_clear_keys_cache(): void
     {
         $this->expectNotToPerformAssertions();
 
         $this->getKeycloak()->realms()->clearKeysCache('master');
     }
 
-    public function testCanClearRealmCache(): void
+    public function test_can_clear_realm_cache(): void
     {
         $this->expectNotToPerformAssertions();
 
         $this->getKeycloak()->realms()->clearRealmCache('master');
     }
 
-    public function testCanClearUserCache(): void
+    public function test_can_clear_user_cache(): void
     {
         $this->expectNotToPerformAssertions();
 
         $this->getKeycloak()->realms()->clearUserCache('master');
     }
 
-    public function testCanGetAdminEvents(): void
+    public function test_can_get_admin_events(): void
     {
         $adminEvents = $this->getKeycloak()->realms()->adminEvents('master');
 
         static::assertEmpty($adminEvents);
     }
 
-    public function testCanDeleteAdminEvents(): void
+    public function test_can_delete_admin_events(): void
     {
         $this->expectNotToPerformAssertions();
 
         $this->getKeycloak()->realms()->deleteAdminEvents('master');
     }
 
-    public function testCanUpdateRealmAttributes(): void
+    public function test_can_update_realm_attributes(): void
     {
         $realm = $this->getKeycloak()->realms()->get(realm: 'master');
 

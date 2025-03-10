@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Resource;
+namespace Overtrue\Keycloak\Resource;
 
-use Fschmtt\Keycloak\Collection\RoleCollection;
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\Criteria;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Representation\Role;
+use Overtrue\Keycloak\Collection\RoleCollection;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Representation\Role;
 use Psr\Http\Message\ResponseInterface;
 
 class Roles extends Resource

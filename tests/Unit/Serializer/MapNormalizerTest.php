@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Serializer;
+namespace Overtrue\Keycloak\Test\Unit\Serializer;
 
 use ArrayObject;
-use Fschmtt\Keycloak\Serializer\MapNormalizer;
-use Fschmtt\Keycloak\Type\Map;
 use Generator;
 use InvalidArgumentException;
+use Overtrue\Keycloak\Serializer\MapNormalizer;
+use Overtrue\Keycloak\Type\Map;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -16,9 +16,9 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(MapNormalizer::class)]
 class MapNormalizerTest extends TestCase
 {
-    public function testSupportedTypes(): void
+    public function test_supported_types(): void
     {
-        $normalizer = new MapNormalizer();
+        $normalizer = new MapNormalizer;
 
         static::assertSame(
             [Map::class => true],
@@ -26,18 +26,18 @@ class MapNormalizerTest extends TestCase
         );
     }
 
-    public function testSupportsNormalization(): void
+    public function test_supports_normalization(): void
     {
-        $normalizer = new MapNormalizer();
+        $normalizer = new MapNormalizer;
 
-        static::assertTrue($normalizer->supportsNormalization(new Map()));
+        static::assertTrue($normalizer->supportsNormalization(new Map));
         static::assertFalse($normalizer->supportsNormalization([]));
     }
 
     #[DataProvider('maps')]
-    public function testNormalize(mixed $value, ArrayObject $expected): void
+    public function test_normalize(mixed $value, ArrayObject $expected): void
     {
-        $normalizer = new MapNormalizer();
+        $normalizer = new MapNormalizer;
 
         static::assertEquals(
             $expected,
@@ -45,9 +45,9 @@ class MapNormalizerTest extends TestCase
         );
     }
 
-    public function testThrowsIfDataIsNotAMap(): void
+    public function test_throws_if_data_is_not_a_map(): void
     {
-        $normalizer = new MapNormalizer();
+        $normalizer = new MapNormalizer;
 
         static::expectException(InvalidArgumentException::class);
         static::expectExceptionMessage(sprintf('Data must be an instance of "%s"', Map::class));
@@ -71,8 +71,8 @@ class MapNormalizerTest extends TestCase
         ];
 
         yield 'empty map' => [
-            new Map(),
-            new ArrayObject(),
+            new Map,
+            new ArrayObject,
         ];
     }
 }

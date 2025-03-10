@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Representation;
+namespace Overtrue\Keycloak\Test\Unit\Representation;
 
-use Fschmtt\Keycloak\Collection\GroupCollection;
-use Fschmtt\Keycloak\Representation\Group;
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Collection\GroupCollection;
+use Overtrue\Keycloak\Representation\Group;
+use Overtrue\Keycloak\Type\Map;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -43,10 +43,10 @@ class GroupTest extends TestCase
     }
 
     /**
-     * @param array<string, mixed> $properties
+     * @param  array<string, mixed>  $properties
      */
     #[DataProvider('provideProperties')]
-    public function testCanBeConstructedFromProperties(array $properties): void
+    public function test_can_be_constructed_from_properties(array $properties): void
     {
         $constructedGroup = Group::from($properties);
 
@@ -54,12 +54,12 @@ class GroupTest extends TestCase
     }
 
     /**
-     * @param array<mixed> $properties
+     * @param  array<mixed>  $properties
      */
     #[DataProvider('provideProperties')]
-    public function testCanBeBuilt(array $properties): void
+    public function test_can_be_built(array $properties): void
     {
-        $builtGroup = new Group();
+        $builtGroup = new Group;
 
         foreach ($properties as $property => $value) {
             $builtGroup = $builtGroup->with($property, $value);

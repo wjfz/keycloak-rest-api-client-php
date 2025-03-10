@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Json;
+namespace Overtrue\Keycloak\Json;
 
-use Fschmtt\Keycloak\Exception\JsonDecodeException;
 use JsonException;
+use Overtrue\Keycloak\Exception\JsonDecodeException;
 
 /**
  * @internal
@@ -14,6 +14,7 @@ class JsonDecoder
 {
     /**
      * @return array<mixed>
+     *
      * @throws JsonDecodeException
      */
     public function decode(string $json): array

@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Resource;
+namespace Overtrue\Keycloak\Test\Unit\Resource;
 
-use Fschmtt\Keycloak\Collection\ClientCollection;
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\CommandExecutor;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Http\QueryExecutor;
-use Fschmtt\Keycloak\Representation\Client as ClientRepresentation;
-use Fschmtt\Keycloak\Representation\Credential;
-use Fschmtt\Keycloak\Resource\Clients;
 use GuzzleHttp\Psr7\Response;
+use Overtrue\Keycloak\Collection\ClientCollection;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\CommandExecutor;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\Representation\Client as ClientRepresentation;
+use Overtrue\Keycloak\Representation\Credential;
+use Overtrue\Keycloak\Resource\Clients;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Clients::class)]
 class ClientsTest extends TestCase
 {
-    public function testGetAllClients(): void
+    public function test_get_all_clients(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/clients',
@@ -52,7 +52,7 @@ class ClientsTest extends TestCase
         );
     }
 
-    public function testGetClient(): void
+    public function test_get_client(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/clients/{clientUuid}',
@@ -82,7 +82,7 @@ class ClientsTest extends TestCase
         );
     }
 
-    public function testUpdateClient(): void
+    public function test_update_client(): void
     {
         $updatedClient = new ClientRepresentation(clientId: 'updated-client', id: 'uuid');
         $updatedClientId = $updatedClient->getId();
@@ -132,7 +132,7 @@ class ClientsTest extends TestCase
         );
     }
 
-    public function testImportClient(): void
+    public function test_import_client(): void
     {
         $importedClient = new ClientRepresentation(clientId: 'imported-client', id: 'uuid');
         $importedClientId = $importedClient->getId();
@@ -181,7 +181,7 @@ class ClientsTest extends TestCase
         );
     }
 
-    public function testDeleteClient(): void
+    public function test_delete_client(): void
     {
         $deletedClient = new ClientRepresentation(clientId: 'deleted-client', id: 'uuid');
         $deletedClientId = $deletedClient->getId();
@@ -213,7 +213,7 @@ class ClientsTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testGetUserSessions(): void
+    public function test_get_user_sessions(): void
     {
         $client = new ClientRepresentation(id: 'test-client');
         $clientId = $client->getId();
@@ -248,14 +248,14 @@ class ClientsTest extends TestCase
         );
     }
 
-    public function testGetClientSecret(): void
+    public function test_get_client_secret(): void
     {
         $client = new ClientRepresentation(id: 'test-client');
         $clientUuid = $client->getId();
 
         static::assertIsString($clientUuid);
 
-        $credential = new Credential();
+        $credential = new Credential;
 
         $query = new Query(
             '/admin/realms/{realm}/clients/{clientUuid}/client-secret',

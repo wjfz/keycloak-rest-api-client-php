@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Attribute\Since;
+use Overtrue\Keycloak\Attribute\Since;
 
 /**
  * @method string[]|null getClientSignatureAsymmetricAlgorithms()
  * @method self withClientSignatureAsymmetricAlgorithms(?string[] $value)
- *
  * @method string[]|null getClientSignatureSymmetricAlgorithms()
  * @method self withClientSignatureSymmetricAlgorithms(?string[] $value)
- *
  * @method string|null getCryptoProvider()
  * @method self withCryptoProvider(?string $value)
- *
  * @method string[]|null getSupportedKeystoreTypes()
  * @method self withSupportedKeystoreTypes(?string[] $value)
  *

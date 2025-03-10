@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Resource;
+namespace Overtrue\Keycloak\Resource;
 
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Type\Map;
 use Psr\Http\Message\ResponseInterface;
 
 class AttackDetection extends Resource

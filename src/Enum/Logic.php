@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Enum;
+namespace Overtrue\Keycloak\Enum;
 
 enum Logic: string implements Enum
 {

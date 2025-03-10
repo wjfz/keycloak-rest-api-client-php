@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Serializer;
+namespace Overtrue\Keycloak\Test\Unit\Serializer;
 
-use Fschmtt\Keycloak\Representation\Representation;
-use Fschmtt\Keycloak\Serializer\AttributeNormalizer;
-use Fschmtt\Keycloak\Test\Unit\Stub\Representation as StubRepresentation;
 use Generator;
+use Overtrue\Keycloak\Representation\Representation;
+use Overtrue\Keycloak\Serializer\AttributeNormalizer;
+use Overtrue\Keycloak\Test\Unit\Stub\Representation as StubRepresentation;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -18,24 +18,24 @@ use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
 #[CoversClass(AttributeNormalizer::class)]
 class AttributeNormalizerTest extends TestCase
 {
-    public function testSupportsRepresentation(): void
+    public function test_supports_representation(): void
     {
-        $normalizer = new AttributeNormalizer(new PropertyNormalizer());
+        $normalizer = new AttributeNormalizer(new PropertyNormalizer);
 
         static::assertSame(
             [Representation::class => true],
             $normalizer->getSupportedTypes(null),
         );
 
-        static::assertTrue($normalizer->supportsNormalization(new StubRepresentation()));
+        static::assertTrue($normalizer->supportsNormalization(new StubRepresentation));
 
-        static::assertFalse($normalizer->supportsNormalization(new stdClass()));
+        static::assertFalse($normalizer->supportsNormalization(new stdClass));
     }
 
-    public function testDoesNotFilterPropertiesIfVersionIsNotProvided(): void
+    public function test_does_not_filter_properties_if_version_is_not_provided(): void
     {
-        $representation = new StubRepresentation();
-        $normalizer = new AttributeNormalizer(new PropertyNormalizer(), null);
+        $representation = new StubRepresentation;
+        $normalizer = new AttributeNormalizer(new PropertyNormalizer, null);
 
         $filteredProperties = $normalizer->normalize($representation);
 
@@ -46,10 +46,10 @@ class AttributeNormalizerTest extends TestCase
     }
 
     #[DataProvider('supportedKeycloakVersions')]
-    public function testFiltersOutPropertyWhichHasNotYetBeenIntroduced(string $version): void
+    public function test_filters_out_property_which_has_not_yet_been_introduced(string $version): void
     {
-        $representation = new StubRepresentation();
-        $normalizer = new AttributeNormalizer(new PropertyNormalizer(), $version);
+        $representation = new StubRepresentation;
+        $normalizer = new AttributeNormalizer(new PropertyNormalizer, $version);
 
         $filteredProperties = $normalizer->normalize($representation);
         static::assertIsArray($filteredProperties);
@@ -62,10 +62,10 @@ class AttributeNormalizerTest extends TestCase
     }
 
     #[DataProvider('supportedKeycloakVersions')]
-    public function testFiltersOutPropertyWhichHasBeenRemoved(string $version): void
+    public function test_filters_out_property_which_has_been_removed(string $version): void
     {
-        $representation = new StubRepresentation();
-        $normalizer = new AttributeNormalizer(new PropertyNormalizer(), $version);
+        $representation = new StubRepresentation;
+        $normalizer = new AttributeNormalizer(new PropertyNormalizer, $version);
 
         $filteredProperties = $normalizer->normalize($representation);
         static::assertIsArray($filteredProperties);
@@ -78,10 +78,10 @@ class AttributeNormalizerTest extends TestCase
     }
 
     #[DataProvider('supportedKeycloakVersions')]
-    public function testFiltersOutPropertyWhichHasBeenIntroducedAndRemoved(string $version): void
+    public function test_filters_out_property_which_has_been_introduced_and_removed(string $version): void
     {
-        $representation = new StubRepresentation();
-        $normalizer = new AttributeNormalizer(new PropertyNormalizer(), $version);
+        $representation = new StubRepresentation;
+        $normalizer = new AttributeNormalizer(new PropertyNormalizer, $version);
 
         $filteredProperties = $normalizer->normalize($representation);
         static::assertIsArray($filteredProperties);
@@ -93,10 +93,10 @@ class AttributeNormalizerTest extends TestCase
         }
     }
 
-    public function testMemoizesFilteredPropertiesOfRepresentation(): void
+    public function test_memoizes_filtered_properties_of_representation(): void
     {
-        $representation = new StubRepresentation();
-        $normalizer = new AttributeNormalizer(new PropertyNormalizer(), '20.0.0');
+        $representation = new StubRepresentation;
+        $normalizer = new AttributeNormalizer(new PropertyNormalizer, '20.0.0');
 
         $reflection = new ReflectionClass($normalizer);
         $reflection->getProperty('filteredProperties')->setAccessible(true);

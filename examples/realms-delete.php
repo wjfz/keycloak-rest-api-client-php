@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Fschmtt\Keycloak\Keycloak;
-use Fschmtt\Keycloak\Representation\Realm;
+use Overtrue\Keycloak\Keycloak;
+use Overtrue\Keycloak\Representation\Realm;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 $keycloak = new Keycloak(
     baseUrl: $_SERVER['KEYCLOAK_BASE_URL'] ?? 'http://keycloak:8080',
@@ -17,9 +17,9 @@ $random = bin2hex(random_bytes(length: 8));
 
 $realm = $keycloak->realms()->import(
     new Realm(
-        displayName: 'My Random Realm ' . $random,
-        id: 'my-random-realm-' . $random,
-        realm: 'my-random-realm-' . $random,
+        displayName: 'My Random Realm '.$random,
+        id: 'my-random-realm-'.$random,
+        realm: 'my-random-realm-'.$random,
     ),
 );
 

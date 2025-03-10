@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Http;
+namespace Overtrue\Keycloak\Test\Unit\Http;
 
-use Fschmtt\Keycloak\Http\Client;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Http\QueryExecutor;
-use Fschmtt\Keycloak\Serializer\Serializer;
 use GuzzleHttp\Psr7\Response;
+use Overtrue\Keycloak\Http\Client;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\Serializer\Serializer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(QueryExecutor::class)]
 class QueryExecutorTest extends TestCase
 {
-    public function testCallsClientWithQueryProperties(): void
+    public function test_calls_client_with_query_properties(): void
     {
         $client = $this->createMock(Client::class);
         $client->expects(static::once())
@@ -33,7 +33,7 @@ class QueryExecutorTest extends TestCase
         );
     }
 
-    public function testDecodesArrayReturnType(): void
+    public function test_decodes_array_return_type(): void
     {
         $client = $this->createMock(Client::class);
         $client->expects(static::once())
@@ -54,7 +54,7 @@ class QueryExecutorTest extends TestCase
         );
     }
 
-    public function testDeserializesNonArrayReturnType(): void
+    public function test_deserializes_non_array_return_type(): void
     {
         $client = $this->createMock(Client::class);
         $client->expects(static::once())

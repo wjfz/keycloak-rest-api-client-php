@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Serializer;
+namespace Overtrue\Keycloak\Test\Unit\Serializer;
 
-use Fschmtt\Keycloak\Collection\ClientCollection;
-use Fschmtt\Keycloak\Collection\Collection;
-use Fschmtt\Keycloak\Collection\GroupCollection;
-use Fschmtt\Keycloak\Representation\Group;
-use Fschmtt\Keycloak\Serializer\CollectionDenormalizer;
-use Fschmtt\Keycloak\Serializer\CollectionSerializer;
+use Overtrue\Keycloak\Collection\ClientCollection;
+use Overtrue\Keycloak\Collection\Collection;
+use Overtrue\Keycloak\Collection\GroupCollection;
+use Overtrue\Keycloak\Representation\Group;
+use Overtrue\Keycloak\Serializer\CollectionDenormalizer;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
@@ -17,9 +16,9 @@ use Symfony\Component\Serializer\Normalizer\PropertyNormalizer;
 #[CoversClass(CollectionDenormalizer::class)]
 class CollectionDenormalizerTest extends TestCase
 {
-    public function testSupportedTypes(): void
+    public function test_supported_types(): void
     {
-        $denormalizer = new CollectionDenormalizer(new PropertyNormalizer());
+        $denormalizer = new CollectionDenormalizer(new PropertyNormalizer);
 
         static::assertSame(
             [Collection::class => true],
@@ -27,20 +26,20 @@ class CollectionDenormalizerTest extends TestCase
         );
     }
 
-    public function testSupportsDenormalization(): void
+    public function test_supports_denormalization(): void
     {
-        $denormalizer = new CollectionDenormalizer(new PropertyNormalizer());
+        $denormalizer = new CollectionDenormalizer(new PropertyNormalizer);
 
         static::assertTrue($denormalizer->supportsDenormalization([], ClientCollection::class));
         static::assertFalse($denormalizer->supportsDenormalization([], 'array'));
     }
 
-    public function testSerializesCollection(): void
+    public function test_serializes_collection(): void
     {
-        $denormalizer = new CollectionDenormalizer(new PropertyNormalizer());
+        $denormalizer = new CollectionDenormalizer(new PropertyNormalizer);
 
         $groupCollection = $denormalizer->denormalize(
-            [new Group(), new Group()],
+            [new Group, new Group],
             GroupCollection::class,
         );
 

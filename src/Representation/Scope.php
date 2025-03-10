@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Collection\PolicyCollection;
-use Fschmtt\Keycloak\Collection\ResourceCollection;
+use Overtrue\Keycloak\Collection\PolicyCollection;
+use Overtrue\Keycloak\Collection\ResourceCollection;
 
 /**
  * @codeCoverageIgnore

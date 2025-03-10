@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Http;
+namespace Overtrue\Keycloak\Http;
 
 /**
  * @internal
@@ -25,7 +25,7 @@ class Query
     public function getPath(): string
     {
         $placeholders = array_map(
-            static fn (string $parameter): string => '{' . $parameter . '}',
+            static fn (string $parameter): string => '{'.$parameter.'}',
             array_keys($this->parameters),
         );
 
@@ -37,16 +37,16 @@ class Query
             $this->path,
         );
 
-        return $path . $this->getQuery();
+        return $path.$this->getQuery();
     }
 
     private function getQuery(): string
     {
-        if (!$this->criteria) {
+        if (! $this->criteria) {
             return '';
         }
 
-        return '?' . http_build_query($this->criteria->jsonSerialize());
+        return '?'.http_build_query($this->criteria->jsonSerialize());
     }
 
     public function getReturnType(): string

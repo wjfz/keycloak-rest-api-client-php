@@ -2,22 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Integration\Resource;
+namespace Overtrue\Keycloak\Test\Integration\Resource;
 
-use Fschmtt\Keycloak\Collection\OrganizationDomainCollection;
-use Fschmtt\Keycloak\Representation\Organization;
-use Fschmtt\Keycloak\Representation\OrganizationDomain;
-use Fschmtt\Keycloak\Representation\Realm;
-use Fschmtt\Keycloak\Test\Integration\IntegrationTestBehaviour;
 use GuzzleHttp\Exception\ServerException;
+use Overtrue\Keycloak\Collection\OrganizationDomainCollection;
+use Overtrue\Keycloak\Representation\Organization;
+use Overtrue\Keycloak\Representation\OrganizationDomain;
+use Overtrue\Keycloak\Representation\Realm;
+use Overtrue\Keycloak\Test\Integration\IntegrationTestBehaviour;
 use PHPUnit\Framework\TestCase;
 
 class OrganizationsTest extends TestCase
 {
     use IntegrationTestBehaviour;
+
     private const REALM = 'organizations-tests';
 
-    public function testOrganizations(): void
+    public function test_organizations(): void
     {
         $this->skipIfKeycloakVersionIsLessThan('26.0.0');
 

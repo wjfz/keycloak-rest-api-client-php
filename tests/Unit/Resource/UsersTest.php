@@ -2,31 +2,30 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Resource;
+namespace Overtrue\Keycloak\Test\Unit\Resource;
 
-use Fschmtt\Keycloak\Collection\CredentialCollection;
-use Fschmtt\Keycloak\Collection\GroupCollection;
-use Fschmtt\Keycloak\Collection\RoleCollection;
-use Fschmtt\Keycloak\Collection\UserCollection;
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\CommandExecutor;
-use Fschmtt\Keycloak\Http\ContentType;
-use Fschmtt\Keycloak\Http\Criteria;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Http\QueryExecutor;
-use Fschmtt\Keycloak\Representation\Group;
-use Fschmtt\Keycloak\Representation\Role;
-use Fschmtt\Keycloak\Representation\User;
-use Fschmtt\Keycloak\Resource\Users;
 use GuzzleHttp\Psr7\Response;
+use Overtrue\Keycloak\Collection\CredentialCollection;
+use Overtrue\Keycloak\Collection\GroupCollection;
+use Overtrue\Keycloak\Collection\RoleCollection;
+use Overtrue\Keycloak\Collection\UserCollection;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\CommandExecutor;
+use Overtrue\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\Representation\Group;
+use Overtrue\Keycloak\Representation\Role;
+use Overtrue\Keycloak\Representation\User;
+use Overtrue\Keycloak\Resource\Users;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Users::class)]
 class UsersTest extends TestCase
 {
-    public function testGetAllUsers(): void
+    public function test_get_all_users(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/users',
@@ -58,7 +57,7 @@ class UsersTest extends TestCase
         );
     }
 
-    public function testGetUser(): void
+    public function test_get_user(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/users/{userId}',
@@ -88,7 +87,7 @@ class UsersTest extends TestCase
         );
     }
 
-    public function testCreateUser(): void
+    public function test_create_user(): void
     {
         $createdUser = new User(id: 'uuid', username: 'imported-user');
 
@@ -110,12 +109,12 @@ class UsersTest extends TestCase
             ]));
 
         $users = $this->getMockBuilder(Users::class)
-                    ->setConstructorArgs([
-                        $commandExecutor,
-                        $this->createMock(QueryExecutor::class),
-                    ])
-                    ->onlyMethods(['get'])
-                    ->getMock();
+            ->setConstructorArgs([
+                $commandExecutor,
+                $this->createMock(QueryExecutor::class),
+            ])
+            ->onlyMethods(['get'])
+            ->getMock();
         $users->expects(static::once())
             ->method('get')
             ->with('test-realm', 'uuid')
@@ -126,7 +125,7 @@ class UsersTest extends TestCase
         static::assertSame('uuid', $user->getId());
     }
 
-    public function testDeleteUser(): void
+    public function test_delete_user(): void
     {
         $deletedUser = new User(id: 'deleted-user');
         $deletedUserId = $deletedUser->getId();
@@ -158,7 +157,7 @@ class UsersTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testUpdateUser(): void
+    public function test_update_user(): void
     {
         $updatedUser = new User(id: 'test-user', username: 'new-username');
 
@@ -201,7 +200,7 @@ class UsersTest extends TestCase
         static::assertSame('new-username', $user->getUsername());
     }
 
-    public function testSearchUser(): void
+    public function test_search_user(): void
     {
         $criteria = new Criteria([
             'username' => 'test-user',
@@ -221,7 +220,7 @@ class UsersTest extends TestCase
         $queryExecutor->expects(static::once())
             ->method('executeQuery')
             ->with($query)
-            ->willReturn(new UserCollection());
+            ->willReturn(new UserCollection);
 
         $users = new Users(
             $this->createMock(CommandExecutor::class),
@@ -233,7 +232,7 @@ class UsersTest extends TestCase
         static::assertInstanceOf(UserCollection::class, $users);
     }
 
-    public function testJoinGroup(): void
+    public function test_join_group(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/users/{userId}/groups/{groupId}',
@@ -261,7 +260,7 @@ class UsersTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testLeaveGroup(): void
+    public function test_leave_group(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/users/{userId}/groups/{groupId}',
@@ -289,7 +288,7 @@ class UsersTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testRetrieveGroups(): void
+    public function test_retrieve_groups(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/users/{userId}/groups',
@@ -322,7 +321,7 @@ class UsersTest extends TestCase
         );
     }
 
-    public function testRetrieveRealmRoles(): void
+    public function test_retrieve_realm_roles(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/users/{userId}/role-mappings/realm',
@@ -355,7 +354,7 @@ class UsersTest extends TestCase
         );
     }
 
-    public function testRetrieveAvailableRealmRoles(): void
+    public function test_retrieve_available_realm_roles(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/users/{userId}/role-mappings/realm/available',
@@ -388,7 +387,7 @@ class UsersTest extends TestCase
         );
     }
 
-    public function testAddRealmRoles(): void
+    public function test_add_realm_roles(): void
     {
         $roles = new RoleCollection([new Role(id: 'uuid', name: 'some-name')]);
 
@@ -418,7 +417,7 @@ class UsersTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testRemoveRealmRoles(): void
+    public function test_remove_realm_roles(): void
     {
         $roles = new RoleCollection([new Role(id: 'uuid', name: 'some-name')]);
 
@@ -448,7 +447,7 @@ class UsersTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testExecuteActionsEmail(): void
+    public function test_execute_actions_email(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/users/{userId}/execute-actions-email',
@@ -475,7 +474,7 @@ class UsersTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testCredentials(): void
+    public function test_credentials(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/users/{userId}/credentials',
@@ -490,7 +489,7 @@ class UsersTest extends TestCase
         $queryExecutor->expects(static::once())
             ->method('executeQuery')
             ->with($query)
-            ->willReturn(new CredentialCollection());
+            ->willReturn(new CredentialCollection);
 
         $users = new Users(
             $this->createMock(CommandExecutor::class),
@@ -502,7 +501,7 @@ class UsersTest extends TestCase
         static::assertInstanceOf(CredentialCollection::class, $credentials);
     }
 
-    public function testCreateUserWithoutResponseLocation(): void
+    public function test_create_user_without_response_location(): void
     {
         $createdUser = new User(id: 'uuid', username: 'imported-user');
 
@@ -520,7 +519,7 @@ class UsersTest extends TestCase
             ->method('executeCommand')
             ->with($command)
             ->willReturn(new Response(201, [
-                //'Location' => '/admin/realms/test-realm/users/uuid',
+                // 'Location' => '/admin/realms/test-realm/users/uuid',
             ]));
 
         $users = new Users(

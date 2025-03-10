@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Stub;
+namespace Overtrue\Keycloak\Test\Unit\Stub;
 
 /**
- * @extends \Fschmtt\Keycloak\Collection\Collection<Representation>
+ * @extends \Overtrue\Keycloak\Collection\Collection<Representation>
  */
-class Collection extends \Fschmtt\Keycloak\Collection\Collection
+class Collection extends \Overtrue\Keycloak\Collection\Collection
 {
     public static function getRepresentationClass(): string
     {

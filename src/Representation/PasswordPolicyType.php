@@ -2,21 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
 /**
  * @method string|null getConfigType()
  * @method self withConfigType(?string $configType)
- *
  * @method string|null getDefaultValue()
  * @method self withDefaultValue(?string $defaultValue)
- *
  * @method string|null getDisplayName()
  * @method self withDisplayName(?string $displayName)
- *
  * @method string|null getId()
  * @method self withId(?string $name)
- *
  * @method bool|null getMultipleSupported()
  * @method self withMultipleSupported(?bool $multipleSupported)
  *

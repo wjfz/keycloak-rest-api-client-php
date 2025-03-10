@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Attribute\Since;
-use Fschmtt\Keycloak\Collection\AuthenticationFlowCollection;
-use Fschmtt\Keycloak\Collection\AuthenticatorConfigCollection;
-use Fschmtt\Keycloak\Collection\ClientCollection;
-use Fschmtt\Keycloak\Collection\ClientScopeCollection;
-use Fschmtt\Keycloak\Collection\GroupCollection;
-use Fschmtt\Keycloak\Collection\IdentityProviderCollection;
-use Fschmtt\Keycloak\Collection\IdentityProviderMapperCollection;
-use Fschmtt\Keycloak\Collection\OrganizationCollection;
-use Fschmtt\Keycloak\Collection\ProtocolMapperCollection;
-use Fschmtt\Keycloak\Collection\RequiredActionProviderCollection;
-use Fschmtt\Keycloak\Collection\ScopeMappingCollection;
-use Fschmtt\Keycloak\Collection\UserCollection;
-use Fschmtt\Keycloak\Collection\UserFederationMapperCollection;
-use Fschmtt\Keycloak\Collection\UserFederationProviderCollection;
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Attribute\Since;
+use Overtrue\Keycloak\Collection\AuthenticationFlowCollection;
+use Overtrue\Keycloak\Collection\AuthenticatorConfigCollection;
+use Overtrue\Keycloak\Collection\ClientCollection;
+use Overtrue\Keycloak\Collection\ClientScopeCollection;
+use Overtrue\Keycloak\Collection\GroupCollection;
+use Overtrue\Keycloak\Collection\IdentityProviderCollection;
+use Overtrue\Keycloak\Collection\IdentityProviderMapperCollection;
+use Overtrue\Keycloak\Collection\OrganizationCollection;
+use Overtrue\Keycloak\Collection\ProtocolMapperCollection;
+use Overtrue\Keycloak\Collection\RequiredActionProviderCollection;
+use Overtrue\Keycloak\Collection\ScopeMappingCollection;
+use Overtrue\Keycloak\Collection\UserCollection;
+use Overtrue\Keycloak\Collection\UserFederationMapperCollection;
+use Overtrue\Keycloak\Collection\UserFederationProviderCollection;
+use Overtrue\Keycloak\Type\Map;
 
 /**
  * @method int|null getAccessCodeLifespan()
@@ -149,7 +149,6 @@ use Fschmtt\Keycloak\Type\Map;
  * @method string|null getWebAuthnPolicyRpId()
  * @method string[]|null getWebAuthnPolicySignatureAlgorithms()
  * @method string|null getWebAuthnPolicyUserVerificationRequirement()
- *
  * @method self withAccessCodeLifespan(?int $accessCodeLifespan)
  * @method self withAccessCodeLifespanLogin(?int $accessCodeLifespanLogin)
  * @method self withAccessCodeLifespanUserAction(?int $accessCodeLifespanUserAction)
@@ -277,10 +276,8 @@ use Fschmtt\Keycloak\Type\Map;
  * @method self withWebAuthnPolicyRpId(?string $value)
  * @method self withWebAuthnPolicySignatureAlgorithms(?string[] $value)
  * @method self withWebAuthnPolicyUserVerificationRequirement(?string $value)
- *
  * @method OrganizationCollection|null getOrganizations()
  * @method self withOrganizations(?OrganizationCollection $organizations)
- *
  * @method bool|null getOrganizationsEnabled()
  * @method self withOrganizationsEnabled(?bool $organizationsEnabled)
  *

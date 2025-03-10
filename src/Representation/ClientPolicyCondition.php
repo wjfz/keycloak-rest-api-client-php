@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
 /**
  * @method string|null getCondition()
  * @method self withCondition(?string $condition)
- *
  * @method JsonNode|null getConfiguration()
  * @method self withConfiguration(?JsonNode $configuration)
  *

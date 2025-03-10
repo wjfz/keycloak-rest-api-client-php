@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Http;
+namespace Overtrue\Keycloak\Http;
 
 /**
  * @internal

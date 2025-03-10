@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Resource;
+namespace Overtrue\Keycloak\Test\Unit\Resource;
 
-use Fschmtt\Keycloak\Http\CommandExecutor;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Http\QueryExecutor;
-use Fschmtt\Keycloak\Representation\ServerInfo as ServerInfoRepresentation;
-use Fschmtt\Keycloak\Resource\ServerInfo;
+use Overtrue\Keycloak\Http\CommandExecutor;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\Representation\ServerInfo as ServerInfoRepresentation;
+use Overtrue\Keycloak\Resource\ServerInfo;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(ServerInfo::class)]
 class ServerInfoTest extends TestCase
 {
-    public function testGetServerInfo(): void
+    public function test_get_server_info(): void
     {
         $query = new Query(
             '/admin/serverinfo',
             ServerInfoRepresentation::class,
         );
 
-        $serverInfoRepresentation = new ServerInfoRepresentation();
+        $serverInfoRepresentation = new ServerInfoRepresentation;
 
         $queryExecutor = $this->createMock(QueryExecutor::class);
         $queryExecutor->expects(static::once())

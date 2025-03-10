@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Type;
+namespace Overtrue\Keycloak\Type;
 
 use ArrayIterator;
 use Countable;
@@ -18,7 +18,7 @@ use Traversable;
 class Map extends Type implements Countable, IteratorAggregate
 {
     /**
-     * @param array<string, T> $map
+     * @param  array<string, T>  $map
      */
     public function __construct(
         private array $map = [],
@@ -46,7 +46,7 @@ class Map extends Type implements Countable, IteratorAggregate
 
     public function get(string $key): mixed
     {
-        if (!$this->contains($key)) {
+        if (! $this->contains($key)) {
             throw new OutOfBoundsException(sprintf('Key "%s" does not exist in map', $key));
         }
 

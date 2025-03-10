@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Http;
+namespace Overtrue\Keycloak\Test\Unit\Http;
 
 use DateTimeImmutable;
-use Fschmtt\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Http\Criteria;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Stringable;
@@ -13,14 +13,14 @@ use Stringable;
 #[CoversClass(Criteria::class)]
 class CriteriaTest extends TestCase
 {
-    public function testCanCreateEmptyCriteria(): void
+    public function test_can_create_empty_criteria(): void
     {
-        $criteria = new Criteria();
+        $criteria = new Criteria;
 
         static::assertSame([], $criteria->jsonSerialize());
     }
 
-    public function testFiltersOutNullCriterion(): void
+    public function test_filters_out_null_criterion(): void
     {
         $criteria = new Criteria([
             'foo' => null,
@@ -29,7 +29,7 @@ class CriteriaTest extends TestCase
         static::assertSame([], $criteria->jsonSerialize());
     }
 
-    public function testCanCreateCriteriaWithBoolCriterion(): void
+    public function test_can_create_criteria_with_bool_criterion(): void
     {
         $criteria = new Criteria([
             'bool' => true,
@@ -39,7 +39,7 @@ class CriteriaTest extends TestCase
         static::assertSame('true', $criteria->jsonSerialize()['bool']);
     }
 
-    public function testCanCreateCriteriaWithArrayCriterion(): void
+    public function test_can_create_criteria_with_array_criterion(): void
     {
         $criteria = new Criteria([
             'array' => ['type-a', 'type-b'],
@@ -49,7 +49,7 @@ class CriteriaTest extends TestCase
         static::assertSame(['type-a', 'type-b'], $criteria->jsonSerialize()['array']);
     }
 
-    public function testCanCreateCriteriaWithDateTimeImmutableCriterion(): void
+    public function test_can_create_criteria_with_date_time_immutable_criterion(): void
     {
         $criteria = new Criteria([
             'dateTimeImmutable' => new DateTimeImmutable('2022-12-18'),
@@ -59,10 +59,11 @@ class CriteriaTest extends TestCase
         static::assertSame('2022-12-18', $criteria->jsonSerialize()['dateTimeImmutable']);
     }
 
-    public function testCanCreateCriteriaWithStringableCriterion(): void
+    public function test_can_create_criteria_with_stringable_criterion(): void
     {
         $criteria = new Criteria([
-            'stringable' => new class () implements Stringable {
+            'stringable' => new class implements Stringable
+            {
                 public function __toString(): string
                 {
                     return 'criterion';

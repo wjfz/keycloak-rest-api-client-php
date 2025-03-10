@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Fschmtt\Keycloak\Keycloak;
+use Overtrue\Keycloak\Keycloak;
 
 /**
  * @method string|null getId()
@@ -10,7 +10,7 @@ use Fschmtt\Keycloak\Keycloak;
  * @method string getName()
  * @method self|null withName(?string $name)
  */
-class MyCustomRepresentation extends \Fschmtt\Keycloak\Representation\Representation
+class MyCustomRepresentation extends \Overtrue\Keycloak\Representation\Representation
 {
     public function __construct(
         protected ?string $id = null,
@@ -18,12 +18,12 @@ class MyCustomRepresentation extends \Fschmtt\Keycloak\Representation\Representa
     ) {}
 }
 
-class MyCustomResource extends \Fschmtt\Keycloak\Resource\Resource
+class MyCustomResource extends \Overtrue\Keycloak\Resource\Resource
 {
     public function myCustomEndpoint(): MyCustomRepresentation
     {
         return $this->queryExecutor->executeQuery(
-            new \Fschmtt\Keycloak\Http\Query(
+            new \Overtrue\Keycloak\Http\Query(
                 '/my-custom-endpoint',
                 MyCustomRepresentation::class,
             ),

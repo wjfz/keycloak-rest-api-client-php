@@ -2,12 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Http;
+namespace Overtrue\Keycloak\Http;
 
-use Fschmtt\Keycloak\Serializer\Serializer;
+use Overtrue\Keycloak\Serializer\Serializer;
 use Psr\Http\Message\ResponseInterface;
-
-use function is_array;
 
 /**
  * @internal

@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Resource;
+namespace Overtrue\Keycloak\Test\Unit\Resource;
 
-use Fschmtt\Keycloak\Collection\RealmCollection;
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\CommandExecutor;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Http\QueryExecutor;
-use Fschmtt\Keycloak\Representation\KeysMetadata;
-use Fschmtt\Keycloak\Representation\Realm;
-use Fschmtt\Keycloak\Resource\Realms;
 use GuzzleHttp\Psr7\Response;
+use Overtrue\Keycloak\Collection\RealmCollection;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\CommandExecutor;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\Representation\KeysMetadata;
+use Overtrue\Keycloak\Representation\Realm;
+use Overtrue\Keycloak\Resource\Realms;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Realms::class)]
 class RealmsTest extends TestCase
 {
-    public function testGetAllRealms(): void
+    public function test_get_all_realms(): void
     {
         $query = new Query(
             '/admin/realms',
@@ -48,7 +48,7 @@ class RealmsTest extends TestCase
         static::assertCount(2, $realms);
     }
 
-    public function testImportRealm(): void
+    public function test_import_realm(): void
     {
         $command = new Command(
             '/admin/realms',
@@ -87,7 +87,7 @@ class RealmsTest extends TestCase
         static::assertSame('imported-realm', $realm->getRealm());
     }
 
-    public function testUpdateRealm(): void
+    public function test_update_realm(): void
     {
         $updatedRealm = new Realm(realm: 'updated-realm', displayName: 'Updated Realm');
 
@@ -133,7 +133,7 @@ class RealmsTest extends TestCase
         static::assertSame('Updated Realm', $realm->getDisplayName());
     }
 
-    public function testDeleteRealm(): void
+    public function test_delete_realm(): void
     {
         $command = new Command(
             '/admin/realms/{realm}',
@@ -159,7 +159,7 @@ class RealmsTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testGetAdminEvents(): void
+    public function test_get_admin_events(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/admin-events',
@@ -186,7 +186,7 @@ class RealmsTest extends TestCase
         static::assertCount(2, $adminEvents);
     }
 
-    public function testDeleteAdminEvents(): void
+    public function test_delete_admin_events(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/admin-events',
@@ -212,7 +212,7 @@ class RealmsTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testClearKeysCache(): void
+    public function test_clear_keys_cache(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/clear-keys-cache',
@@ -238,7 +238,7 @@ class RealmsTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testClearRealmCache(): void
+    public function test_clear_realm_cache(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/clear-realm-cache',
@@ -264,7 +264,7 @@ class RealmsTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testClearUserCache(): void
+    public function test_clear_user_cache(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/clear-user-cache',
@@ -290,7 +290,7 @@ class RealmsTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testGetKeys(): void
+    public function test_get_keys(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/keys',
@@ -304,7 +304,7 @@ class RealmsTest extends TestCase
         $queryExecutor->expects(static::once())
             ->method('executeQuery')
             ->with($query)
-            ->willReturn(new KeysMetadata());
+            ->willReturn(new KeysMetadata);
 
         $realms = new Realms(
             $this->createMock(CommandExecutor::class),

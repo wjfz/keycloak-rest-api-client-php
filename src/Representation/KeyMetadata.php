@@ -2,38 +2,29 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Attribute\Since;
+use Overtrue\Keycloak\Attribute\Since;
 
 /**
  * @method string|null getProviderId()
  * @method self withProviderId(?string $providerId)
- *
  * @method int|null getProviderPriority()
  * @method self withProviderPriority(?int $providerPriority)
- *
  * @method string|null getKid()
  * @method self withKid(?string $kid)
- *
  * @method string|null getStatus()
  * @method self withStatus(?string $status)
- *
  * @method string|null getType()
  * @method self withType(?string $type)
- *
  * @method string|null getAlgorithm()
  * @method self withAlgorithm(?string $algorithm)
- *
  * @method string|null getPublicKey()
  * @method self withPublicKey(?string $publicKey)
- *
  * @method string|null getCertificate()
  * @method self withCertificate(?string $certificate)
- *
  * @method string|null getUse()
  * @method self withUse(?string $use)
- *
  * @method int|null getValidTo()
  * @method self withValidTo(?int $validTo)
  *

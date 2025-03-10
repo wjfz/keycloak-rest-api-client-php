@@ -2,28 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Http;
+namespace Overtrue\Keycloak\Test\Unit\Http;
 
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\ContentType;
-use Fschmtt\Keycloak\Http\Criteria;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Test\Unit\Stub\Collection;
-use Fschmtt\Keycloak\Test\Unit\Stub\Representation;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\ContentType;
+use Overtrue\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Test\Unit\Stub\Collection;
+use Overtrue\Keycloak\Test\Unit\Stub\Representation;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Command::class)]
 class CommandTest extends TestCase
 {
-    public function testHasNoPayloadByDefault(): void
+    public function test_has_no_payload_by_default(): void
     {
         static::assertNull((new Command('/path', Method::POST))->getPayload());
     }
 
-    public function testCanGetRepresentationPayload(): void
+    public function test_can_get_representation_payload(): void
     {
-        $representation = new Representation();
+        $representation = new Representation;
 
         static::assertSame(
             $representation,
@@ -31,9 +31,9 @@ class CommandTest extends TestCase
         );
     }
 
-    public function testCanGetCollectionPayload(): void
+    public function test_can_get_collection_payload(): void
     {
-        $payload = new Collection([new Representation()]);
+        $payload = new Collection([new Representation]);
 
         static::assertSame(
             $payload,
@@ -41,7 +41,7 @@ class CommandTest extends TestCase
         );
     }
 
-    public function testSubstitutesParametersInPath(): void
+    public function test_substitutes_parameters_in_path(): void
     {
         static::assertSame(
             '/admin/realms/master/groups/group-uuid',
@@ -56,7 +56,7 @@ class CommandTest extends TestCase
         );
     }
 
-    public function testSupportsAnyMethod(): void
+    public function test_supports_any_method(): void
     {
         foreach (Method::cases() as $method) {
             static::assertSame(
@@ -66,7 +66,7 @@ class CommandTest extends TestCase
         }
     }
 
-    public function testBuildsPathWithQueryIfCriteriaIsProvided(): void
+    public function test_builds_path_with_query_if_criteria_is_provided(): void
     {
         static::assertSame(
             '/admin/realms/master/users/user-uuid/execute-actions-email?client_id=foo&lifespan=600',
@@ -86,14 +86,14 @@ class CommandTest extends TestCase
         );
     }
 
-    public function testContentTypeDefaultsToJson(): void
+    public function test_content_type_defaults_to_json(): void
     {
         $command = new Command('/path', Method::GET);
 
         static::assertSame(ContentType::JSON, $command->getContentType());
     }
 
-    public function testContentTypeCanBeSetToFormParams(): void
+    public function test_content_type_can_be_set_to_form_params(): void
     {
         $command = new Command('/path', Method::GET, contentType: ContentType::FORM_PARAMS);
 

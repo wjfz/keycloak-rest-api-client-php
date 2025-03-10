@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Stub;
+namespace Overtrue\Keycloak\Test\Unit\Stub;
 
-use Fschmtt\Keycloak\Attribute\Since;
-use Fschmtt\Keycloak\Attribute\Until;
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Attribute\Since;
+use Overtrue\Keycloak\Attribute\Until;
+use Overtrue\Keycloak\Type\Map;
 
 /**
  * @method string|null getSince2000()
@@ -18,7 +18,7 @@ use Fschmtt\Keycloak\Type\Map;
  * @method self withSince1500Until1800(?string $since1500Until1800)
  * @method self withMap(?Map $map)
  */
-class Representation extends \Fschmtt\Keycloak\Representation\Representation
+class Representation extends \Overtrue\Keycloak\Representation\Representation
 {
     #[Since('20.0.0')]
     protected ?string $since2000 = null;

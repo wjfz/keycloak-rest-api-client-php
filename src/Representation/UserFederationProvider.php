@@ -2,32 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\Map;
 
 /**
  * @method int|null getChangedSyncPeriod()
  * @method self withChangedSyncPeriod(?int $changedSyncPeriod)
- *
  * @method Map|null getConfig()
  * @method self withConfig(?Map $config)
- *
  * @method string|null getDisplayName()
  * @method self withDisplayName(?string $displayName)
- *
  * @method int|null getFullSyncPeriod()
  * @method self withFullSyncPeriod(?int $fullSyncPeriod)
- *
  * @method string|null getId()
  * @method self withId(?string $id)
- *
  * @method int|null getLastSync()
  * @method self withLastSync(?int $lastSync)
- *
  * @method int|null getPriority()
  * @method self withPriority(?int $priority)
- *
  * @method string|null getProviderName()
  * @method self withProviderName(?string $providerName)
  *

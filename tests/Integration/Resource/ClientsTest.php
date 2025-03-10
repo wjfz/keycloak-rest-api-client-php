@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Integration\Resource;
+namespace Overtrue\Keycloak\Test\Integration\Resource;
 
 use Exception;
-use Fschmtt\Keycloak\Representation\Client;
-use Fschmtt\Keycloak\Test\Integration\IntegrationTestBehaviour;
+use Overtrue\Keycloak\Representation\Client;
+use Overtrue\Keycloak\Test\Integration\IntegrationTestBehaviour;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
@@ -14,7 +14,7 @@ class ClientsTest extends TestCase
 {
     use IntegrationTestBehaviour;
 
-    public function testImportUpdateDeleteClient(): void
+    public function test_import_update_delete_client(): void
     {
         $resource = $this->getKeycloak()->clients();
 
@@ -51,7 +51,7 @@ class ClientsTest extends TestCase
         }
     }
 
-    public function testGetUserSessions(): void
+    public function test_get_user_sessions(): void
     {
         $resource = $this->getKeycloak()->clients();
 
@@ -61,7 +61,7 @@ class ClientsTest extends TestCase
         $resource->getUserSessions('master', $client->getId());
     }
 
-    public function testGetClientSecret(): void
+    public function test_get_client_secret(): void
     {
         $resource = $this->getKeycloak()->clients();
 

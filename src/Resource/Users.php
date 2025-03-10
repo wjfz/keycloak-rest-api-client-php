@@ -2,18 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Resource;
+namespace Overtrue\Keycloak\Resource;
 
-use Fschmtt\Keycloak\Collection\CredentialCollection;
-use Fschmtt\Keycloak\Collection\GroupCollection;
-use Fschmtt\Keycloak\Collection\RoleCollection;
-use Fschmtt\Keycloak\Collection\UserCollection;
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\ContentType;
-use Fschmtt\Keycloak\Http\Criteria;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Representation\User as UserRepresentation;
+use Overtrue\Keycloak\Collection\CredentialCollection;
+use Overtrue\Keycloak\Collection\GroupCollection;
+use Overtrue\Keycloak\Collection\RoleCollection;
+use Overtrue\Keycloak\Collection\UserCollection;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Representation\User as UserRepresentation;
 use Psr\Http\Message\ResponseInterface;
 
 class Users extends Resource
@@ -217,7 +216,7 @@ class Users extends Resource
     }
 
     /**
-     * @param list<string>|null $actions
+     * @param  list<string>|null  $actions
      */
     public function executeActionsEmail(string $realm, string $userId, ?array $actions = null, ?Criteria $criteria = null): ResponseInterface
     {
@@ -251,7 +250,7 @@ class Users extends Resource
 
     public function getIdFromResponse(ResponseInterface $response): ?string
     {
-        //Location: http://keycloak:8080/admin/realms/master/users/999a5022-e757-4f5f-ba0e-1d3ccd601c34
+        // Location: http://keycloak:8080/admin/realms/master/users/999a5022-e757-4f5f-ba0e-1d3ccd601c34
         $location = $response->getHeaderLine('Location');
 
         preg_match('~/users/(?<id>[a-z0-9\-]+)$~', $location, $matches);

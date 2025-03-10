@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Exception;
+namespace Overtrue\Keycloak\Exception;
 
 use Exception;
 

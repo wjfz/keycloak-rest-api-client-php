@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\OAuth\TokenStorage;
+namespace Overtrue\Keycloak\OAuth\TokenStorage;
 
-use Fschmtt\Keycloak\Exception\TokenStorageException;
-use Fschmtt\Keycloak\OAuth\TokenStorageInterface;
 use Lcobucci\JWT\Encoding\JoseEncoder;
 use Lcobucci\JWT\Token;
+use Overtrue\Keycloak\Exception\TokenStorageException;
+use Overtrue\Keycloak\OAuth\TokenStorageInterface;
 
 /**
  * @internal
@@ -26,12 +26,12 @@ class Filesystem implements TokenStorageInterface
     {
         $realPath = realpath($path);
 
-        if (!$realPath) {
+        if (! $realPath) {
             throw new TokenStorageException(sprintf('Path "%s" does not exist or is not writable', $path));
         }
 
-        $this->accessTokenPath = $realPath . '/access_token';
-        $this->refreshTokenPath = $realPath . '/refresh_token';
+        $this->accessTokenPath = $realPath.'/access_token';
+        $this->refreshTokenPath = $realPath.'/refresh_token';
     }
 
     public function storeAccessToken(Token $accessToken): void
@@ -58,7 +58,7 @@ class Filesystem implements TokenStorageInterface
             return $this->accessToken;
         }
 
-        if (!file_exists($this->accessTokenPath)) {
+        if (! file_exists($this->accessTokenPath)) {
             return null;
         }
 
@@ -68,7 +68,7 @@ class Filesystem implements TokenStorageInterface
             throw new TokenStorageException('Could not retrieve access token from filesystem');
         }
 
-        $this->accessToken = (new Token\Parser(new JoseEncoder()))->parse($token);
+        $this->accessToken = (new Token\Parser(new JoseEncoder))->parse($token);
 
         return $this->accessToken;
     }
@@ -79,7 +79,7 @@ class Filesystem implements TokenStorageInterface
             return $this->refreshToken;
         }
 
-        if (!file_exists($this->refreshTokenPath)) {
+        if (! file_exists($this->refreshTokenPath)) {
             return null;
         }
 
@@ -89,7 +89,7 @@ class Filesystem implements TokenStorageInterface
             throw new TokenStorageException('Could not retrieve refresh token from filesystem');
         }
 
-        $this->refreshToken = (new Token\Parser(new JoseEncoder()))->parse($token);
+        $this->refreshToken = (new Token\Parser(new JoseEncoder))->parse($token);
 
         return $this->refreshToken;
     }

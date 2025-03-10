@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit;
+namespace Overtrue\Keycloak\Test\Unit;
 
 use DateTimeImmutable;
 use Lcobucci\JWT\Encoding\ChainedFormatter;
@@ -16,12 +16,12 @@ trait TokenGenerator
 {
     private function generateToken(DateTimeImmutable $expiresAt): Token
     {
-        $tokenBuilder = (new Builder(new JoseEncoder(), ChainedFormatter::default()));
-        $algorithm = new Sha256();
+        $tokenBuilder = (new Builder(new JoseEncoder, ChainedFormatter::default()));
+        $algorithm = new Sha256;
         $signingKey = InMemory::plainText(random_bytes(32));
 
         return $tokenBuilder
-            ->issuedAt(new \DateTimeImmutable())
+            ->issuedAt(new \DateTimeImmutable)
             ->expiresAt($expiresAt)
             ->getToken($algorithm, $signingKey);
     }

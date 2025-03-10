@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Resource;
+namespace Overtrue\Keycloak\Resource;
 
-use Fschmtt\Keycloak\Collection\RealmCollection;
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\Criteria;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Representation\KeysMetadata;
-use Fschmtt\Keycloak\Representation\Realm;
+use Overtrue\Keycloak\Collection\RealmCollection;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Representation\KeysMetadata;
+use Overtrue\Keycloak\Representation\Realm;
 use Psr\Http\Message\ResponseInterface;
 
 /**

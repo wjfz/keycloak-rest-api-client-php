@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Collection;
+namespace Overtrue\Keycloak\Collection;
 
-use Fschmtt\Keycloak\Representation\ClientPolicy;
+use Overtrue\Keycloak\Representation\ClientPolicy;
 
 /**
  * @extends Collection<ClientPolicy>

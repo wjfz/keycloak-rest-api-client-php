@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Attribute;
+namespace Overtrue\Keycloak\Test\Unit\Attribute;
 
-use Fschmtt\Keycloak\Attribute\Since;
+use Overtrue\Keycloak\Attribute\Since;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Since::class)]
 class SinceTest extends TestCase
 {
-    public function testCanBeConstructedWithVersion(): void
+    public function test_can_be_constructed_with_version(): void
     {
         $since = new Since('20.0.0');
 

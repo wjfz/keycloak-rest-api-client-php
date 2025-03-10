@@ -1,6 +1,6 @@
 services:
   php:
-    image: php:8.2-cli
+    image: php:8.4-cli
     volumes:
     - .:/app:rw
     working_dir: /app

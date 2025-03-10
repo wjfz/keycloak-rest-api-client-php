@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Serializer;
+namespace Overtrue\Keycloak\Serializer;
 
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\Map;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class MapDenormalizer implements DenormalizerInterface
 {
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
@@ -18,15 +18,15 @@ class MapDenormalizer implements DenormalizerInterface
             return $data;
         }
 
-        if (!is_array($data) || empty($data)) {
-            return new Map();
+        if (! is_array($data) || empty($data)) {
+            return new Map;
         }
 
         return new Map($data);
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {

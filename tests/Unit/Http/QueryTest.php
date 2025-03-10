@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Http;
+namespace Overtrue\Keycloak\Test\Unit\Http;
 
-use Fschmtt\Keycloak\Collection\GroupCollection;
-use Fschmtt\Keycloak\Http\Criteria;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
+use Overtrue\Keycloak\Collection\GroupCollection;
+use Overtrue\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Query::class)]
 class QueryTest extends TestCase
 {
-    public function testEnforcesGetMethod(): void
+    public function test_enforces_get_method(): void
     {
         static::assertSame(
             Method::GET->value,
@@ -22,7 +22,7 @@ class QueryTest extends TestCase
         );
     }
 
-    public function testSubstitutesParametersInPath(): void
+    public function test_substitutes_parameters_in_path(): void
     {
         static::assertSame(
             '/admin/realms/master/groups/group-uuid',
@@ -37,7 +37,7 @@ class QueryTest extends TestCase
         );
     }
 
-    public function testGetReturnType(): void
+    public function test_get_return_type(): void
     {
         static::assertSame(
             GroupCollection::class,
@@ -51,7 +51,7 @@ class QueryTest extends TestCase
         );
     }
 
-    public function testBuildsPathWithQueryIfCriteriaIsProvided(): void
+    public function test_builds_path_with_query_if_criteria_is_provided(): void
     {
         static::assertSame(
             '/admin/realms/master/groups?username=foo&exact=true',
@@ -69,7 +69,7 @@ class QueryTest extends TestCase
         );
     }
 
-    public function testBuildsPathWithoutQueryIfCriteriaIsNotProvided(): void
+    public function test_builds_path_without_query_if_criteria_is_not_provided(): void
     {
         static::assertSame(
             '/admin/realms/master/groups',

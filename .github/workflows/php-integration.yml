@@ -12,8 +12,8 @@ jobs:
 
     strategy:
       matrix:
-        keycloak: [ 24.0.0, 25.0.0, 26.0.0 ]
-        php: [ 8.1 ]
+        keycloak: [ 26.0.0 ]
+        php: [ 8.4 ]
 
     env:
       KEYCLOAK_VERSION: ${{ matrix.keycloak }}
@@ -45,10 +45,6 @@ jobs:
         with:
           resource: http-get://localhost:8080
           timeout: 30000
-
-      - name: Wait some more for Keycloak 24.0.0 zZz
-        if: ${{ matrix.keycloak == '24.0.0' }}
-        run: sleep 5
 
       - name: Run integration tests
         run: vendor/bin/phpunit --testsuite integration

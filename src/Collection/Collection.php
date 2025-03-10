@@ -2,19 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Collection;
+namespace Overtrue\Keycloak\Collection;
 
 use ArrayIterator;
 use Countable;
-use Fschmtt\Keycloak\Representation\Representation;
 use InvalidArgumentException;
 use IteratorAggregate;
 use JsonSerializable;
+use Overtrue\Keycloak\Representation\Representation;
 use ReflectionClass;
 use Traversable;
 
 /**
  * @template T of Representation
+ *
  * @implements IteratorAggregate<T>
  */
 abstract class Collection implements Countable, IteratorAggregate, JsonSerializable
@@ -25,7 +26,7 @@ abstract class Collection implements Countable, IteratorAggregate, JsonSerializa
     protected array $items = [];
 
     /**
-     * @param iterable<T> $items
+     * @param  iterable<T>  $items
      */
     public function __construct(iterable $items = [])
     {
@@ -61,7 +62,7 @@ abstract class Collection implements Countable, IteratorAggregate, JsonSerializa
     {
         $expectedRepresentationClass = $this->getRepresentationClass();
 
-        if (!$item instanceof $expectedRepresentationClass) {
+        if (! $item instanceof $expectedRepresentationClass) {
             throw new InvalidArgumentException(
                 sprintf(
                     '%s expects items to be %s representation, %s given',

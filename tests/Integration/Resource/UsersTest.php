@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Integration\Resource;
+namespace Overtrue\Keycloak\Test\Integration\Resource;
 
 use Exception;
-use Fschmtt\Keycloak\Collection\CredentialCollection;
-use Fschmtt\Keycloak\Collection\RoleCollection;
-use Fschmtt\Keycloak\Http\Criteria;
-use Fschmtt\Keycloak\Representation\Credential;
-use Fschmtt\Keycloak\Representation\Group;
-use Fschmtt\Keycloak\Representation\Role;
-use Fschmtt\Keycloak\Representation\User;
-use Fschmtt\Keycloak\Test\Integration\IntegrationTestBehaviour;
 use GuzzleHttp\Exception\ServerException;
+use Overtrue\Keycloak\Collection\CredentialCollection;
+use Overtrue\Keycloak\Collection\RoleCollection;
+use Overtrue\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Representation\Credential;
+use Overtrue\Keycloak\Representation\Group;
+use Overtrue\Keycloak\Representation\Role;
+use Overtrue\Keycloak\Representation\User;
+use Overtrue\Keycloak\Test\Integration\IntegrationTestBehaviour;
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
 
@@ -21,7 +21,7 @@ class UsersTest extends TestCase
 {
     use IntegrationTestBehaviour;
 
-    public function testImportSearchUpdateDeleteUser(): void
+    public function test_import_search_update_delete_user(): void
     {
         $resource = $this->getKeycloak()->users();
         $importedUsername = Uuid::uuid4()->toString();
@@ -67,7 +67,7 @@ class UsersTest extends TestCase
         }
     }
 
-    public function testJoinRetrieveLeaveGroupUser(): void
+    public function test_join_retrieve_leave_group_user(): void
     {
         $users = $this->getKeycloak()->users();
         $user = $users->all('master')->first();
@@ -108,7 +108,7 @@ class UsersTest extends TestCase
         $groups->delete('master', $group->getId());
     }
 
-    public function testAddRemoveRealmRoleUser(): void
+    public function test_add_remove_realm_role_user(): void
     {
         try {
             // create a role required for our test
@@ -155,7 +155,7 @@ class UsersTest extends TestCase
         }
     }
 
-    public function testCreateUserWithPasswordCredential(): void
+    public function test_create_user_with_password_credential(): void
     {
         $users = $this->getKeycloak()->users();
         $username = Uuid::uuid4()->toString();
@@ -174,7 +174,7 @@ class UsersTest extends TestCase
         static::assertNull($user);
     }
 
-    public function testGetUserCredentials(): void
+    public function test_get_user_credentials(): void
     {
         $users = $this->getKeycloak()->users();
         $username = Uuid::uuid4()->toString();
@@ -196,7 +196,7 @@ class UsersTest extends TestCase
         static::assertNull($user);
     }
 
-    public function testExecuteActionsEmail(): void
+    public function test_execute_actions_email(): void
     {
         $users = $this->getKeycloak()->users();
         $username = Uuid::uuid4()->toString();

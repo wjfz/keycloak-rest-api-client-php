@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Http;
+namespace Overtrue\Keycloak\Http;
 
-use Fschmtt\Keycloak\Json\JsonDecoder;
-use Fschmtt\Keycloak\Serializer\Serializer;
+use Overtrue\Keycloak\Json\JsonDecoder;
+use Overtrue\Keycloak\Serializer\Serializer;
 
 /**
  * @internal
@@ -25,7 +25,7 @@ class QueryExecutor
         );
 
         if ($query->getReturnType() === 'array') {
-            return (new JsonDecoder())->decode($response->getBody()->getContents());
+            return (new JsonDecoder)->decode($response->getBody()->getContents());
         }
 
         return $this->serializer->deserialize(

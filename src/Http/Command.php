@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Http;
+namespace Overtrue\Keycloak\Http;
 
-use Fschmtt\Keycloak\Collection\Collection;
-use Fschmtt\Keycloak\Representation\Representation;
+use Overtrue\Keycloak\Collection\Collection;
+use Overtrue\Keycloak\Representation\Representation;
 
 /**
  * @internal
@@ -31,7 +31,7 @@ class Command
     public function getPath(): string
     {
         $placeholders = array_map(
-            static fn (string $parameter): string => '{' . $parameter . '}',
+            static fn (string $parameter): string => '{'.$parameter.'}',
             array_keys($this->parameters),
         );
 
@@ -43,7 +43,7 @@ class Command
             $this->path,
         );
 
-        return $path . $this->getQuery();
+        return $path.$this->getQuery();
     }
 
     /**
@@ -56,11 +56,11 @@ class Command
 
     public function getQuery(): string
     {
-        if (!$this->criteria) {
+        if (! $this->criteria) {
             return '';
         }
 
-        return '?' . http_build_query($this->criteria->jsonSerialize());
+        return '?'.http_build_query($this->criteria->jsonSerialize());
     }
 
     public function getContentType(): ContentType

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\OAuth\TokenStorage;
+namespace Overtrue\Keycloak\OAuth\TokenStorage;
 
-use Fschmtt\Keycloak\OAuth\TokenStorageInterface;
 use Lcobucci\JWT\Token;
+use Overtrue\Keycloak\OAuth\TokenStorageInterface;
 
 /**
  * @internal

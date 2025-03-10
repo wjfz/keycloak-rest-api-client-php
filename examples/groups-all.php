@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Fschmtt\Keycloak\Keycloak;
-use Fschmtt\Keycloak\Representation\Group;
+use Overtrue\Keycloak\Keycloak;
+use Overtrue\Keycloak\Representation\Group;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 $keycloak = new Keycloak(
     baseUrl: $_SERVER['KEYCLOAK_BASE_URL'] ?? 'http://keycloak:8080',

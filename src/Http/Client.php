@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Http;
+namespace Overtrue\Keycloak\Http;
 
 use DateTime;
-use Fschmtt\Keycloak\Keycloak;
-use Fschmtt\Keycloak\OAuth\TokenStorageInterface;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use Lcobucci\JWT\Encoding\JoseEncoder;
 use Lcobucci\JWT\Token;
+use Overtrue\Keycloak\Keycloak;
+use Overtrue\Keycloak\OAuth\TokenStorageInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -25,18 +25,18 @@ class Client
     ) {}
 
     /**
-     * @param array<string, mixed> $options
+     * @param  array<string, mixed>  $options
      */
     public function request(string $method, string $path = '', array $options = []): ResponseInterface
     {
-        if (!$this->isAuthorized()) {
+        if (! $this->isAuthorized()) {
             $this->authorize();
         }
 
         $defaultOptions = [
             'base_uri' => $this->keycloak->getBaseUrl(),
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->tokenStorage->retrieveAccessToken()->toString(),
+                'Authorization' => 'Bearer '.$this->tokenStorage->retrieveAccessToken()->toString(),
             ],
         ];
 
@@ -44,20 +44,20 @@ class Client
 
         return $this->httpClient->request(
             $method,
-            $this->keycloak->getBaseUrl() . $path,
+            $this->keycloak->getBaseUrl().$path,
             $options,
         );
     }
 
     public function isAuthorized(): bool
     {
-        return $this->tokenStorage->retrieveAccessToken()?->isExpired(new DateTime()) === false;
+        return $this->tokenStorage->retrieveAccessToken()?->isExpired(new DateTime) === false;
     }
 
     private function authorize(): void
     {
         $tokens = $this->fetchTokens();
-        $parser = (new Token\Parser(new JoseEncoder()));
+        $parser = (new Token\Parser(new JoseEncoder));
 
         $this->tokenStorage->storeAccessToken($parser->parse($tokens['access_token']));
         $this->tokenStorage->storeRefreshToken($parser->parse($tokens['refresh_token']));
@@ -71,7 +71,7 @@ class Client
         try {
             $response = $this->httpClient->request(
                 'POST',
-                $this->keycloak->getBaseUrl() . '/realms/master/protocol/openid-connect/token',
+                $this->keycloak->getBaseUrl().'/realms/master/protocol/openid-connect/token',
                 [
                     'form_params' => [
                         'refresh_token' => $this->tokenStorage->retrieveRefreshToken()?->toString(),
@@ -83,7 +83,7 @@ class Client
         } catch (ClientException $e) {
             $response = $this->httpClient->request(
                 'POST',
-                $this->keycloak->getBaseUrl() . '/realms/master/protocol/openid-connect/token',
+                $this->keycloak->getBaseUrl().'/realms/master/protocol/openid-connect/token',
                 [
                     'form_params' => [
                         'username' => $this->keycloak->getUsername(),

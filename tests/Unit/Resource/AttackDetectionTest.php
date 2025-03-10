@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Resource;
+namespace Overtrue\Keycloak\Test\Unit\Resource;
 
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\CommandExecutor;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Http\QueryExecutor;
-use Fschmtt\Keycloak\Resource\AttackDetection;
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\CommandExecutor;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\Resource\AttackDetection;
+use Overtrue\Keycloak\Type\Map;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(AttackDetection::class)]
 class AttackDetectionTest extends TestCase
 {
-    public function testClearAttackDetectionForAllUsersInRealm(): void
+    public function test_clear_attack_detection_for_all_users_in_realm(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/attack-detection/brute-force/users',
@@ -39,7 +39,7 @@ class AttackDetectionTest extends TestCase
         $attackDetection->clear('realm');
     }
 
-    public function testClearAttackDetectionForSingleUserInRealm(): void
+    public function test_clear_attack_detection_for_single_user_in_realm(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/attack-detection/brute-force/users/{userId}',
@@ -62,7 +62,7 @@ class AttackDetectionTest extends TestCase
         $attackDetection->clearUser('realm', 'userId');
     }
 
-    public function testGetAttackDetectionForSingleUserInRealm(): void
+    public function test_get_attack_detection_for_single_user_in_realm(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/attack-detection/brute-force/users/{userId}',
@@ -77,7 +77,7 @@ class AttackDetectionTest extends TestCase
         $queryExecutor->expects(static::once())
             ->method('executeQuery')
             ->with($query)
-            ->willReturn(new Map());
+            ->willReturn(new Map);
 
         $attackDetection = new AttackDetection(
             $this->createMock(CommandExecutor::class),

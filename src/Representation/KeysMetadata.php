@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Collection\KeyMetadataCollection;
+use Overtrue\Keycloak\Collection\KeyMetadataCollection;
 
 /**
  * @method string[]|null getActive()
  * @method self withActive(?string[] $active)
- *
  * @method KeyMetadataCollection|null getKeys()
  * @method self withKeyMetadataCollection(?KeyMetadataCollection $keys)
  *

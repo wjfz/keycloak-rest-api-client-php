@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Json;
+namespace Overtrue\Keycloak\Json;
 
-use Fschmtt\Keycloak\Exception\JsonEncodeException;
 use JsonException;
+use Overtrue\Keycloak\Exception\JsonEncodeException;
 
 /**
  * @internal

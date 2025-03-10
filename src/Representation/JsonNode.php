@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Enum\NodeType;
+use Overtrue\Keycloak\Enum\NodeType;
 
 /**
  * @codeCoverageIgnore

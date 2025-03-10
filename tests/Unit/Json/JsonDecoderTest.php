@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Json;
+namespace Overtrue\Keycloak\Test\Unit\Json;
 
-use Fschmtt\Keycloak\Exception\JsonDecodeException;
-use Fschmtt\Keycloak\Json\JsonDecoder;
+use Overtrue\Keycloak\Exception\JsonDecodeException;
+use Overtrue\Keycloak\Json\JsonDecoder;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -16,10 +16,10 @@ class JsonDecoderTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->decoder = new JsonDecoder();
+        $this->decoder = new JsonDecoder;
     }
 
-    public function testCanDecode(): void
+    public function test_can_decode(): void
     {
         self::assertSame(
             [
@@ -29,7 +29,7 @@ class JsonDecoderTest extends TestCase
         );
     }
 
-    public function testThrowsExceptionOnMalformedJson(): void
+    public function test_throws_exception_on_malformed_json(): void
     {
         $this->expectException(JsonDecodeException::class);
 

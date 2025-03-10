@@ -12,10 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [ 8.1, 8.2, 8.3, 8.4 ]
-
-    env:
-      PHP_CS_FIXER_IGNORE_ENV: 1 # Remove when PHP 8.4 is officially supported by PHP CS Fixer
+        php: [ 8.4 ]
 
     steps:
       - uses: actions/checkout@v4
@@ -30,5 +27,5 @@ jobs:
       - name: Run PHPStan
         run: composer phpstan
 
-      - name: Run PHP-CS-Fixer
-        run: composer cs
+      - name: Run pint
+        run: composer fix

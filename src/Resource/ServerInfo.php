@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Resource;
+namespace Overtrue\Keycloak\Resource;
 
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Representation\ServerInfo as ServerInfoRepresentation;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Representation\ServerInfo as ServerInfoRepresentation;
 
 class ServerInfo extends Resource
 {

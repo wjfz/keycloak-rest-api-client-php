@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Resource;
+namespace Overtrue\Keycloak\Resource;
 
-use Fschmtt\Keycloak\Collection\OrganizationCollection;
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\ContentType;
-use Fschmtt\Keycloak\Http\Criteria;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Representation\Organization;
+use Overtrue\Keycloak\Collection\OrganizationCollection;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\ContentType;
+use Overtrue\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Representation\Organization;
 use Psr\Http\Message\ResponseInterface;
 
 class Organizations extends Resource
@@ -88,7 +88,7 @@ class Organizations extends Resource
 
     public function getIdFromResponse(ResponseInterface $response): ?string
     {
-        //Location: http://keycloak:8080/admin/realms/master/organizations/b1651206-a558-453f-afc6-e329f9bacb8c
+        // Location: http://keycloak:8080/admin/realms/master/organizations/b1651206-a558-453f-afc6-e329f9bacb8c
         $location = $response->getHeaderLine('Location');
 
         preg_match('~/organizations/(?<id>[a-z0-9\-]+)$~', $location, $matches);

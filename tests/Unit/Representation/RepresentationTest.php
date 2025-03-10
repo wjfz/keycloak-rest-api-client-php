@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Representation;
+namespace Overtrue\Keycloak\Test\Unit\Representation;
 
 use BadMethodCallException;
-use Fschmtt\Keycloak\Exception\PropertyDoesNotExistException;
-use Fschmtt\Keycloak\Test\Unit\Stub\Representation;
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Exception\PropertyDoesNotExistException;
+use Overtrue\Keycloak\Test\Unit\Stub\Representation;
+use Overtrue\Keycloak\Type\Map;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(\Fschmtt\Keycloak\Representation\Representation::class)]
+#[CoversClass(\Overtrue\Keycloak\Representation\Representation::class)]
 class RepresentationTest extends TestCase
 {
-    public function testThrowsExceptionWhenTryingToModifyPropertyWhichDoesNotExist(): void
+    public function test_throws_exception_when_trying_to_modify_property_which_does_not_exist(): void
     {
-        $representation = new Representation();
+        $representation = new Representation;
 
         $this->expectException(PropertyDoesNotExistException::class);
         $representation->with('doesNotExist', 'value');
     }
 
-    public function testThrowsExceptionWhenTryingToConstructFromJsonAndPropertyDoesNotExist(): void
+    public function test_throws_exception_when_trying_to_construct_from_json_and_property_does_not_exist(): void
     {
         $this->expectException(PropertyDoesNotExistException::class);
         Representation::fromJson(json_encode([
@@ -30,7 +30,7 @@ class RepresentationTest extends TestCase
         ], JSON_THROW_ON_ERROR));
     }
 
-    public function testThrowsExceptionWhenTryingToConstructFromPropertiesAndPropertyDoesNotExist(): void
+    public function test_throws_exception_when_trying_to_construct_from_properties_and_property_does_not_exist(): void
     {
         $this->expectException(PropertyDoesNotExistException::class);
         Representation::from([
@@ -38,9 +38,9 @@ class RepresentationTest extends TestCase
         ]);
     }
 
-    public function testExistingPropertyCanBeModified(): void
+    public function test_existing_property_can_be_modified(): void
     {
-        $representation = new Representation();
+        $representation = new Representation;
         $modifiedRepresentation = $representation->withMap(
             new Map([
                 'key' => 'value',
@@ -57,7 +57,7 @@ class RepresentationTest extends TestCase
         static::assertNotSame($representation, $modifiedRepresentation);
     }
 
-    public function testCanBeConstructedFromJson(): void
+    public function test_can_be_constructed_from_json(): void
     {
         $representation = Representation::fromJson(json_encode([
             'since2000' => 'since2000-value',
@@ -70,7 +70,7 @@ class RepresentationTest extends TestCase
         static::assertSame($representation->getSince1500Until1800(), 'since1500Until1800-value');
     }
 
-    public function testCanBeConstructedFromPropertiesArray(): void
+    public function test_can_be_constructed_from_properties_array(): void
     {
         $representation = Representation::from([
             'since2000' => 'since2000-value',
@@ -83,7 +83,7 @@ class RepresentationTest extends TestCase
         static::assertSame($representation->getSince1500Until1800(), 'since1500Until1800-value');
     }
 
-    public function testJsonSerializesScalarTypesCorrectly(): void
+    public function test_json_serializes_scalar_types_correctly(): void
     {
         $representation = Representation::from([
             'since2000' => 'since2000-value',
@@ -102,7 +102,7 @@ class RepresentationTest extends TestCase
         );
     }
 
-    public function testJsonSerializesMapCorrectly(): void
+    public function test_json_serializes_map_correctly(): void
     {
         $map = new Map([
             'key-1' => 'value-1',
@@ -122,7 +122,7 @@ class RepresentationTest extends TestCase
         static::assertIsObject($jsonSerialized['map']);
     }
 
-    public function testSerializesMapCorrectlyWhenOnlyArrayIsProvided(): void
+    public function test_serializes_map_correctly_when_only_array_is_provided(): void
     {
         $array = [
             'key-1' => 'value-1',
@@ -132,7 +132,7 @@ class RepresentationTest extends TestCase
 
         $map = new Map($array);
 
-        $representation = new Representation();
+        $representation = new Representation;
         $representation = $representation->with('map', new Map([
             'key-1' => 'value-1',
             'key-2' => 'value-2',
@@ -143,9 +143,9 @@ class RepresentationTest extends TestCase
         static::assertEquals($map, $representation->getMap());
     }
 
-    public function testThrowsIfPropertyDoesNotExist(): void
+    public function test_throws_if_property_does_not_exist(): void
     {
-        $representation = new Representation();
+        $representation = new Representation;
 
         $this->expectException(BadMethodCallException::class);
 

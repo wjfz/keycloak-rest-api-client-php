@@ -2,40 +2,31 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Attribute\Since;
-use Fschmtt\Keycloak\Collection\GroupCollection;
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Attribute\Since;
+use Overtrue\Keycloak\Collection\GroupCollection;
+use Overtrue\Keycloak\Type\Map;
 
 /**
  * @method Map|null getAccess()
  * @method self withAccess(?Map $access)
- *
  * @method Map|null getAttributes()
  * @method self withAttributes(?Map $attributes)
- *
  * @method Map|null getClientRoles()
  * @method self withClientRoles(?Map $clientRoles)
- *
  * @method string|null getId()
  * @method self withId(?string $id)
- *
  * @method string|null getName()
  * @method self withName(?string $name)
- *
  * @method string|null getParentId()
  * @method self withParentId(?string $parentId)
- *
  * @method string|null getPath()
  * @method self withPath(?string $path)
- *
  * @method string[]|null getRealmRoles()
  * @method self withRealmRoles(?string[] $realmRoles)
- *
  * @method int|null getSubGroupCount()
  * @method self withSubGroupCount(?int $subGroupCount)
- *
  * @method GroupCollection|null getSubGroups()
  * @method self withSubGroups(?GroupCollection[] $subGroups)
  *

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Integration\Resource;
+namespace Overtrue\Keycloak\Test\Integration\Resource;
 
 use Exception;
-use Fschmtt\Keycloak\Http\Criteria;
-use Fschmtt\Keycloak\Representation\Role;
-use Fschmtt\Keycloak\Test\Integration\IntegrationTestBehaviour;
+use Overtrue\Keycloak\Http\Criteria;
+use Overtrue\Keycloak\Representation\Role;
+use Overtrue\Keycloak\Test\Integration\IntegrationTestBehaviour;
 use PHPUnit\Framework\TestCase;
 
 class RolesTest extends TestCase
 {
     use IntegrationTestBehaviour;
 
-    public function testCreateRetrieveUpdateDeleteRole(): void
+    public function test_create_retrieve_update_delete_role(): void
     {
         $resource = $this->getKeycloak()->roles();
 

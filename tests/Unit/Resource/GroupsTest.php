@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Resource;
+namespace Overtrue\Keycloak\Test\Unit\Resource;
 
-use Fschmtt\Keycloak\Collection\GroupCollection;
-use Fschmtt\Keycloak\Collection\UserCollection;
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\CommandExecutor;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Http\QueryExecutor;
-use Fschmtt\Keycloak\Representation\Group;
-use Fschmtt\Keycloak\Representation\User;
-use Fschmtt\Keycloak\Resource\Groups;
 use GuzzleHttp\Psr7\Response;
+use Overtrue\Keycloak\Collection\GroupCollection;
+use Overtrue\Keycloak\Collection\UserCollection;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\CommandExecutor;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\Representation\Group;
+use Overtrue\Keycloak\Representation\User;
+use Overtrue\Keycloak\Resource\Groups;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Groups::class)]
 class GroupsTest extends TestCase
 {
-    public function testGetAllGroups(): void
+    public function test_get_all_groups(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/groups',
@@ -53,7 +53,7 @@ class GroupsTest extends TestCase
         static::assertSame('group-1', $groups->first()->getId());
     }
 
-    public function testGetGroupChildren(): void
+    public function test_get_group_children(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/groups/{groupId}/children',
@@ -86,7 +86,7 @@ class GroupsTest extends TestCase
         static::assertSame('group-1', $groups->first()->getId());
     }
 
-    public function testGetGroup(): void
+    public function test_get_group(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/groups/{groupId}',
@@ -112,7 +112,7 @@ class GroupsTest extends TestCase
         static::assertSame('group-1', $group->getId());
     }
 
-    public function testCreateGroup(): void
+    public function test_create_group(): void
     {
         $group = new Group(name: 'imported-group');
 
@@ -148,7 +148,7 @@ class GroupsTest extends TestCase
         self::assertSame('uuid', $group->getId());
     }
 
-    public function testCreateChildGroup(): void
+    public function test_create_child_group(): void
     {
         $group = new Group(name: 'child-group');
 
@@ -185,7 +185,7 @@ class GroupsTest extends TestCase
         self::assertSame('uuid', $group->getId());
     }
 
-    public function testUpdateGroup(): void
+    public function test_update_group(): void
     {
         $group = new Group(id: 'group-id', name: 'updated-group');
 
@@ -203,7 +203,7 @@ class GroupsTest extends TestCase
         $commandExecutor->expects(static::once())
             ->method('executeCommand')
             ->with($command)
-            ->willReturn($mockResponse = new Response());
+            ->willReturn($mockResponse = new Response);
 
         $groups = new Groups(
             $commandExecutor,
@@ -215,7 +215,7 @@ class GroupsTest extends TestCase
         $this->assertSame($mockResponse, $response);
     }
 
-    public function testDeleteGroup(): void
+    public function test_delete_group(): void
     {
         $group = new Group(id: 'group-id', name: 'updated-group');
 
@@ -232,7 +232,7 @@ class GroupsTest extends TestCase
         $commandExecutor->expects(static::once())
             ->method('executeCommand')
             ->with($command)
-            ->willReturn($mockResponse = new Response());
+            ->willReturn($mockResponse = new Response);
 
         $groups = new Groups(
             $commandExecutor,
@@ -244,7 +244,7 @@ class GroupsTest extends TestCase
         $this->assertSame($mockResponse, $response);
     }
 
-    public function testByPath(): void
+    public function test_by_path(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/group-by-path/{path}',
@@ -270,7 +270,7 @@ class GroupsTest extends TestCase
         static::assertSame('group-1', $group->getId());
     }
 
-    public function testMembers(): void
+    public function test_members(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/groups/{groupId}/members',
@@ -296,7 +296,7 @@ class GroupsTest extends TestCase
         static::assertCount(1, $members);
     }
 
-    public function testCreateGroupWithoutResponseHeaderLocation(): void
+    public function test_create_group_without_response_header_location(): void
     {
         $group = new Group(name: 'child-group');
 
@@ -329,7 +329,7 @@ class GroupsTest extends TestCase
         self::fail('Expected exception not thrown');
     }
 
-    public function testCreateChildGroupWithoutResponseHeaderLocation(): void
+    public function test_create_child_group_without_response_header_location(): void
     {
         $group = new Group(name: 'child-group');
 

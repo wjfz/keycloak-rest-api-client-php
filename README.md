@@ -1,7 +1,7 @@
-[![codecov](https://codecov.io/gh/fschmtt/keycloak-rest-api-client-php/graph/badge.svg?token=uDlQdqBF5V)](https://codecov.io/gh/fschmtt/keycloak-rest-api-client-php)
-![PHP Analysis](https://github.com/fschmtt/keycloak-rest-api-client-php/actions/workflows/php-analysis.yml/badge.svg?branch=main)
-![PHP Unit](https://github.com/fschmtt/keycloak-rest-api-client-php/actions/workflows/php-unit.yml/badge.svg?branch=main)
-![PHP Integration (Keycloak compatibility)](https://github.com/fschmtt/keycloak-rest-api-client-php/actions/workflows/php-integration.yml/badge.svg?branch=main)
+[![codecov](https://codecov.io/gh/overtrue/keycloak-rest-api-client-php/graph/badge.svg?token=uDlQdqBF5V)](https://codecov.io/gh/overtrue/keycloak-rest-api-client-php)
+![PHP Analysis](https://github.com/overtrue/keycloak-rest-api-client-php/actions/workflows/php-analysis.yml/badge.svg?branch=main)
+![PHP Unit](https://github.com/overtrue/keycloak-rest-api-client-php/actions/workflows/php-unit.yml/badge.svg?branch=main)
+![PHP Integration (Keycloak compatibility)](https://github.com/overtrue/keycloak-rest-api-client-php/actions/workflows/php-integration.yml/badge.svg?branch=main)
 
 # Keycloak Admin REST API Client
 
@@ -9,12 +9,14 @@ PHP client to interact with [Keycloak's Admin REST API](https://www.keycloak.org
 
 Inspired by [keycloak/keycloak-nodejs-admin-client](https://github.com/keycloak/keycloak-nodejs-admin-client).
 
+> This is a fork of [fschmtt/keycloak-rest-api-client-php](https://github.com/fschmtt/keycloak-rest-api-client-php)
+
 ## Installation
 
 Install via Composer:
 
 ```bash
-composer require fschmtt/keycloak-rest-api-client-php
+composer require overtrue/keycloak-rest-api-client-php
 ```
 
 ## Usage
@@ -209,8 +211,7 @@ docker compose run --rm php php examples/serverinfo.php
 ### Composer scripts
 
 * `analyze`: Run phpstan analysis
-* `cs`: Check coding style (PHP CS Fixer)
-* `cs:fix`: Fix coding style issues (PHP CS Fixer)
+* `fix`: Fix coding style issues (Laravel pint)
 * `test`: Run unit and integration tests
 * `test:unit`: Run unit tests
 * `test:integration`: Run integration tests (requires a fresh and running Keycloak instance)

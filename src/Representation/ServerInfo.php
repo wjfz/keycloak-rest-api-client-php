@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Attribute\Since;
-use Fschmtt\Keycloak\Collection\FeatureCollection;
-use Fschmtt\Keycloak\Collection\PasswordPolicyTypeCollection;
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Attribute\Since;
+use Overtrue\Keycloak\Collection\FeatureCollection;
+use Overtrue\Keycloak\Collection\PasswordPolicyTypeCollection;
+use Overtrue\Keycloak\Type\Map;
 
 /**
  * @method Map|null getBuiltinProtocolMappers()

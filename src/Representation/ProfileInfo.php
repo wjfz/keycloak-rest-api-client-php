@@ -2,18 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
 /**
  * @method string[]|null getDisabledFeatures()
  * @method self withDisabledFeatures(?string[] $value)
- *
  * @method string[]|null getExperimentalFeatures()
  * @method self withExperimentalFeatures(?string[] $value)
- *
  * @method string|null getName()
  * @method self withName(?string $value)
- *
  * @method string[]|null getPreviewFeatures()
  * @method self withPreviewFeatures(?string[] $value)
  *

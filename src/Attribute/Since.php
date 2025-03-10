@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Attribute;
+namespace Overtrue\Keycloak\Attribute;
 
 use Attribute;
 

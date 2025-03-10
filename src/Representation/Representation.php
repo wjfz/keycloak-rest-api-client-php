@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
 use BadMethodCallException;
-use Fschmtt\Keycloak\Exception\PropertyDoesNotExistException;
-use Fschmtt\Keycloak\Json\JsonDecoder;
 use JsonSerializable;
+use Overtrue\Keycloak\Exception\PropertyDoesNotExistException;
+use Overtrue\Keycloak\Json\JsonDecoder;
 use ReflectionClass;
 use ReflectionProperty;
 
@@ -16,11 +16,11 @@ abstract class Representation implements JsonSerializable
     abstract public function __construct();
 
     /**
-     * @param array<mixed> $properties
+     * @param  array<mixed>  $properties
      */
     final public static function from(array $properties): static
     {
-        $representation = new static();
+        $representation = new static;
 
         foreach ($properties as $property => $value) {
             $representation = $representation->withProperty($property, $value);
@@ -32,7 +32,7 @@ abstract class Representation implements JsonSerializable
     public static function fromJson(string $json): static
     {
         return static::from(
-            (new JsonDecoder())->decode($json),
+            (new JsonDecoder)->decode($json),
         );
     }
 
@@ -61,7 +61,7 @@ abstract class Representation implements JsonSerializable
     }
 
     /**
-     * @param string[] $arguments
+     * @param  string[]  $arguments
      */
     final public function __call(string $name, array $arguments): mixed
     {
@@ -73,7 +73,7 @@ abstract class Representation implements JsonSerializable
             return $this->with(lcfirst(substr($name, 4)), $arguments[0]);
         }
 
-        throw new BadMethodCallException();
+        throw new BadMethodCallException;
     }
 
     final public function __get(string $name): mixed
@@ -98,7 +98,7 @@ abstract class Representation implements JsonSerializable
      */
     private function throwExceptionIfPropertyDoesNotExist(string $property): void
     {
-        if (!property_exists(static::class, $property)) {
+        if (! property_exists(static::class, $property)) {
             throw new PropertyDoesNotExistException(
                 sprintf(
                     'Property "%s" does not exist in "%s"',

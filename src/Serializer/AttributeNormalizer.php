@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Serializer;
+namespace Overtrue\Keycloak\Serializer;
 
 use ArrayObject;
-use Fschmtt\Keycloak\Attribute\Since;
-use Fschmtt\Keycloak\Attribute\Until;
-use Fschmtt\Keycloak\Representation\Representation;
+use Overtrue\Keycloak\Attribute\Since;
+use Overtrue\Keycloak\Attribute\Until;
+use Overtrue\Keycloak\Representation\Representation;
 use ReflectionClass;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -24,14 +24,14 @@ class AttributeNormalizer implements NormalizerInterface
     ) {}
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      * @return array<mixed>
      */
     public function normalize(mixed $object, ?string $format = null, array $context = []): array|string|int|float|bool|ArrayObject|null
     {
         $properties = $this->normalizer->normalize($object, $format, $context);
 
-        if (!$this->keycloakVersion) {
+        if (! $this->keycloakVersion) {
             return $properties;
         }
 
@@ -49,7 +49,7 @@ class AttributeNormalizer implements NormalizerInterface
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {

@@ -2,27 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Resource;
+namespace Overtrue\Keycloak\Test\Unit\Resource;
 
-use Fschmtt\Keycloak\Collection\OrganizationCollection;
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\CommandExecutor;
-use Fschmtt\Keycloak\Http\ContentType;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Http\QueryExecutor;
-use Fschmtt\Keycloak\Representation\Organization;
-use Fschmtt\Keycloak\Resource\AttackDetection;
-use Fschmtt\Keycloak\Resource\Organizations;
-use Fschmtt\Keycloak\Type\Map;
 use GuzzleHttp\Psr7\Response;
+use Overtrue\Keycloak\Collection\OrganizationCollection;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\CommandExecutor;
+use Overtrue\Keycloak\Http\ContentType;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\Representation\Organization;
+use Overtrue\Keycloak\Resource\Organizations;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Organizations::class)]
 class OrganizationsTest extends TestCase
 {
-    public function testGetAllOrganizations(): void
+    public function test_get_all_organizations(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/organizations',
@@ -54,7 +52,7 @@ class OrganizationsTest extends TestCase
         );
     }
 
-    public function testGetOrganization(): void
+    public function test_get_organization(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/organizations/{id}',
@@ -84,7 +82,7 @@ class OrganizationsTest extends TestCase
         );
     }
 
-    public function testCreateOrganization(): void
+    public function test_create_organization(): void
     {
         $createdOrganization = new Organization(id: 'uuid', name: 'test-organization-1');
 
@@ -122,7 +120,7 @@ class OrganizationsTest extends TestCase
         );
     }
 
-    public function testDeleteOrganization(): void
+    public function test_delete_organization(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/organizations/{id}',
@@ -149,7 +147,7 @@ class OrganizationsTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testInviteUser(): void
+    public function test_invite_user(): void
     {
         $command = new Command(
             '/admin/realms/{realm}/organizations/{id}/members/invite-user',
@@ -182,7 +180,7 @@ class OrganizationsTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testCreateOrganizationWithoutResponseHeaderLocation(): void
+    public function test_create_organization_without_response_header_location(): void
     {
         $createdOrganization = new Organization(id: 'uuid', name: 'test-organization-1');
 
@@ -200,7 +198,7 @@ class OrganizationsTest extends TestCase
             ->method('executeCommand')
             ->with($command)
             ->willReturn(new Response(204, [
-                //'Location' => '/admin/realms/test-realm/organizations/uuid',
+                // 'Location' => '/admin/realms/test-realm/organizations/uuid',
             ]));
 
         $organizations = new Organizations(

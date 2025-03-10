@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Collection\ScopeCollection;
-use Fschmtt\Keycloak\Type\Map;
+use Overtrue\Keycloak\Collection\ScopeCollection;
+use Overtrue\Keycloak\Type\Map;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 
 /**

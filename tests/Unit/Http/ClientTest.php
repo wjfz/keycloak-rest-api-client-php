@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Http;
+namespace Overtrue\Keycloak\Test\Unit\Http;
 
 use DateTimeImmutable;
-use Fschmtt\Keycloak\Http\Client;
-use Fschmtt\Keycloak\Keycloak;
-use Fschmtt\Keycloak\OAuth\TokenStorage\InMemory as InMemoryTokenStorage;
-use Fschmtt\Keycloak\Test\Unit\TokenGenerator;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Psr7\Response;
+use Overtrue\Keycloak\Http\Client;
+use Overtrue\Keycloak\Keycloak;
+use Overtrue\Keycloak\OAuth\TokenStorage\InMemory as InMemoryTokenStorage;
+use Overtrue\Keycloak\Test\Unit\TokenGenerator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -31,10 +31,10 @@ class ClientTest extends TestCase
         );
     }
 
-    public function testAuthorizesBeforeSendingRequest(): void
+    public function test_authorizes_before_sending_request(): void
     {
-        $accessToken = $this->generateToken((new DateTimeImmutable())->modify('+1 hour'));
-        $refreshToken = $this->generateToken((new DateTimeImmutable())->modify('+1 hour'));
+        $accessToken = $this->generateToken((new DateTimeImmutable)->modify('+1 hour'));
+        $refreshToken = $this->generateToken((new DateTimeImmutable)->modify('+1 hour'));
 
         $authorizationResponse = new Response(
             status: 200,
@@ -66,28 +66,28 @@ class ClientTest extends TestCase
                 $realmsResponse,
             );
 
-        $client = new Client($this->keycloak, $httpClient, new InMemoryTokenStorage());
+        $client = new Client($this->keycloak, $httpClient, new InMemoryTokenStorage);
         $client->request('GET', '/admin/realms');
 
         static::assertTrue($client->isAuthorized());
     }
 
-    public function testIsNotAuthorizedIfTokenStorageContainsNoAccessToken(): void
+    public function test_is_not_authorized_if_token_storage_contains_no_access_token(): void
     {
         $client = new Client(
             $this->keycloak,
             $this->createMock(ClientInterface::class),
-            new InMemoryTokenStorage(),
+            new InMemoryTokenStorage,
         );
 
         static::assertFalse($client->isAuthorized());
     }
 
-    public function testIsNotAuthorizedIfTokenStorageContainsExpiredAccessToken(): void
+    public function test_is_not_authorized_if_token_storage_contains_expired_access_token(): void
     {
-        $accessToken = $this->generateToken((new DateTimeImmutable())->modify('-1 hour'));
+        $accessToken = $this->generateToken((new DateTimeImmutable)->modify('-1 hour'));
 
-        $tokenStorage = new InMemoryTokenStorage();
+        $tokenStorage = new InMemoryTokenStorage;
         $tokenStorage->storeAccessToken($accessToken);
 
         $client = new Client(
@@ -99,11 +99,11 @@ class ClientTest extends TestCase
         static::assertFalse($client->isAuthorized());
     }
 
-    public function testIsAuthorizedIfTokenStorageContainsUnexpiredAccessToken(): void
+    public function test_is_authorized_if_token_storage_contains_unexpired_access_token(): void
     {
-        $accessToken = $this->generateToken((new DateTimeImmutable())->modify('+1 hour'));
+        $accessToken = $this->generateToken((new DateTimeImmutable)->modify('+1 hour'));
 
-        $tokenStorage = new InMemoryTokenStorage();
+        $tokenStorage = new InMemoryTokenStorage;
         $tokenStorage->storeAccessToken($accessToken);
 
         $client = new Client(

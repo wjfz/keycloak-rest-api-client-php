@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Attribute;
+namespace Overtrue\Keycloak\Test\Unit\Attribute;
 
-use Fschmtt\Keycloak\Attribute\Until;
+use Overtrue\Keycloak\Attribute\Until;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Until::class)]
 class UntilTest extends TestCase
 {
-    public function testCanBeConstructedWithVersion(): void
+    public function test_can_be_constructed_with_version(): void
     {
         $until = new Until('20.0.0');
 

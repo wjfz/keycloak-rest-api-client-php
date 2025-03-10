@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Resource;
+namespace Overtrue\Keycloak\Test\Unit\Resource;
 
-use Fschmtt\Keycloak\Collection\RoleCollection;
-use Fschmtt\Keycloak\Http\Command;
-use Fschmtt\Keycloak\Http\CommandExecutor;
-use Fschmtt\Keycloak\Http\Method;
-use Fschmtt\Keycloak\Http\Query;
-use Fschmtt\Keycloak\Http\QueryExecutor;
-use Fschmtt\Keycloak\Representation\Role;
-use Fschmtt\Keycloak\Resource\Roles;
 use GuzzleHttp\Psr7\Response;
+use Overtrue\Keycloak\Collection\RoleCollection;
+use Overtrue\Keycloak\Http\Command;
+use Overtrue\Keycloak\Http\CommandExecutor;
+use Overtrue\Keycloak\Http\Method;
+use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\Representation\Role;
+use Overtrue\Keycloak\Resource\Roles;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Roles::class)]
 class RolesTest extends TestCase
 {
-    public function testGetAllRoles(): void
+    public function test_get_all_roles(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/roles',
@@ -51,7 +51,7 @@ class RolesTest extends TestCase
         );
     }
 
-    public function testGetRole(): void
+    public function test_get_role(): void
     {
         $query = new Query(
             '/admin/realms/{realm}/roles/{roleName}',
@@ -81,7 +81,7 @@ class RolesTest extends TestCase
         );
     }
 
-    public function testCreateRole(): void
+    public function test_create_role(): void
     {
         $createdRole = new Role(id: 'uuid', name: 'created-role');
 
@@ -113,7 +113,7 @@ class RolesTest extends TestCase
         static::assertSame($createdRole->getName(), $role->getName());
     }
 
-    public function testDeleteRole(): void
+    public function test_delete_role(): void
     {
         $deletedRole = new Role(name: 'deleted-role');
         $deletedRoleName = $deletedRole->getName();
@@ -145,7 +145,7 @@ class RolesTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function testUpdateRole(): void
+    public function test_update_role(): void
     {
         $updatedRole = new Role(name: 'updated-role');
         $updatedRoleName = $updatedRole->getName();

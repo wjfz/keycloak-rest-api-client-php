@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Representation;
+namespace Overtrue\Keycloak\Representation;
 
-use Fschmtt\Keycloak\Collection\ClientProfileCollection;
+use Overtrue\Keycloak\Collection\ClientProfileCollection;
 
 /**
  * @method ClientProfileCollection|null getGlobalProfiles()
  * @method self withGlobalProfiles(?ClientProfileCollection $globalProfiles)
- *
  * @method ClientProfileCollection|null getProfiles()
  * @method self withProfiles(?ClientProfileCollection $profiles)
  *

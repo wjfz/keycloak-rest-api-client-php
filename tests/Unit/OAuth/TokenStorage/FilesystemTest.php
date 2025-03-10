@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\OAuth\TokenStorage;
+namespace Overtrue\Keycloak\Test\Unit\OAuth\TokenStorage;
 
-use Fschmtt\Keycloak\Exception\TokenStorageException;
-use Fschmtt\Keycloak\OAuth\TokenStorage\Filesystem;
-use Fschmtt\Keycloak\Test\Unit\TokenGenerator;
+use Overtrue\Keycloak\Exception\TokenStorageException;
+use Overtrue\Keycloak\OAuth\TokenStorage\Filesystem;
+use Overtrue\Keycloak\Test\Unit\TokenGenerator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -33,45 +33,45 @@ class FilesystemTest extends TestCase
      */
     public function clearTokensFromFilesystem(): void
     {
-        @unlink($this->path . '/access_token');
-        @unlink($this->path . '/refresh_token');
+        @unlink($this->path.'/access_token');
+        @unlink($this->path.'/refresh_token');
 
-        static::assertFalse(file_exists($this->path . '/access_token'));
-        static::assertFalse(file_exists($this->path . '/refresh_token'));
+        static::assertFalse(file_exists($this->path.'/access_token'));
+        static::assertFalse(file_exists($this->path.'/refresh_token'));
     }
 
-    public function testReturnsNoAccessTokenIfNotPreviouslySet(): void
+    public function test_returns_no_access_token_if_not_previously_set(): void
     {
         static::assertNull($this->storage->retrieveAccessToken());
     }
 
-    public function testReturnsNoRefreshTokenIfNotPreviouslySet(): void
+    public function test_returns_no_refresh_token_if_not_previously_set(): void
     {
         static::assertNull($this->storage->retrieveAccessToken());
     }
 
-    public function testReturnsAccessTokenIfPreviouslySet(): void
+    public function test_returns_access_token_if_previously_set(): void
     {
-        $accessToken = $this->generateToken(new \DateTimeImmutable());
+        $accessToken = $this->generateToken(new \DateTimeImmutable);
 
         $this->storage->storeAccessToken($accessToken);
 
         static::assertSame($accessToken, $this->storage->retrieveAccessToken());
     }
 
-    public function testReturnsRefreshTokenIfPreviouslySet(): void
+    public function test_returns_refresh_token_if_previously_set(): void
     {
-        $refreshToken = $this->generateToken(new \DateTimeImmutable());
+        $refreshToken = $this->generateToken(new \DateTimeImmutable);
 
         $this->storage->storeRefreshToken($refreshToken);
 
         static::assertSame($refreshToken, $this->storage->retrieveRefreshToken());
     }
 
-    public function testOverridesPreviouslyStoredAccessToken(): void
+    public function test_overrides_previously_stored_access_token(): void
     {
-        $storedAccessToken = $this->generateToken(new \DateTimeImmutable());
-        $newAccessToken = $this->generateToken(new \DateTimeImmutable());
+        $storedAccessToken = $this->generateToken(new \DateTimeImmutable);
+        $newAccessToken = $this->generateToken(new \DateTimeImmutable);
 
         $this->storage->storeAccessToken($storedAccessToken);
 
@@ -85,10 +85,10 @@ class FilesystemTest extends TestCase
         static::assertEquals($newAccessToken->toString(), $this->storage->retrieveAccessToken()->toString());
     }
 
-    public function testOverridesPreviouslyStoredRefreshToken(): void
+    public function test_overrides_previously_stored_refresh_token(): void
     {
-        $storedRefreshToken = $this->generateToken(new \DateTimeImmutable());
-        $newRefreshToken = $this->generateToken(new \DateTimeImmutable());
+        $storedRefreshToken = $this->generateToken(new \DateTimeImmutable);
+        $newRefreshToken = $this->generateToken(new \DateTimeImmutable);
 
         $this->storage->storeRefreshToken($storedRefreshToken);
 
@@ -102,9 +102,9 @@ class FilesystemTest extends TestCase
         static::assertEquals($newRefreshToken->toString(), $this->storage->retrieveRefreshToken()->toString());
     }
 
-    public function testThrowsExceptionIfPathDoesNotExist(): void
+    public function test_throws_exception_if_path_does_not_exist(): void
     {
-        $path = __DIR__ . '/does-not-exist';
+        $path = __DIR__.'/does-not-exist';
 
         static::expectException(TokenStorageException::class);
         static::expectExceptionMessage(sprintf('Path "%s" does not exist or is not writable', $path));

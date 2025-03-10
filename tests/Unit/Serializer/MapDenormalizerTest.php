@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\Serializer;
+namespace Overtrue\Keycloak\Test\Unit\Serializer;
 
-use Fschmtt\Keycloak\Serializer\MapDenormalizer;
-use Fschmtt\Keycloak\Type\Map;
 use Generator;
+use Overtrue\Keycloak\Serializer\MapDenormalizer;
+use Overtrue\Keycloak\Type\Map;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -14,9 +14,9 @@ use PHPUnit\Framework\TestCase;
 #[CoversClass(MapDenormalizer::class)]
 class MapDenormalizerTest extends TestCase
 {
-    public function testSupportedTypes(): void
+    public function test_supported_types(): void
     {
-        $denormalizer = new MapDenormalizer();
+        $denormalizer = new MapDenormalizer;
 
         static::assertSame(
             [Map::class => true],
@@ -24,17 +24,18 @@ class MapDenormalizerTest extends TestCase
         );
     }
 
-    public function testSupportsDenormalization(): void
+    public function test_supports_denormalization(): void
     {
-        $denormalizer = new MapDenormalizer();
+        $denormalizer = new MapDenormalizer;
 
         static::assertTrue($denormalizer->supportsDenormalization([], Map::class));
         static::assertFalse($denormalizer->supportsDenormalization([], 'array'));
     }
+
     #[DataProvider('maps')]
-    public function testDenormalize(mixed $value, Map $expected): void
+    public function test_denormalize(mixed $value, Map $expected): void
     {
-        $denormalizer = new MapDenormalizer();
+        $denormalizer = new MapDenormalizer;
 
         self::assertEquals(
             $expected,
@@ -59,12 +60,12 @@ class MapDenormalizerTest extends TestCase
 
         yield 'empty array' => [
             [],
-            new Map(),
+            new Map,
         ];
 
         yield 'non-array' => [
             1337,
-            new Map(),
+            new Map,
         ];
 
         yield Map::class => [

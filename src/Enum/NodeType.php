@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Enum;
+namespace Overtrue\Keycloak\Enum;
 
-use Fschmtt\Keycloak\Attribute\Since;
+use Overtrue\Keycloak\Attribute\Since;
 
 #[Since(version: '14.0.0')]
 enum NodeType: string implements Enum

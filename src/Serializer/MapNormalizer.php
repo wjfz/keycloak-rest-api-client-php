@@ -2,21 +2,21 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Serializer;
+namespace Overtrue\Keycloak\Serializer;
 
 use ArrayObject;
-use Fschmtt\Keycloak\Type\Map;
 use InvalidArgumentException;
+use Overtrue\Keycloak\Type\Map;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 class MapNormalizer implements NormalizerInterface
 {
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function normalize(mixed $data, ?string $format = null, array $context = []): ArrayObject
     {
-        if (!$data instanceof Map) {
+        if (! $data instanceof Map) {
             throw new InvalidArgumentException(sprintf('Data must be an instance of "%s"', Map::class));
         }
 
@@ -24,7 +24,7 @@ class MapNormalizer implements NormalizerInterface
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {

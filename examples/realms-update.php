@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use Fschmtt\Keycloak\Keycloak;
+use Overtrue\Keycloak\Keycloak;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 $keycloak = new Keycloak(
     baseUrl: $_SERVER['KEYCLOAK_BASE_URL'] ?? 'http://keycloak:8080',
@@ -16,7 +16,7 @@ $keycloak = new Keycloak(
 $realm = $keycloak->realms()->get(realm: 'master');
 
 // Disable registrations
-$realm = $realm->withRegistrationAllowed(!$realm->getRegistrationAllowed());
+$realm = $realm->withRegistrationAllowed(! $realm->getRegistrationAllowed());
 
 // Update realm
 $realm = $keycloak->realms()->update($realm->getRealm(), $realm);

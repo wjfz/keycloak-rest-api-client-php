@@ -2,6 +2,6 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Enum;
+namespace Overtrue\Keycloak\Enum;
 
 interface Enum {}

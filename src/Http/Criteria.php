@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Http;
+namespace Overtrue\Keycloak\Http;
 
 use DateTimeInterface;
 use Stringable;
@@ -18,7 +18,7 @@ class Criteria
     private array $criteria;
 
     /**
-     * @param array<string, mixed> $criteria
+     * @param  array<string, mixed>  $criteria
      */
     public function __construct(array $criteria = [])
     {

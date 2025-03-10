@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Unit\OAuth\TokenStorage;
+namespace Overtrue\Keycloak\Test\Unit\OAuth\TokenStorage;
 
-use Fschmtt\Keycloak\OAuth\TokenStorage\InMemory;
-use Fschmtt\Keycloak\Test\Unit\TokenGenerator;
+use Overtrue\Keycloak\OAuth\TokenStorage\InMemory;
+use Overtrue\Keycloak\Test\Unit\TokenGenerator;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -14,42 +14,42 @@ class InMemoryTest extends TestCase
 {
     use TokenGenerator;
 
-    public function testReturnsNoAccessTokenIfNotPreviouslySet(): void
+    public function test_returns_no_access_token_if_not_previously_set(): void
     {
-        static::assertNull((new InMemory())->retrieveAccessToken());
+        static::assertNull((new InMemory)->retrieveAccessToken());
     }
 
-    public function testReturnsNoRefreshTokenIfNotPreviouslySet(): void
+    public function test_returns_no_refresh_token_if_not_previously_set(): void
     {
-        static::assertNull((new InMemory())->retrieveAccessToken());
+        static::assertNull((new InMemory)->retrieveAccessToken());
     }
 
-    public function testReturnsAccessTokenIfPreviouslySet(): void
+    public function test_returns_access_token_if_previously_set(): void
     {
-        $accessToken = $this->generateToken(new \DateTimeImmutable());
+        $accessToken = $this->generateToken(new \DateTimeImmutable);
 
-        $storage = new InMemory();
+        $storage = new InMemory;
         $storage->storeAccessToken($accessToken);
 
         static::assertSame($accessToken, $storage->retrieveAccessToken());
     }
 
-    public function testReturnsRefreshTokenIfPreviouslySet(): void
+    public function test_returns_refresh_token_if_previously_set(): void
     {
-        $refreshToken = $this->generateToken(new \DateTimeImmutable());
+        $refreshToken = $this->generateToken(new \DateTimeImmutable);
 
-        $storage = new InMemory();
+        $storage = new InMemory;
         $storage->storeRefreshToken($refreshToken);
 
         static::assertSame($refreshToken, $storage->retrieveRefreshToken());
     }
 
-    public function testOverridesPreviouslyStoredAccessToken(): void
+    public function test_overrides_previously_stored_access_token(): void
     {
-        $storedAccessToken = $this->generateToken(new \DateTimeImmutable());
-        $newAccessToken = $this->generateToken(new \DateTimeImmutable());
+        $storedAccessToken = $this->generateToken(new \DateTimeImmutable);
+        $newAccessToken = $this->generateToken(new \DateTimeImmutable);
 
-        $storage = new InMemory();
+        $storage = new InMemory;
         $storage->storeAccessToken($storedAccessToken);
 
         static::assertSame($storedAccessToken, $storage->retrieveAccessToken());
@@ -60,12 +60,12 @@ class InMemoryTest extends TestCase
         static::assertSame($newAccessToken, $storage->retrieveAccessToken());
     }
 
-    public function testOverridesPreviouslyStoredRefreshToken(): void
+    public function test_overrides_previously_stored_refresh_token(): void
     {
-        $storedRefreshToken = $this->generateToken(new \DateTimeImmutable());
-        $newRefreshToken = $this->generateToken(new \DateTimeImmutable());
+        $storedRefreshToken = $this->generateToken(new \DateTimeImmutable);
+        $newRefreshToken = $this->generateToken(new \DateTimeImmutable);
 
-        $storage = new InMemory();
+        $storage = new InMemory;
         $storage->storeRefreshToken($storedRefreshToken);
 
         static::assertSame($storedRefreshToken, $storage->retrieveRefreshToken());

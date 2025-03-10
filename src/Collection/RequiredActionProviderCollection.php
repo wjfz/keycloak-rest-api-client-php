@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Collection;
+namespace Overtrue\Keycloak\Collection;
 
-use Fschmtt\Keycloak\Representation\RequiredActionProvider;
+use Overtrue\Keycloak\Representation\RequiredActionProvider;
 
 /**
  * @extends Collection<RequiredActionProvider>

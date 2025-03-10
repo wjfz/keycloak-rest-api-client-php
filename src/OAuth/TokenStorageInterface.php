@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\OAuth;
+namespace Overtrue\Keycloak\OAuth;
 
 use Lcobucci\JWT\Token;
 

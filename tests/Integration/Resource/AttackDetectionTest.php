@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Test\Integration\Resource;
+namespace Overtrue\Keycloak\Test\Integration\Resource;
 
-use Fschmtt\Keycloak\Test\Integration\IntegrationTestBehaviour;
+use Overtrue\Keycloak\Test\Integration\IntegrationTestBehaviour;
 use PHPUnit\Framework\TestCase;
 
 class AttackDetectionTest extends TestCase
@@ -21,21 +21,21 @@ class AttackDetectionTest extends TestCase
         $this->userId = '978df19a-7fa5-441d-a4b6-e5ae238e5c12';
     }
 
-    public function testCanClearAttackDetection(): void
+    public function test_can_clear_attack_detection(): void
     {
         $this->expectNotToPerformAssertions();
 
         $this->getKeycloak()->attackDetection()->clear($this->realm);
     }
 
-    public function testCanClearAttackDetectionForUser(): void
+    public function test_can_clear_attack_detection_for_user(): void
     {
         $this->expectNotToPerformAssertions();
 
         $this->getKeycloak()->attackDetection()->clearUser($this->realm, $this->userId);
     }
 
-    public function testCanGetAttackDetectionForUser(): void
+    public function test_can_get_attack_detection_for_user(): void
     {
         $this->expectNotToPerformAssertions();
 

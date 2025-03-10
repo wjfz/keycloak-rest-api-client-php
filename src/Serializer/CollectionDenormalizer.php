@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Fschmtt\Keycloak\Serializer;
+namespace Overtrue\Keycloak\Serializer;
 
-use Fschmtt\Keycloak\Collection\Collection;
+use Overtrue\Keycloak\Collection\Collection;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
 class CollectionDenormalizer implements DenormalizerInterface
@@ -14,12 +14,12 @@ class CollectionDenormalizer implements DenormalizerInterface
     ) {}
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         /** @var Collection $collection */
-        $collection = new $type();
+        $collection = new $type;
 
         foreach ($data as $representation) {
             $collection->add(
@@ -31,7 +31,7 @@ class CollectionDenormalizer implements DenormalizerInterface
     }
 
     /**
-     * @param array<string, mixed> $context
+     * @param  array<string, mixed>  $context
      */
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
