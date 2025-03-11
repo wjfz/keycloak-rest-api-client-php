@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\AuthenticationFlow;
  */
 class AuthenticationFlowCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return AuthenticationFlow::class;

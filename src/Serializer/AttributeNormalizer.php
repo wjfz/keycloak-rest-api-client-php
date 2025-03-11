@@ -3,7 +3,6 @@
 namespace Overtrue\Keycloak\Serializer;
 
 use Overtrue\Keycloak\Representation\AttributesAwareInterface;
-use Overtrue\Keycloak\Representation\Representation;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 readonly class AttributeNormalizer implements NormalizerInterface
@@ -13,6 +12,7 @@ readonly class AttributeNormalizer implements NormalizerInterface
     /**
      * @param  array<string, mixed>  $context
      */
+    #[\Override]
     public function supportsNormalization($data, $format = null, array $context = []): bool
     {
         return $data instanceof AttributesAwareInterface;
@@ -24,9 +24,10 @@ readonly class AttributeNormalizer implements NormalizerInterface
      *
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
-    public function normalize($object, $format = null, array $context = []): float|int|bool|\ArrayObject|array|string|null
+    #[\Override]
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|\ArrayObject|null
     {
-        $data = $this->normalizer->normalize($object, $format, $context);
+        $data = $this->normalizer->normalize($data, $format, $context);
 
         if (isset($data['attributes']) && is_array($data['attributes'])) {
             $attributes = $data['attributes'];
@@ -41,10 +42,14 @@ readonly class AttributeNormalizer implements NormalizerInterface
         return $data;
     }
 
+    /**
+     * @return array<class-string|'*'|'object'|string, bool|null>
+     */
+    #[\Override]
     public function getSupportedTypes(?string $format): array
     {
         return [
-            Representation::class => true,
+            AttributesAwareInterface::class => true,
         ];
     }
 }

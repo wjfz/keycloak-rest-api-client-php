@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\Realm;
  */
 class RealmCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return Realm::class;

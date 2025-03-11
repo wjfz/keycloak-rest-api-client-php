@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\FederatedIdentity;
  */
 class FederatedIdentityCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return FederatedIdentity::class;

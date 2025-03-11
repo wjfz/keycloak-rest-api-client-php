@@ -28,6 +28,7 @@ class RequiredActionProvider extends Representation
 {
     public function __construct(
         protected ?string $alias = null,
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $config = null,
         protected ?bool $defaultAction = null,
         protected ?bool $enabled = null,

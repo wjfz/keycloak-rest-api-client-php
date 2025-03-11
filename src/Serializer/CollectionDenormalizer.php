@@ -20,6 +20,7 @@ readonly class CollectionDenormalizer implements DenormalizerInterface
      * @throws \ReflectionException
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
+    #[\Override]
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         /** @var Collection $collection */
@@ -37,6 +38,7 @@ readonly class CollectionDenormalizer implements DenormalizerInterface
     /**
      * @param  array<string, mixed>  $context
      */
+    #[\Override]
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return is_subclass_of($type, Collection::class);
@@ -45,6 +47,7 @@ readonly class CollectionDenormalizer implements DenormalizerInterface
     /**
      * @return array<class-string|'*'|'object'|string, bool|null>
      */
+    #[\Override]
     public function getSupportedTypes(?string $format): array
     {
         return [

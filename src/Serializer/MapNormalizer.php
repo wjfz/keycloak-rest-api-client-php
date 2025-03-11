@@ -14,6 +14,7 @@ class MapNormalizer implements NormalizerInterface
     /**
      * @param  array<string, mixed>  $context
      */
+    #[\Override]
     public function normalize(mixed $data, ?string $format = null, array $context = []): ArrayObject
     {
         if (! $data instanceof Map) {
@@ -26,6 +27,7 @@ class MapNormalizer implements NormalizerInterface
     /**
      * @param  array<string, mixed>  $context
      */
+    #[\Override]
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof Map;
@@ -34,6 +36,7 @@ class MapNormalizer implements NormalizerInterface
     /**
      * @return array<class-string|'*'|'object'|string, bool|null>
      */
+    #[\Override]
     public function getSupportedTypes(?string $format): array
     {
         return [

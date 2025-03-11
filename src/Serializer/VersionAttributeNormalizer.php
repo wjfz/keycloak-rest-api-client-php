@@ -29,6 +29,7 @@ class VersionAttributeNormalizer implements NormalizerInterface
      *
      * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
+    #[\Override]
     public function normalize(mixed $data, ?string $format = null, array $context = []): array|string|int|float|bool|ArrayObject|null
     {
         $properties = $this->normalizer->normalize($data, $format, $context);
@@ -53,6 +54,7 @@ class VersionAttributeNormalizer implements NormalizerInterface
     /**
      * @param  array<string, mixed>  $context
      */
+    #[\Override]
     public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof Representation;
@@ -61,6 +63,7 @@ class VersionAttributeNormalizer implements NormalizerInterface
     /**
      * @return array<class-string|'*'|'object'|string, bool|null>
      */
+    #[\Override]
     public function getSupportedTypes(?string $format): array
     {
         return [

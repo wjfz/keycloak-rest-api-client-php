@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\AuthenticatorConfig;
  */
 class AuthenticatorConfigCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return AuthenticatorConfig::class;

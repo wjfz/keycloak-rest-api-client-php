@@ -49,6 +49,7 @@ abstract class Representation implements JsonSerializable
     /**
      * @return array<string, mixed>
      */
+    #[\Override]
     final public function jsonSerialize(): array
     {
         $serializable = [];

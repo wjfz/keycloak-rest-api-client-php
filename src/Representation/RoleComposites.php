@@ -18,6 +18,7 @@ use Overtrue\Keycloak\Type\Map;
 class RoleComposites extends Representation
 {
     public function __construct(
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $client = null,
         protected ?RealmCollection $realm = null,
     ) {}

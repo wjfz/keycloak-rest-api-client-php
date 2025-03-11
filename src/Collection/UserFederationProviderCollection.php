@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\UserFederationProvider;
  */
 class UserFederationProviderCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return UserFederationProvider::class;

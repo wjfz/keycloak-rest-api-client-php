@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\Credential;
  */
 class CredentialCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return Credential::class;

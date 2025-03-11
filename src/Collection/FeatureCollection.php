@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\Feature;
  */
 class FeatureCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return Feature::class;

@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\KeyMetadata;
  */
 class KeyMetadataCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return KeyMetadata::class;

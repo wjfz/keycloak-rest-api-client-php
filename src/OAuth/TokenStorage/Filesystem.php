@@ -34,6 +34,7 @@ class Filesystem implements TokenStorageInterface
         $this->refreshTokenPath = $realPath.'/refresh_token';
     }
 
+    #[\Override]
     public function storeAccessToken(Token $accessToken): void
     {
         if (@file_put_contents($this->accessTokenPath, $accessToken->toString()) === false) {
@@ -43,6 +44,7 @@ class Filesystem implements TokenStorageInterface
         $this->accessToken = $accessToken;
     }
 
+    #[\Override]
     public function storeRefreshToken(Token $refreshToken): void
     {
         if (@file_put_contents($this->refreshTokenPath, $refreshToken->toString()) === false) {
@@ -52,6 +54,7 @@ class Filesystem implements TokenStorageInterface
         $this->refreshToken = $refreshToken;
     }
 
+    #[\Override]
     public function retrieveAccessToken(): ?Token
     {
         if ($this->accessToken) {
@@ -73,6 +76,7 @@ class Filesystem implements TokenStorageInterface
         return $this->accessToken;
     }
 
+    #[\Override]
     public function retrieveRefreshToken(): ?Token
     {
         if ($this->refreshToken) {

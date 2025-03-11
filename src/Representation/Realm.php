@@ -33,7 +33,6 @@ use Overtrue\Keycloak\Type\Map;
  * @method bool|null getAdminEventsDetailsEnabled()
  * @method bool|null getAdminEventsEnabled()
  * @method string|null getAdminTheme()
- * @method Map|null getAttributes()
  * @method AuthenticationFlowCollection|null getAuthenticationFlows()
  * @method AuthenticatorConfigCollection|null getAuthenticatorConfig()
  * @method string|null getBrowserFlow()
@@ -299,11 +298,12 @@ class Realm extends Representation implements AttributesAwareInterface
         protected ?bool $adminEventsDetailsEnabled = null,
         protected ?bool $adminEventsEnabled = null,
         protected ?string $adminTheme = null,
-        /** @var Map|array<string, mixed>|null $attributes */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $attributes = null,
         protected ?AuthenticationFlowCollection $authenticationFlows = null,
         protected ?AuthenticatorConfigCollection $authenticatorConfig = null,
         protected ?string $browserFlow = null,
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $browserSecurityHeaders = null,
         protected ?bool $bruteForceProtected = null,
         protected ?string $clientAuthenticationFlow = null,
@@ -311,7 +311,7 @@ class Realm extends Representation implements AttributesAwareInterface
         protected ?int $clientOfflineSessionMaxLifespan = null,
         protected ?ClientPolicies $clientPolicies = null,
         protected ?ClientProfiles $clientProfiles = null,
-        /** @var Map|array<string, mixed>|null $clientScopeMappings */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $clientScopeMappings = null,
         protected ?ClientScopeCollection $clientScopes = null,
         protected ?int $clientSessionIdleTimeout = null,
@@ -396,7 +396,7 @@ class Realm extends Representation implements AttributesAwareInterface
         protected ?bool $revokeRefreshToken = null,
         protected ?Roles $roles = null,
         protected ?ScopeMappingCollection $scopeMappings = null,
-        /** @var Map|array<string, mixed>|null $smtpServer */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $smtpServer = null,
         protected ?string $sslRequired = null,
         protected ?int $ssoSessionIdleTimeout = null,

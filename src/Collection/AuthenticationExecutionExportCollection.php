@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\AuthenticationExecutionExport;
  */
 class AuthenticationExecutionExportCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return AuthenticationExecutionExport::class;

@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\ClientPolicyExecutor;
  */
 class ClientPolicyExecutorCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return ClientPolicyExecutor::class;

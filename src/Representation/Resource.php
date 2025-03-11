@@ -16,7 +16,7 @@ class Resource extends Representation
     public function __construct(
         #[SerializedName('_id')]
         protected ?string $id = null,
-        /** @var Map|array<string, mixed>|null $attributes */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $attributes = null,
         protected ?string $displayName = null,
         protected ?string $icon_uri = null,

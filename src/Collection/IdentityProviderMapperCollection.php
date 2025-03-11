@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\IdentityProviderMapper;
  */
 class IdentityProviderMapperCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return IdentityProviderMapper::class;

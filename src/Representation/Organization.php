@@ -19,8 +19,6 @@ use Overtrue\Keycloak\Type\Map;
  * @method self withEnabled(?bool $enabled)
  * @method string|null getDescription()
  * @method self withDescription(?string $description)
- * @method Map|null getAttributes()
- * @method self withAttributes(?Map $attributes)
  * @method OrganizationDomainCollection|null getDomains()
  * @method self withDomains(?OrganizationDomainCollection $domains)
  * @method UserCollection|null getMembers()
@@ -43,7 +41,7 @@ class Organization extends Representation implements AttributesAwareInterface
         protected ?string $name = null,
         protected ?bool $enabled = null,
         protected ?string $description = null,
-        /** @var Map|array<string, mixed>|null $attributes */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $attributes = null,
         protected ?OrganizationDomainCollection $domains = null,
         protected ?UserCollection $members = null,

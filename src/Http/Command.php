@@ -15,7 +15,7 @@ readonly class Command
     public function __construct(
         private string $path,
         private Method $method,
-        /** @var array<string, string> */
+        /** @var array<string, mixed> */
         private array $parameters = [],
         /** @var Representation|Collection|array<string, mixed>|null */
         private Representation|Collection|array|null $payload = null,

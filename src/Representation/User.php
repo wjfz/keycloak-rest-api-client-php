@@ -12,8 +12,6 @@ use Overtrue\Keycloak\Type\Map;
 /**
  * @method Map|null getAccess()
  * @method self withAccess(?Map $access)
- * @method Map|null getAttributes()
- * @method self withAttributes(?Map $attributes)
  * @method UserConsentCollection|null getClientConsents()
  * @method self withClientConsents(?UserConsentCollection $clientConsents)
  * @method Map|null getClientRoles()
@@ -66,12 +64,12 @@ class User extends Representation implements AttributesAwareInterface
     use HasAttributes;
 
     public function __construct(
-        /** @var Map|array<string, mixed>|null $access */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $access = null,
-        /** @var Map|array<string, mixed>|null $attributes */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $attributes = null,
         protected ?UserConsentCollection $clientConsents = null,
-        /** @var Map|array<string, mixed>|null $clientRoles */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $clientRoles = null,
         protected ?int $createdTimestamp = null,
         protected ?CredentialCollection $credentials = null,

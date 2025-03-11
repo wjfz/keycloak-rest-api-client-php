@@ -43,11 +43,13 @@ abstract class Collection implements Countable, IteratorAggregate, JsonSerializa
      */
     abstract public static function getRepresentationClass(): string;
 
+    #[\Override]
     public function count(): int
     {
         return count($this->items);
     }
 
+    #[\Override]
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->items);
@@ -56,6 +58,7 @@ abstract class Collection implements Countable, IteratorAggregate, JsonSerializa
     /**
      * @return array<array-key, T>
      */
+    #[\Override]
     public function jsonSerialize(): array
     {
         return $this->items;

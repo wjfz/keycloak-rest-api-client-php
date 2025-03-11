@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\Role;
  */
 class RoleCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return Role::class;

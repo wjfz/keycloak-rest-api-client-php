@@ -62,6 +62,7 @@ class Credential extends Representation
         protected ?string $algorithm = null,
         protected ?int $digits = null,
         protected ?int $period = null,
+        /** @var Map|array<string,mixed>|null */
         protected Map|array|null $config = null,
     ) {}
 }

@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\Resource;
  */
 class ResourceCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return Resource::class;

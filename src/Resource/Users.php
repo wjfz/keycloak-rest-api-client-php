@@ -249,7 +249,8 @@ class Users extends Resource
     }
 
     /**
-     * @param  list<string>|null  $actions
+     * @param  array<string>|null  $actions
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string,mixed>|null  $criteria
      */
     public function executeActionsEmail(string $realm, string $userId, ?array $actions = null, Criteria|array|null $criteria = null): ResponseInterface
     {

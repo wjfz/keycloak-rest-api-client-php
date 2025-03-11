@@ -11,8 +11,6 @@ use Overtrue\Keycloak\Type\Map;
 /**
  * @method Map|null getAccess()
  * @method self withAccess(?Map $access)
- * @method Map|null getAttributes()
- * @method self withAttributes(?Map $attributes)
  * @method Map|null getClientRoles()
  * @method self withClientRoles(?Map $clientRoles)
  * @method string|null getId()
@@ -37,11 +35,11 @@ class Group extends Representation implements AttributesAwareInterface
     use HasAttributes;
 
     public function __construct(
-        /** @var Map|array<string, mixed>|null $access */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $access = null,
-        /** @var Map|array<string, mixed>|null $attributes */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $attributes = null,
-        /** @var Map|array<string, mixed>|null $clientRoles */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $clientRoles = null,
         protected ?string $id = null,
         protected ?string $name = null,

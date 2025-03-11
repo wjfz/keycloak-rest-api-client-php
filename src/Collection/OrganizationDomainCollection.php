@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\OrganizationDomain;
  */
 class OrganizationDomainCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return OrganizationDomain::class;

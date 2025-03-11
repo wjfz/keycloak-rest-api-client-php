@@ -6,26 +6,26 @@ use Overtrue\Keycloak\Type\Map;
 
 trait HasAttributes
 {
+    /**
+     * @return Map|array<string,mixed>|null
+     */
     public function getAttributes(): Map|array|null
     {
-        return $this->attributes instanceof Map ? $this->attributes : $this->normalizeAttributes($this->attributes);
+        if (! $this->attributes) {
+            return null;
+        }
+
+        return is_array($this->attributes) ? new Map($this->attributes) : $this->attributes;
     }
 
+    /**
+     * @param  Map|array<string,mixed>  $attributes
+     */
     public function withAttributes(Map|array $attributes): static
     {
         $new = clone $this;
-        $new->attributes = new Map($this->normalizeAttributes($attributes));
+        $new->attributes = is_array($attributes) ? new Map($attributes) : $attributes;
 
         return $new;
-    }
-
-    public function normalizeAttributes(Map|array $attributes): array|Map
-    {
-        foreach ($attributes as $attribute => $value) {
-            // Ensure that the value is an array.
-            $attributes[$attribute] = (array) $value;
-        }
-
-        return $attributes;
     }
 }

@@ -23,7 +23,7 @@ use Overtrue\Keycloak\Type\Map;
 class UserFederationMapper extends Representation
 {
     public function __construct(
-        /** @var Map|array<string, mixed>|null $config */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $config = null,
         protected ?string $federationMapperType = null,
         protected ?string $federationProviderDisplayName = null,

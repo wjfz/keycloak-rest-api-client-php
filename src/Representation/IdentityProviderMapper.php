@@ -23,6 +23,7 @@ use Overtrue\Keycloak\Type\Map;
 class IdentityProviderMapper extends Representation
 {
     public function __construct(
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $config = null,
         protected ?string $id = null,
         protected ?string $identityProviderAlias = null,

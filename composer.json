@@ -11,12 +11,12 @@
         "symfony/property-access": "^7.2"
     },
     "require-dev": {
-        "phpmetrics/phpmetrics": "^2.8",
+        "phpmetrics/phpmetrics": "^v3.0.0rc8",
         "phpstan/phpstan": "^2.1",
         "ramsey/uuid": "^4.7",
         "phpunit/phpunit": "^10",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "vimeo/psalm": "^0.3.14",
+        "vimeo/psalm": "^6.8.8",
         "laravel/pint": "^1.21",
         "symfony/var-dumper": "^7.2"
     },
@@ -46,8 +46,8 @@
             "@phpstan",
             "@psalm"
         ],
-        "phpstan": "vendor/bin/phpstan analyze",
-        "psalm": "vendor/bin/psalm",
+        "phpstan": "@php -d memory_limit=-1 vendor/bin/phpstan analyze",
+        "psalm": "vendor/bin/psalm --no-cache",
         "pint": "vendor/bin/pint",
         "fix": "vendor/bin/pint",
         "test": [

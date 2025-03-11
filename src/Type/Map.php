@@ -34,16 +34,19 @@ class Map extends Type implements Countable, IteratorAggregate
     }
 
     #[ReturnTypeWillChange]
+    #[\Override]
     public function jsonSerialize()
     {
         return $this->map;
     }
 
+    #[\Override]
     public function getIterator(): Traversable
     {
         return new ArrayIterator($this->map);
     }
 
+    #[\Override]
     public function count(): int
     {
         return count($this->map);
@@ -84,7 +87,7 @@ class Map extends Type implements Countable, IteratorAggregate
      */
     public function getFirst(string $key, mixed $default = null): mixed
     {
-        return $this->get($key)[0] ?? null;
+        return $this->get($key)[0] ?? $default;
     }
 
     /**

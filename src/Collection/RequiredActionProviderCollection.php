@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\RequiredActionProvider;
  */
 class RequiredActionProviderCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return RequiredActionProvider::class;

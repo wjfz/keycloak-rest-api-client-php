@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\Policy;
  */
 class PolicyCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return Policy::class;

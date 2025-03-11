@@ -19,7 +19,7 @@ use Psr\Http\Message\ResponseInterface;
 class Clients extends Resource
 {
     /**
-     * @param  \Overtrue\Keycloak\Http\Criteria|array<string,string>|null  $criteria
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string,mixed>|null  $criteria
      */
     public function all(string $realm, Criteria|array|null $criteria = null): ClientCollection
     {
@@ -51,9 +51,15 @@ class Clients extends Resource
 
     /**
      * @param  \Overtrue\Keycloak\Representation\Client|array<string,mixed>  $client
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
      */
     public function import(string $realm, ClientRepresentation|array $client): ClientRepresentation
     {
+        if (! $client instanceof ClientRepresentation) {
+            $client = ClientRepresentation::from($client);
+        }
+
         $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/clients',
@@ -70,9 +76,15 @@ class Clients extends Resource
 
     /**
      * @param  \Overtrue\Keycloak\Representation\Client|array<string, mixed>  $updatedClient
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
      */
     public function update(string $realm, string $clientUuid, ClientRepresentation|array $updatedClient): ClientRepresentation
     {
+        if (! $updatedClient instanceof ClientRepresentation) {
+            $updatedClient = ClientRepresentation::from($updatedClient);
+        }
+
         $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/clients/{clientUuid}',
@@ -103,7 +115,7 @@ class Clients extends Resource
     }
 
     /**
-     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, mixed>|null  $criteria
      * @return array<array-key, mixed>
      */
     public function getUserSessions(string $realm, string $clientUuid, Criteria|array|null $criteria = null): array

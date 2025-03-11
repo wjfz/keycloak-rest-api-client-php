@@ -12,6 +12,7 @@ class MapDenormalizer implements DenormalizerInterface
     /**
      * @param  array<string, mixed>  $context
      */
+    #[\Override]
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {
         if ($data instanceof Map) {
@@ -28,6 +29,7 @@ class MapDenormalizer implements DenormalizerInterface
     /**
      * @param  array<string, mixed>  $context
      */
+    #[\Override]
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === Map::class;
@@ -36,6 +38,7 @@ class MapDenormalizer implements DenormalizerInterface
     /**
      * @return array<class-string|'*'|'object'|string, bool|null>
      */
+    #[\Override]
     public function getSupportedTypes(?string $format): array
     {
         return [

@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\PasswordPolicyType;
  */
 class PasswordPolicyTypeCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return PasswordPolicyType::class;

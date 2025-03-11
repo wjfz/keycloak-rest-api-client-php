@@ -7,7 +7,6 @@ namespace Overtrue\Keycloak\Representation;
 use Overtrue\Keycloak\Type\Map;
 
 /**
- * @method Map|null getAttributes()
  * @method self withAttributes(?Map $value)
  * @method bool|null getClientRole()
  * @method self withClientRole(?bool $value)
@@ -29,7 +28,7 @@ class Role extends Representation implements AttributesAwareInterface
     use HasAttributes;
 
     public function __construct(
-        /** @var Map|array<string, mixed>|null $attributes */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $attributes = null,
         protected ?bool $clientRole = null,
         protected ?bool $composite = null,

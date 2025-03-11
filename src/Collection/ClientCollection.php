@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\Client;
  */
 class ClientCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return Client::class;

@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\UserConsent;
  */
 class UserConsentCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return UserConsent::class;

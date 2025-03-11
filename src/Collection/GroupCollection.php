@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\Group;
  */
 class GroupCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return Group::class;

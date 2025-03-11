@@ -30,7 +30,7 @@ class UserFederationProvider extends Representation
 {
     public function __construct(
         protected ?int $changedSyncPeriod = null,
-        /** @var Map|array<string, mixed>|null $config */
+        /** @var Map|array<string, mixed>|null */
         protected Map|array|null $config = null,
         protected ?string $displayName = null,
         protected ?int $fullSyncPeriod = null,

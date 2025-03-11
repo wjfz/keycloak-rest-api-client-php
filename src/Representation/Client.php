@@ -14,8 +14,6 @@ use Overtrue\Keycloak\Type\Map;
  * @method self withAdminUrl(?string $adminUrl)
  * @method bool|null getAlwaysDisplayInConsole()
  * @method self withAlwaysDisplayInConsole(?bool $alwaysDisplayInConsole)
- * @method Map|null getAttributes()
- * @method self withAttributes(?Map $attributes)
  * @method Map|null getAuthenticationFlowBindingOverrides()
  * @method self withAuthenticationFlowBindingOverrides(?Map $authenticationFlowBindingOverrides)
  * @method bool|null getAuthorizationServicesEnabled()

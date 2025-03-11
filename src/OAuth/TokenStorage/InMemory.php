@@ -16,21 +16,25 @@ class InMemory implements TokenStorageInterface
 
     private ?Token $refreshToken = null;
 
+    #[\Override]
     public function storeAccessToken(Token $accessToken): void
     {
         $this->accessToken = $accessToken;
     }
 
+    #[\Override]
     public function storeRefreshToken(Token $refreshToken): void
     {
         $this->refreshToken = $refreshToken;
     }
 
+    #[\Override]
     public function retrieveAccessToken(): ?Token
     {
         return $this->accessToken;
     }
 
+    #[\Override]
     public function retrieveRefreshToken(): ?Token
     {
         return $this->refreshToken;

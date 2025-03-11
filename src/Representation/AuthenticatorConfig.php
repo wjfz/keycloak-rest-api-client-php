@@ -20,6 +20,7 @@ class AuthenticatorConfig extends Representation
 {
     public function __construct(
         protected ?string $alias = null,
+        /** @var Map|array<string,mixed>|null */
         protected Map|array|null $config = null,
         protected ?string $id = null,
     ) {}

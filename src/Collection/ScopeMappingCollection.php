@@ -13,6 +13,7 @@ use Overtrue\Keycloak\Representation\ScopeMapping;
  */
 class ScopeMappingCollection extends Collection
 {
+    #[\Override]
     public static function getRepresentationClass(): string
     {
         return ScopeMapping::class;
