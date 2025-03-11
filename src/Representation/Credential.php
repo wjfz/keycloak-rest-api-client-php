@@ -39,6 +39,10 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method self withDigits(?string $digits)
  * @method int|null getPeriod()
  * @method self withPeriod(?string $period)
+ * @method string|null getHashedSaltedValue()
+ * @method self withHashedSaltedValue(?string $hashedSaltedValue)
+ * @method StringMap|null getConfig()
+ * @method self withConfig(StringMap|array|null $config)
  *
  * @codeCoverageIgnore
  */

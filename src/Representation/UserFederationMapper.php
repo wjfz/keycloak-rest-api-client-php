@@ -8,8 +8,8 @@ use Overtrue\Keycloak\Type\Map;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
- * @method Map|null getConfig()
- * @method self withConfig(?Map $config)
+ * @method StringMap|null getConfig()
+ * @method self withConfig(StringMap|array|null $config)
  * @method string|null getFederationMapperType()
  * @method self withFederationMapperType(?string $federationMapperType)
  * @method string|null getFederationProviderDisplayName()

@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Overtrue\Keycloak\Representation;
 
 use Overtrue\Keycloak\Collection\RealmCollection;
+use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\Map;
 
 /**
- * @method Map|null getClient()
- * @method self withClient(?Map $client)
+ * @method ArrayMap|null getClient()
+ * @method self withClient(ArrayMap|array|null $client)
  * @method RealmCollection|null getRealm()
  * @method self withRealm(?RealmCollection $realm)
  *
@@ -17,9 +18,15 @@ use Overtrue\Keycloak\Type\Map;
  */
 class RoleComposites extends Representation
 {
+    protected ArrayMap|null $client = null;
+
+    /**
+     * @param ArrayMap|array<string, string|string[]>|null $client
+     */
     public function __construct(
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $client = null,
+        ArrayMap|array|null $client = null,
         protected ?RealmCollection $realm = null,
-    ) {}
+    ) {
+        $this->client = ArrayMap::make($client);
+    }
 }

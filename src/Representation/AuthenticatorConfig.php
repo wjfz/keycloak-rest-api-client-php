@@ -10,8 +10,8 @@ use Overtrue\Keycloak\Type\StringMap;
 /**
  * @method string|null getAlias()
  * @method self withAlias(?string $alias)
- * @method Map|null getConfig()
- * @method self withConfig(?Map $config)
+ * @method StringMap|null getConfig()
+ * @method self withConfig(StringMap|array|null $config)
  * @method string|null getId()
  * @method self withId(?string $id)
  *

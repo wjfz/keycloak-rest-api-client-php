@@ -3,7 +3,7 @@ parameters:
   ignoreErrors:
     - identifier: missingType.generics
     - identifier: missingType.iterableValue
-      path: src/Representation/Realm.php
+      path: src/Representation/*
   paths:
     - src
 

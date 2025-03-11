@@ -9,6 +9,25 @@ use Overtrue\Keycloak\Type\ArrayMap;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 
 /**
+ * @method ArrayMap|null getAttributes()
+ * @method self withAttributes(ArrayMap|array|null $value)
+ * @method string|null getDisplayName()
+ * @method self withDisplayName(?string $value)
+ * @method string|null getIconUri()
+ * @method self withIconUri(?string $value)
+ * @method string|null getId()
+ * @method self withId(?string $value)
+ * @method string|null getName()
+ * @method self withName(?string $value)
+ * @method bool|null getOwnerManagedAccess()
+ * @method self withOwnerManagedAccess(?bool $value)
+ * @method ScopeCollection|null getScopes()
+ * @method self withScopes(?ScopeCollection $value)
+ * @method string|null getType()
+ * @method self withType(?string $value)
+ * @method string[]|null getUris()
+ * @method self withUris(?array $value)
+ *
  * @codeCoverageIgnore
  */
 class Resource extends Representation

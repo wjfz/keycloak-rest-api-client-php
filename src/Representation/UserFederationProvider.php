@@ -10,8 +10,8 @@ use Overtrue\Keycloak\Type\StringMap;
 /**
  * @method int|null getChangedSyncPeriod()
  * @method self withChangedSyncPeriod(?int $changedSyncPeriod)
- * @method Map|null getConfig()
- * @method self withConfig(?Map $config)
+ * @method StringMap|null getConfig()
+ * @method self withConfig(StringMap|array|null $config)
  * @method string|null getDisplayName()
  * @method self withDisplayName(?string $displayName)
  * @method int|null getFullSyncPeriod()
@@ -24,7 +24,6 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method self withPriority(?int $priority)
  * @method string|null getProviderName()
  * @method self withProviderName(?string $providerName)
- *
  * @codeCoverageIgnore
  */
 class UserFederationProvider extends Representation

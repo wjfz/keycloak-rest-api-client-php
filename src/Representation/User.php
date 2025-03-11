@@ -12,12 +12,14 @@ use Overtrue\Keycloak\Type\BooleanMap;
 use Overtrue\Keycloak\Type\Map;
 
 /**
- * @method Map|null getAccess()
- * @method self withAccess(?Map $access)
+ * @method BooleanMap|null getAccess()
+ * @method self withAccess(BooleanMap|array|null $access)
+ * @method ArrayMap|null getAttributes()
+ * @method self withAttributes(ArrayMap|array|null $attributes)
  * @method UserConsentCollection|null getClientConsents()
  * @method self withClientConsents(?UserConsentCollection $clientConsents)
- * @method Map|null getClientRoles()
- * @method self withClientRoles(?Map $clientRoles)
+ * @method ArrayMap|null getClientRoles()
+ * @method self withClientRoles(ArrayMap|array|null $clientRoles)
  * @method int|null getCreatedTimestamp()
  * @method self withCreatedTimestamp(?int $createdTimestamp)
  * @method CredentialCollection|null getCredentials()

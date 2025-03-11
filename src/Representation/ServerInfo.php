@@ -11,22 +11,22 @@ use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\Map;
 
 /**
- * @method Map|null getBuiltinProtocolMappers()
- * @method Map|null getClientImporters()
- * @method Map|null getClientInstallations()
- * @method Map|null getComponentTypes()
+ * @method ArrayMap|null getBuiltinProtocolMappers()
+ * @method ArrayMap|null getClientImporters()
+ * @method ArrayMap|null getClientInstallations()
+ * @method ArrayMap|null getComponentTypes()
  * @method CryptoInfo|null getCryptoInfo()
- * @method Map|null getEnums()
+ * @method ArrayMap|null getEnums()
  * @method FeatureCollection|null getFeatures()
- * @method Map|null getIdentityProviders()
+ * @method ArrayMap|null getIdentityProviders()
  * @method MemoryInfo|null getMemoryInfo()
  * @method PasswordPolicyType[]|null getPasswordPolicies()
- * @method Map|null getProtocolMapperTypes()
+ * @method ArrayMap|null getProtocolMapperTypes()
  * @method ProfileInfo|null getProfileInfo()
- * @method Map|null getProviders()
- * @method Map|null getSocialProviders()
+ * @method ArrayMap|null getProviders()
+ * @method ArrayMap|null getSocialProviders()
  * @method SystemInfo|null getSystemInfo()
- * @method Map|null getThemes()
+ * @method ArrayMap|null getThemes()
  * @codeCoverageIgnore
  */
 class ServerInfo extends Representation

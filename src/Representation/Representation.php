@@ -16,9 +16,10 @@ abstract class Representation implements JsonSerializable
     abstract public function __construct();
 
     /**
-     * @param  array<string, mixed>  $properties
+     * @param array<string, mixed> $properties
      *
      * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     * @throws \ReflectionException
      */
     public static function from(array $properties): static
     {
@@ -40,6 +41,7 @@ abstract class Representation implements JsonSerializable
 
     /**
      * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     * @throws \ReflectionException
      */
     public function with(string $property, mixed $value): static
     {
@@ -74,9 +76,10 @@ abstract class Representation implements JsonSerializable
     }
 
     /**
-     * @param  string[]  $arguments
+     * @param string[] $arguments
      *
      * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     * @throws \ReflectionException
      */
     final public function __call(string $name, array $arguments): mixed
     {

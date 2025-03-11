@@ -24,6 +24,8 @@ use Overtrue\Keycloak\Type\Map;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
+ * @method ArrayMap|null getAttributes()
+ * @method self withAttributes(StringMap|array|null $attributes)
  * @method int|null getAccessCodeLifespan()
  * @method int|null getAccessCodeLifespanLogin()
  * @method int|null getAccessCodeLifespanUserAction()
@@ -38,7 +40,7 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method AuthenticationFlowCollection|null getAuthenticationFlows()
  * @method AuthenticatorConfigCollection|null getAuthenticatorConfig()
  * @method string|null getBrowserFlow()
- * @method Map|null getBrowserSecurityHeaders()
+ * @method StringMap|null getBrowserSecurityHeaders()
  * @method bool|null getBruteForceProtected()
  * @method string|null getClientAuthenticationFlow()
  * @method int|null getClientOfflineSessionIdleTimeout()
@@ -115,7 +117,7 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method bool|null getRevokeRefreshToken()
  * @method Roles|null getRoles()
  * @method ScopeMappingCollection|null getScopeMappings()
- * @method Map|null getSmtpServer()
+ * @method StringMap|null getSmtpServer()
  * @method string|null getSslRequired()
  * @method int|null getSsoSessionIdleTimeout()
  * @method int|null getSsoSessionIdleTimeoutRememberMe()

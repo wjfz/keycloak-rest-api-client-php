@@ -8,6 +8,8 @@ use Overtrue\Keycloak\Collection\ProtocolMapperCollection;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
+ * @method StringMap|null getAttributes()
+ * @method self withAttributes(StringMap|array|null $attributes)
  * @method string|null getDescription()
  * @method self withDescription(?string $description)
  * @method string|null getId()

@@ -29,6 +29,8 @@ use Overtrue\Keycloak\Type\ArrayMap;
  * @method self withAlias(?string $alias)
  * @method string|null getRedirectUrl()
  * @method self withRedirectUrl(?string $redirectUrl)
+ * @method ArrayMap|null getAttributes()
+ * @method self withAttributes(ArrayMap|array|null $attributes)
  *
  * @codeCoverageIgnore
  */

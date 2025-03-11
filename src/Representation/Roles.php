@@ -9,10 +9,10 @@ use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\Map;
 
 /**
- * @method Map|null getApplication()
- * @method self withApplication(?Map $value)
- * @method Map|null getClient()
- * @method self withClient(?Map $value)
+ * @method ArrayMap|null getApplication()
+ * @method self withApplication(ArrayMap|array|null $value)
+ * @method ArrayMap|null getClient()
+ * @method self withClient(ArrayMap|array|null $value)
  * @method RealmCollection|null getRealm()
  * @method self withRealm(?RealmCollection $value)
  *

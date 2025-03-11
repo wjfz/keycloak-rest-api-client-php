@@ -11,10 +11,12 @@ use Overtrue\Keycloak\Type\BooleanMap;
 use Overtrue\Keycloak\Type\Map;
 
 /**
- * @method Map|null getAccess()
- * @method self withAccess(?Map $access)
- * @method Map|null getClientRoles()
- * @method self withClientRoles(?Map $clientRoles)
+ * @method BooleanMap|null getAccess()
+ * @method self withAccess(BooleanMap|array|null $access)
+ * @method ArrayMap|null getAttributes()
+ * @method self withAttributes(ArrayMap|array|null $attributes)
+ * @method ArrayMap|null getClientRoles()
+ * @method self withClientRoles(ArrayMap|array|null $clientRoles)
  * @method string|null getId()
  * @method self withId(?string $id)
  * @method string|null getName()
@@ -35,9 +37,7 @@ use Overtrue\Keycloak\Type\Map;
 class Group extends Representation
 {
     protected ?BooleanMap $access = null;
-
     protected ?ArrayMap $attributes = null;
-
     protected ?ArrayMap $clientRoles = null;
 
     /**

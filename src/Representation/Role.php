@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Overtrue\Keycloak\Representation;
 
 use Overtrue\Keycloak\Type\ArrayMap;
-use Overtrue\Keycloak\Type\Map;
 
 /**
- * @method self withAttributes(?Map $value)
+ * @method ArrayMap|null getAttributes()
+ * @method self withAttributes(ArrayMap|array|null $value)
  * @method bool|null getClientRole()
  * @method self withClientRole(?bool $value)
  * @method bool|null getComposite()
