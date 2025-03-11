@@ -283,8 +283,10 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class Realm extends Representation
+class Realm extends Representation implements AttributesAwareInterface
 {
+    use HasAttributes;
+
     public function __construct(
         protected ?int $accessCodeLifespan = null,
         protected ?int $accessCodeLifespanLogin = null,
@@ -297,18 +299,20 @@ class Realm extends Representation
         protected ?bool $adminEventsDetailsEnabled = null,
         protected ?bool $adminEventsEnabled = null,
         protected ?string $adminTheme = null,
-        protected ?Map $attributes = null,
+        /** @var Map|array<string, mixed>|null $attributes */
+        protected Map|array|null $attributes = null,
         protected ?AuthenticationFlowCollection $authenticationFlows = null,
         protected ?AuthenticatorConfigCollection $authenticatorConfig = null,
         protected ?string $browserFlow = null,
-        protected ?Map $browserSecurityHeaders = null,
+        protected Map|array|null $browserSecurityHeaders = null,
         protected ?bool $bruteForceProtected = null,
         protected ?string $clientAuthenticationFlow = null,
         protected ?int $clientOfflineSessionIdleTimeout = null,
         protected ?int $clientOfflineSessionMaxLifespan = null,
         protected ?ClientPolicies $clientPolicies = null,
         protected ?ClientProfiles $clientProfiles = null,
-        protected ?Map $clientScopeMappings = null,
+        /** @var Map|array<string, mixed>|null $clientScopeMappings */
+        protected Map|array|null $clientScopeMappings = null,
         protected ?ClientScopeCollection $clientScopes = null,
         protected ?int $clientSessionIdleTimeout = null,
         protected ?int $clientSessionMaxLifespan = null,
@@ -392,7 +396,8 @@ class Realm extends Representation
         protected ?bool $revokeRefreshToken = null,
         protected ?Roles $roles = null,
         protected ?ScopeMappingCollection $scopeMappings = null,
-        protected ?Map $smtpServer = null,
+        /** @var Map|array<string, mixed>|null $smtpServer */
+        protected Map|array|null $smtpServer = null,
         protected ?string $sslRequired = null,
         protected ?int $ssoSessionIdleTimeout = null,
         protected ?int $ssoSessionIdleTimeoutRememberMe = null,

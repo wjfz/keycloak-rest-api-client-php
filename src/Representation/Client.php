@@ -85,14 +85,19 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class Client extends Representation
+class Client extends Representation implements AttributesAwareInterface
 {
+    use HasAttributes;
+
     public function __construct(
-        protected ?Map $access = null,
+        /** @var Map|array<string,mixed>|null */
+        protected Map|array|null $access = null,
         protected ?string $adminUrl = null,
         protected ?bool $alwaysDisplayInConsole = null,
-        protected ?Map $attributes = null,
-        protected ?Map $authenticationFlowBindingOverrides = null,
+        /** @var Map|array<string,mixed>|null */
+        protected Map|array|null $attributes = null,
+        /** @var Map|array<string,mixed>|null */
+        protected Map|array|null $authenticationFlowBindingOverrides = null,
         protected ?bool $authorizationServicesEnabled = null,
         protected ?ResourceServer $authorizationSettings = null,
         protected ?string $baseUrl = null,
@@ -120,7 +125,8 @@ class Client extends Representation
         protected ?bool $publicClient = null,
         /** @var string[]|null */
         protected ?array $redirectUris = null,
-        protected ?Map $registeredNodes = null,
+        /** @var Map|array<string,mixed>|null */
+        protected Map|array|null $registeredNodes = null,
         protected ?string $registrationAccessToken = null,
         protected ?string $rootUrl = null,
         protected ?string $secret = null,

@@ -25,7 +25,8 @@ use Overtrue\Keycloak\Type\Map;
 class ProtocolMapper extends Representation
 {
     public function __construct(
-        protected ?Map $config = null,
+        /** @var Map|array<string, mixed>|null $config */
+        protected Map|array|null $config = null,
         protected ?bool $consentRequired = null,
         protected ?string $id = null,
         protected ?string $name = null,

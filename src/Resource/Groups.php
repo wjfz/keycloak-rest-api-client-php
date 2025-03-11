@@ -15,7 +15,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class Groups extends Resource
 {
-    public function all(string $realm, ?Criteria $criteria = null): GroupCollection
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string,string>|null  $criteria
+     */
+    public function all(string $realm, Criteria|array|null $criteria = null): GroupCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -43,7 +46,10 @@ class Groups extends Resource
         );
     }
 
-    public function children(string $realm, string $groupId, ?Criteria $criteria = null): GroupCollection
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     */
+    public function children(string $realm, string $groupId, Criteria|array|null $criteria = null): GroupCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -58,7 +64,10 @@ class Groups extends Resource
         );
     }
 
-    public function members(string $realm, string $groupId, ?Criteria $criteria = null): UserCollection
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     */
+    public function members(string $realm, string $groupId, Criteria|array|null $criteria = null): UserCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -87,8 +96,17 @@ class Groups extends Resource
         );
     }
 
-    public function create(string $realm, Group $group): Group
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Group|array<string,mixed>  $group
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    public function create(string $realm, Group|array $group): Group
     {
+        if (! $group instanceof Group) {
+            $group = Group::from($group);
+        }
+
         $response = $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/groups',
@@ -109,8 +127,17 @@ class Groups extends Resource
         return $this->get($realm, $groupId);
     }
 
-    public function createChild(string $realm, Group $group, string $parentGroupId): Group
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Group|array<string,mixed>  $group
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    public function createChild(string $realm, Group|array $group, string $parentGroupId): Group
     {
+        if (! $group instanceof Group) {
+            $group = Group::from($group);
+        }
+
         $response = $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/groups/{groupId}/children',
@@ -132,8 +159,17 @@ class Groups extends Resource
         return $this->get($realm, $groupId);
     }
 
-    public function update(string $realm, string $groupId, Group $updatedGroup): ResponseInterface
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Group|array<string,mixed>  $updatedGroup
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    public function update(string $realm, string $groupId, Group|array $updatedGroup): ResponseInterface
     {
+        if (! $updatedGroup instanceof Group) {
+            $updatedGroup = Group::from($updatedGroup);
+        }
+
         return $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/groups/{groupId}',

@@ -119,7 +119,11 @@ class RepresentationTest extends TestCase
 
         $jsonSerialized = $representation->jsonSerialize();
 
-        static::assertIsObject($jsonSerialized['map']);
+        static::assertSame([
+            'key-1' => ['value-1'],
+            'key-2' => ['value-2'],
+            'key-3' => ['value-3'],
+        ], $jsonSerialized['map']);
     }
 
     public function test_serializes_map_correctly_when_only_array_is_provided(): void

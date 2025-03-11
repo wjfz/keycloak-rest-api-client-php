@@ -19,13 +19,16 @@ use Psr\Http\Message\ResponseInterface;
 class Client
 {
     public function __construct(
-        private readonly Keycloak $keycloak,
-        private readonly ClientInterface $httpClient,
-        private readonly TokenStorageInterface $tokenStorage,
+        private Keycloak $keycloak,
+        private ClientInterface $httpClient,
+        private TokenStorageInterface $tokenStorage,
     ) {}
 
     /**
      * @param  array<string, mixed>  $options
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
     public function request(string $method, string $path = '', array $options = []): ResponseInterface
     {
@@ -54,6 +57,10 @@ class Client
         return $this->tokenStorage->retrieveAccessToken()?->isExpired(new DateTime) === false;
     }
 
+    /**
+     * @throws \JsonException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     private function authorize(): void
     {
         $tokens = $this->fetchTokens();
@@ -65,6 +72,9 @@ class Client
 
     /**
      * @return array{access_token: non-empty-string, refresh_token: non-empty-string}
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
      */
     private function fetchTokens(): array
     {

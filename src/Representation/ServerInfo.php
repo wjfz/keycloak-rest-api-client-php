@@ -32,23 +32,33 @@ use Overtrue\Keycloak\Type\Map;
 class ServerInfo extends Representation
 {
     public function __construct(
-        protected ?Map $builtinProtocolMappers = null,
-        protected ?Map $clientImporters = null,
-        protected ?Map $clientInstallations = null,
-        protected ?Map $componentTypes = null,
+        /** @var Map|array<string, mixed>|null $builtinProtocolMappers */
+        protected Map|array|null $builtinProtocolMappers = null,
+        /** @var Map|array<string, mixed>|null $clientImporters */
+        protected Map|array|null $clientImporters = null,
+        /** @var Map|array<string, mixed>|null $clientInstallations */
+        protected Map|array|null $clientInstallations = null,
+        /** @var Map|array<string, mixed>|null $componentTypes */
+        protected Map|array|null $componentTypes = null,
         #[Since('20.0.0')]
         protected ?CryptoInfo $cryptoInfo = null,
-        protected ?Map $enums = null,
+        /** @var Map|array<string, mixed>|null $enums */
+        protected Map|array|null $enums = null,
         #[Since('22.0.4')]
         protected ?FeatureCollection $features = null,
-        protected ?Map $identityProviders = null,
+        /** @var Map|array<string, mixed>|null $identityProviders */
+        protected Map|array|null $identityProviders = null,
         protected ?MemoryInfo $memoryInfo = null,
         protected ?PasswordPolicyTypeCollection $passwordPolicies = null,
         protected ?ProfileInfo $profileInfo = null,
-        protected ?Map $protocolMapperTypes = null,
-        protected ?Map $providers = null,
-        protected ?Map $socialProviders = null,
+        /** @var Map|array<string, mixed>|null $protocolMapperTypes */
+        protected Map|array|null $protocolMapperTypes = null,
+        /** @var Map|array<string, mixed>|null $providers */
+        protected Map|array|null $providers = null,
+        /** @var Map|array<string, mixed>|null $socialProviders */
+        protected Map|array|null $socialProviders = null,
         protected ?SystemInfo $systemInfo = null,
-        protected ?Map $themes = null,
+        /** @var Map|array<string, mixed>|null $themes */
+        protected Map|array|null $themes = null,
     ) {}
 }

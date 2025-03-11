@@ -16,9 +16,11 @@ abstract class Representation implements JsonSerializable
     abstract public function __construct();
 
     /**
-     * @param  array<mixed>  $properties
+     * @param  array<string, mixed>  $properties
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
      */
-    final public static function from(array $properties): static
+    public static function from(array $properties): static
     {
         $representation = new static;
 
@@ -36,13 +38,16 @@ abstract class Representation implements JsonSerializable
         );
     }
 
-    final public function with(string $property, mixed $value): static
+    /**
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    public function with(string $property, mixed $value): static
     {
         return $this->withProperty($property, $value);
     }
 
     /**
-     * @return array<mixed>
+     * @return array<string, mixed>
      */
     final public function jsonSerialize(): array
     {
@@ -51,7 +56,6 @@ abstract class Representation implements JsonSerializable
         $properties = $reflectedClass->getProperties(ReflectionProperty::IS_PROTECTED);
 
         foreach ($properties as $property) {
-            $property->setAccessible(true);
             $serializable[$property->getName()] = ($property->getValue($this) instanceof JsonSerializable)
                 ? $property->getValue($this)->jsonSerialize()
                 : $property->getValue($this);
@@ -61,7 +65,17 @@ abstract class Representation implements JsonSerializable
     }
 
     /**
+     * @return array<string, mixed>
+     */
+    final public function toArray(): array
+    {
+        return $this->jsonSerialize();
+    }
+
+    /**
      * @param  string[]  $arguments
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
      */
     final public function __call(string $name, array $arguments): mixed
     {
@@ -76,18 +90,45 @@ abstract class Representation implements JsonSerializable
         throw new BadMethodCallException;
     }
 
+    /**
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
     final public function __get(string $name): mixed
     {
+        return $this->getProperty($name);
+    }
+
+    /**
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    private function getProperty(string $name): mixed
+    {
+        $getter = 'get'.ucfirst($name);
+        if (method_exists($this, $getter)) {
+            return $this->$getter();
+        }
+
         $this->throwExceptionIfPropertyDoesNotExist($name);
 
         return $this->$name;
     }
 
+    /**
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
     private function withProperty(string $property, mixed $value): static
     {
+        $clone = clone $this;
+
+        $setter = 'set'.ucfirst($property);
+        if (method_exists($this, $setter)) {
+            $clone->$setter($value);
+
+            return $clone;
+        }
+
         $this->throwExceptionIfPropertyDoesNotExist($property);
 
-        $clone = clone $this;
         $clone->$property = $value;
 
         return $clone;

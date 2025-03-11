@@ -15,7 +15,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class Organizations extends Resource
 {
-    public function all(string $realm, ?Criteria $criteria = null): OrganizationCollection
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     */
+    public function all(string $realm, Criteria|array|null $criteria = null): OrganizationCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -38,8 +41,17 @@ class Organizations extends Resource
         );
     }
 
-    public function create(string $realm, Organization $organization): Organization
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Organization|array<string, mixed>  $organization
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    public function create(string $realm, Organization|array $organization): Organization
     {
+        if (! $organization instanceof Organization) {
+            $organization = Organization::from($organization);
+        }
+
         $response = $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/organizations',

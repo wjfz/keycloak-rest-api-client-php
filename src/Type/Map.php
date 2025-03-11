@@ -8,25 +8,35 @@ use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use OutOfBoundsException;
+use ReturnTypeWillChange;
 use Traversable;
 
 /**
  * @template T
  *
- * @implements IteratorAggregate<string, T>
+ * @implements IteratorAggregate<string, T[]>
  */
 class Map extends Type implements Countable, IteratorAggregate
 {
     /**
-     * @param  array<string, T>  $map
+     * @var array<string, T[]>
      */
-    public function __construct(
-        private array $map = [],
-    ) {}
+    private array $map = [];
 
-    public function jsonSerialize(): object
+    /**
+     * @param  array<string, T[]|T>  $map
+     */
+    public function __construct(array $map = [])
     {
-        return (object) $this->map;
+        foreach ($map as $key => $value) {
+            $this->map[$key] = (array) $value;
+        }
+    }
+
+    #[ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
+        return $this->map;
     }
 
     public function getIterator(): Traversable
@@ -44,6 +54,22 @@ class Map extends Type implements Countable, IteratorAggregate
         return array_key_exists($key, $this->map);
     }
 
+    public function containsKey(string $key): bool
+    {
+        return array_key_exists($key, $this->map);
+    }
+
+    public function containsValue(mixed $value): bool
+    {
+        return array_any($this->map, function ($v) use ($value) {
+            if (! is_array($value)) {
+                return in_array($value, $v, true);
+            }
+
+            return $v == $value;
+        });
+    }
+
     public function get(string $key): mixed
     {
         if (! $this->contains($key)) {
@@ -53,11 +79,23 @@ class Map extends Type implements Countable, IteratorAggregate
         return $this->map[$key];
     }
 
+    /**
+     * @return T|mixed
+     */
+    public function getFirst(string $key, mixed $default = null): mixed
+    {
+        return $this->get($key)[0] ?? null;
+    }
+
+    /**
+     * @param  T|T[]  $value
+     * @return $this
+     */
     public function with(string $key, mixed $value): self
     {
         $clone = clone $this;
 
-        $clone->map[$key] = $value;
+        $clone->map[$key] = (array) $value;
 
         return $clone;
     }
@@ -72,10 +110,18 @@ class Map extends Type implements Countable, IteratorAggregate
     }
 
     /**
-     * @return array<string, T>
+     * @return array<string, T[]>
      */
     public function getMap(): array
     {
         return $this->map;
+    }
+
+    /**
+     * @return array<string>
+     */
+    public function nameSet(): array
+    {
+        return array_keys($this->map);
     }
 }

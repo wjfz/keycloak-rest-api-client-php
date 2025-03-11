@@ -32,12 +32,17 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class Group extends Representation
+class Group extends Representation implements AttributesAwareInterface
 {
+    use HasAttributes;
+
     public function __construct(
-        protected ?Map $access = null,
-        protected ?Map $attributes = null,
-        protected ?Map $clientRoles = null,
+        /** @var Map|array<string, mixed>|null $access */
+        protected Map|array|null $access = null,
+        /** @var Map|array<string, mixed>|null $attributes */
+        protected Map|array|null $attributes = null,
+        /** @var Map|array<string, mixed>|null $clientRoles */
+        protected Map|array|null $clientRoles = null,
         protected ?string $id = null,
         protected ?string $name = null,
         #[Since('23.0.0')]

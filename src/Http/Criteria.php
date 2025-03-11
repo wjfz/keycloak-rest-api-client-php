@@ -28,9 +28,9 @@ class Criteria
     /**
      * @return array<string, mixed>
      */
-    public function jsonSerialize(): array
+    public function toArray(): array
     {
-        $serialized = [];
+        $formatted = [];
 
         foreach ($this->criteria as $key => $value) {
             if ($value === null) {
@@ -38,26 +38,34 @@ class Criteria
             }
 
             if (is_bool($value)) {
-                $serialized[$key] = $value ? 'true' : 'false';
+                $formatted[$key] = $value ? 'true' : 'false';
 
                 continue;
             }
 
             if ($value instanceof DateTimeInterface) {
-                $serialized[$key] = $value->format('Y-m-d');
+                $formatted[$key] = $value->format('Y-m-d');
 
                 continue;
             }
 
             if ($value instanceof Stringable) {
-                $serialized[$key] = (string) $value;
+                $formatted[$key] = (string) $value;
 
                 continue;
             }
 
-            $serialized[$key] = $value;
+            $formatted[$key] = $value;
         }
 
-        return $serialized;
+        return $formatted;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
+    {
+        return $this->toArray();
     }
 }

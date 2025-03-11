@@ -39,7 +39,7 @@ class IdentityProvider extends Representation
     public function __construct(
         protected ?bool $addReadTokenRoleOnCreate = null,
         protected ?string $alias = null,
-        protected ?Map $config = null,
+        protected Map|array|null $config = null,
         protected ?string $displayName = null,
         protected ?bool $enabled = null,
         protected ?string $firstBrokerLoginFlowAlias = null,

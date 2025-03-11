@@ -21,4 +21,4 @@ $group = new Group(
 
 $response = $keycloak->groups()->create($realm, $group);
 
-var_dump($response);
+var_dump($response->toArray());

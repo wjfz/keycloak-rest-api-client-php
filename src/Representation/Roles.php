@@ -20,8 +20,8 @@ use Overtrue\Keycloak\Type\Map;
 class Roles extends Representation
 {
     public function __construct(
-        protected ?Map $application = null,
-        protected ?Map $client = null,
+        protected Map|array|null $application = null,
+        protected Map|array|null $client = null,
         protected ?RealmCollection $realm = null,
     ) {}
 }

@@ -14,7 +14,7 @@ use ReflectionClass;
 use Traversable;
 
 /**
- * @template T of Representation
+ * @template T extends Representation
  *
  * @implements IteratorAggregate<T>
  */
@@ -26,7 +26,10 @@ abstract class Collection implements Countable, IteratorAggregate, JsonSerializa
     protected array $items = [];
 
     /**
-     * @param  iterable<T>  $items
+     * @param  iterable<T|array<string, mixed>>  $items
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     * @throws \ReflectionException
      */
     public function __construct(iterable $items = [])
     {
@@ -58,27 +61,31 @@ abstract class Collection implements Countable, IteratorAggregate, JsonSerializa
         return $this->items;
     }
 
-    public function add(Representation $item): void
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Representation|array<string, mixed>  $item
+     *
+     * @throws \ReflectionException
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    public function add(Representation|array $item): void
     {
+        /** @var class-string<T> $expectedRepresentationClass */
         $expectedRepresentationClass = $this->getRepresentationClass();
 
-        if (! $item instanceof $expectedRepresentationClass) {
+        if (! $item instanceof $expectedRepresentationClass && ! is_array($item)) {
             throw new InvalidArgumentException(
                 sprintf(
                     '%s expects items to be %s representation, %s given',
-                    (new ReflectionClass(static::class))->getShortName(),
-                    (new ReflectionClass($expectedRepresentationClass))->getShortName(),
-                    (new ReflectionClass($item))->getShortName(),
+                    new ReflectionClass(static::class)->getShortName(),
+                    new ReflectionClass($expectedRepresentationClass)->getShortName(),
+                    new ReflectionClass($item)->getShortName(),
                 ),
             );
         }
 
-        $this->items[] = $item;
+        $this->items[] = $item instanceof $expectedRepresentationClass ? $item : $expectedRepresentationClass::from($item);
     }
 
-    /**
-     * @return T
-     */
     public function first(): ?Representation
     {
         return $this->items[0] ?? null;
@@ -87,8 +94,16 @@ abstract class Collection implements Countable, IteratorAggregate, JsonSerializa
     /**
      * @return array<array-key, T>
      */
-    public function all(): array
+    public function toArray(): array
     {
         return $this->items;
+    }
+
+    /**
+     * @return array<array-key, T>
+     */
+    public function all(): array
+    {
+        return $this->toArray();
     }
 }

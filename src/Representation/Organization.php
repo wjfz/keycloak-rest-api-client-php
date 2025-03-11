@@ -34,14 +34,17 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class Organization extends Representation
+class Organization extends Representation implements AttributesAwareInterface
 {
+    use HasAttributes;
+
     public function __construct(
         protected ?string $id = null,
         protected ?string $name = null,
         protected ?bool $enabled = null,
         protected ?string $description = null,
-        protected ?Map $attributes = null,
+        /** @var Map|array<string, mixed>|null $attributes */
+        protected Map|array|null $attributes = null,
         protected ?OrganizationDomainCollection $domains = null,
         protected ?UserCollection $members = null,
         protected ?IdentityProviderCollection $identityProviders = null,

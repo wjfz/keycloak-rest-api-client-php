@@ -10,17 +10,18 @@ use Overtrue\Keycloak\Representation\Representation;
 /**
  * @internal
  */
-class Command
+readonly class Command
 {
     public function __construct(
-        private readonly string $path,
-        private readonly Method $method,
+        private string $path,
+        private Method $method,
         /** @var array<string, string> */
-        private readonly array $parameters = [],
-        /** @var Representation|Collection|array<mixed>|null */
-        private readonly Representation|Collection|array|null $payload = null,
-        private readonly ?Criteria $criteria = null,
-        private readonly ContentType $contentType = ContentType::JSON,
+        private array $parameters = [],
+        /** @var Representation|Collection|array<string, mixed>|null */
+        private Representation|Collection|array|null $payload = null,
+        /** @var Criteria|array<string, string>|null */
+        private Criteria|array|null $criteria = null,
+        private ContentType $contentType = ContentType::JSON,
     ) {}
 
     public function getMethod(): Method
@@ -47,7 +48,7 @@ class Command
     }
 
     /**
-     * @return Representation|Collection|array<mixed>|null
+     * @return Representation|Collection|array<string, mixed>|null
      */
     public function getPayload(): Representation|Collection|array|null
     {
@@ -60,7 +61,11 @@ class Command
             return '';
         }
 
-        return '?'.http_build_query($this->criteria->jsonSerialize());
+        if ($this->criteria instanceof Criteria) {
+            return '?'.http_build_query($this->criteria->jsonSerialize());
+        }
+
+        return '?'.http_build_query($this->criteria);
     }
 
     public function getContentType(): ContentType

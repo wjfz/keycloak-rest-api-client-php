@@ -23,10 +23,13 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class ClientScope extends Representation
+class ClientScope extends Representation implements AttributesAwareInterface
 {
+    use HasAttributes;
+
     public function __construct(
-        protected ?Map $attributes = null,
+        /** @var Map|array<string, mixed>|null $attributes */
+        protected Map|array|null $attributes = null,
         protected ?string $description = null,
         protected ?string $id = null,
         protected ?string $name = null,

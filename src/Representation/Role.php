@@ -24,10 +24,13 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class Role extends Representation
+class Role extends Representation implements AttributesAwareInterface
 {
+    use HasAttributes;
+
     public function __construct(
-        protected ?Map $attributes = null,
+        /** @var Map|array<string, mixed>|null $attributes */
+        protected Map|array|null $attributes = null,
         protected ?bool $clientRole = null,
         protected ?bool $composite = null,
         protected ?RoleComposites $composites = null,

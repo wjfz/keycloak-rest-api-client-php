@@ -7,14 +7,18 @@ namespace Overtrue\Keycloak\Serializer;
 use Overtrue\Keycloak\Collection\Collection;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
-class CollectionDenormalizer implements DenormalizerInterface
+readonly class CollectionDenormalizer implements DenormalizerInterface
 {
     public function __construct(
-        private readonly DenormalizerInterface $denormalizer,
+        private DenormalizerInterface $denormalizer,
     ) {}
 
     /**
      * @param  array<string, mixed>  $context
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     * @throws \ReflectionException
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
      */
     public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): mixed
     {

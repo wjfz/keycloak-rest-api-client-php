@@ -14,7 +14,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class Roles extends Resource
 {
-    public function all(string $realm, ?Criteria $criteria = null): RoleCollection
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     */
+    public function all(string $realm, Criteria|array|null $criteria = null): RoleCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -42,8 +45,17 @@ class Roles extends Resource
         );
     }
 
-    public function create(string $realm, Role $role): Role
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Role|array<string,mixed>  $role
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    public function create(string $realm, Role|array $role): Role
     {
+        if (! $role instanceof Role) {
+            $role = Role::from($role);
+        }
+
         $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/roles',
@@ -72,8 +84,17 @@ class Roles extends Resource
         );
     }
 
-    public function update(string $realm, Role $role): Role
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Role|array<string, mixed>  $role
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    public function update(string $realm, Role|array $role): Role
     {
+        if (! $role instanceof Role) {
+            $role = Role::from($role);
+        }
+
         $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/roles/{roleName}',

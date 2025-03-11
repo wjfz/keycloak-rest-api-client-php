@@ -16,9 +16,12 @@ $keycloak = new Keycloak(
 $realm = 'master';
 
 $role = new Role(
-    name: 'my-role',
+    attributes: [
+        'foo' => 'bar',
+    ],
+    name: uniqid('role')
 );
 
 $response = $keycloak->roles()->create($realm, $role);
 
-var_dump($response);
+print_r($response->toArray());

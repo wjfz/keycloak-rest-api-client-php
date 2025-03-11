@@ -43,7 +43,8 @@ use Overtrue\Keycloak\Type\Map;
 class Policy extends Representation
 {
     public function __construct(
-        protected ?Map $config = null,
+        /** @var Map|array<string, mixed>|null $config */
+        protected Map|array|null $config = null,
         protected ?DecisionStrategy $decisionStrategy = null,
         protected ?string $description = null,
         protected ?string $id = null,

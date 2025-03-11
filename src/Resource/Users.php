@@ -17,7 +17,10 @@ use Psr\Http\Message\ResponseInterface;
 
 class Users extends Resource
 {
-    public function all(string $realm, ?Criteria $criteria = null): UserCollection
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     */
+    public function all(string $realm, Criteria|array|null $criteria = null): UserCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -45,8 +48,15 @@ class Users extends Resource
         );
     }
 
-    public function create(string $realm, UserRepresentation $user): UserRepresentation
+    /**
+     * @param  \Overtrue\Keycloak\Representation\User|array<string, mixed>  $user
+     */
+    public function create(string $realm, UserRepresentation|array $user): UserRepresentation
     {
+        if (! $user instanceof UserRepresentation) {
+            $user = UserRepresentation::from($user);
+        }
+
         $response = $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/users',
@@ -67,8 +77,15 @@ class Users extends Resource
         return $this->get($realm, $userId);
     }
 
-    public function update(string $realm, string $userId, UserRepresentation $updatedUser): UserRepresentation
+    /**
+     * @param  \Overtrue\Keycloak\Representation\User|array<string, mixed>  $updatedUser
+     */
+    public function update(string $realm, string $userId, UserRepresentation|array $updatedUser): UserRepresentation
     {
+        if (! $updatedUser instanceof UserRepresentation) {
+            $updatedUser = UserRepresentation::from($updatedUser);
+        }
+
         $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/users/{userId}',
@@ -98,7 +115,10 @@ class Users extends Resource
         );
     }
 
-    public function search(string $realm, ?Criteria $criteria = null): UserCollection
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     */
+    public function search(string $realm, Criteria|array|null $criteria = null): UserCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -142,7 +162,10 @@ class Users extends Resource
         );
     }
 
-    public function retrieveGroups(string $realm, string $userId, ?Criteria $criteria = null): GroupCollection
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     */
+    public function retrieveGroups(string $realm, string $userId, Criteria|array|null $criteria = null): GroupCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -185,8 +208,18 @@ class Users extends Resource
         );
     }
 
-    public function addRealmRoles(string $realm, string $userId, RoleCollection $roles): ResponseInterface
+    /**
+     * @param  \Overtrue\Keycloak\Collection\RoleCollection|array<array<string,mixed>|\Overtrue\Keycloak\Representation\Role>  $roles
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     * @throws \ReflectionException
+     */
+    public function addRealmRoles(string $realm, string $userId, RoleCollection|array $roles): ResponseInterface
     {
+        if (! $roles instanceof RoleCollection) {
+            $roles = new RoleCollection($roles);
+        }
+
         return $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}/users/{userId}/role-mappings/realm',
@@ -218,7 +251,7 @@ class Users extends Resource
     /**
      * @param  list<string>|null  $actions
      */
-    public function executeActionsEmail(string $realm, string $userId, ?array $actions = null, ?Criteria $criteria = null): ResponseInterface
+    public function executeActionsEmail(string $realm, string $userId, ?array $actions = null, Criteria|array|null $criteria = null): ResponseInterface
     {
         return $this->commandExecutor->executeCommand(
             new Command(

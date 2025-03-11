@@ -18,7 +18,10 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Realms extends Resource
 {
-    public function all(?Criteria $criteria = null): RealmCollection
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     */
+    public function all(Criteria|array|null $criteria = null): RealmCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -42,8 +45,17 @@ class Realms extends Resource
         );
     }
 
-    public function import(Realm $realm): Realm
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Realm|array<string,mixed>  $realm
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    public function import(Realm|array $realm): Realm
     {
+        if (! $realm instanceof Realm) {
+            $realm = Realm::from($realm);
+        }
+
         $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms',
@@ -52,11 +64,20 @@ class Realms extends Resource
             ),
         );
 
-        return $this->get($realm->getRealm());
+        return $this->get(realm: $realm->getRealm());
     }
 
-    public function update(string $realm, Realm $updatedRealm): Realm
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Realm|array<string,string>  $updatedRealm
+     *
+     * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     */
+    public function update(string $realm, Realm|array $updatedRealm): Realm
     {
+        if (! $updatedRealm instanceof Realm) {
+            $updatedRealm = Realm::from($updatedRealm);
+        }
+
         $this->commandExecutor->executeCommand(
             new Command(
                 '/admin/realms/{realm}',
@@ -85,9 +106,10 @@ class Realms extends Resource
     }
 
     /**
-     * @return AdminEvent[]
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     * @return array<array-key, mixed>
      */
-    public function adminEvents(string $realm, ?Criteria $criteria = null): array
+    public function adminEvents(string $realm, Criteria|array|null $criteria = null): array
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -101,7 +123,10 @@ class Realms extends Resource
         );
     }
 
-    public function keys(string $realm, ?Criteria $criteria = null): KeysMetadata
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     */
+    public function keys(string $realm, Criteria|array|null $criteria = null): KeysMetadata
     {
         return $this->queryExecutor->executeQuery(
             new Query(

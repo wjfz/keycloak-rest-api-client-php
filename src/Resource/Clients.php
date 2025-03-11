@@ -18,7 +18,10 @@ use Psr\Http\Message\ResponseInterface;
  */
 class Clients extends Resource
 {
-    public function all(string $realm, ?Criteria $criteria = null): ClientCollection
+    /**
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string,string>|null  $criteria
+     */
+    public function all(string $realm, Criteria|array|null $criteria = null): ClientCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
@@ -46,7 +49,10 @@ class Clients extends Resource
         );
     }
 
-    public function import(string $realm, ClientRepresentation $client): ClientRepresentation
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Client|array<string,mixed>  $client
+     */
+    public function import(string $realm, ClientRepresentation|array $client): ClientRepresentation
     {
         $this->commandExecutor->executeCommand(
             new Command(
@@ -62,7 +68,10 @@ class Clients extends Resource
         return $this->get($realm, $client->getId());
     }
 
-    public function update(string $realm, string $clientUuid, ClientRepresentation $updatedClient): ClientRepresentation
+    /**
+     * @param  \Overtrue\Keycloak\Representation\Client|array<string, mixed>  $updatedClient
+     */
+    public function update(string $realm, string $clientUuid, ClientRepresentation|array $updatedClient): ClientRepresentation
     {
         $this->commandExecutor->executeCommand(
             new Command(
@@ -94,9 +103,10 @@ class Clients extends Resource
     }
 
     /**
-     * @return UserSession[]
+     * @param  \Overtrue\Keycloak\Http\Criteria|array<string, string>|null  $criteria
+     * @return array<array-key, mixed>
      */
-    public function getUserSessions(string $realm, string $clientUuid, ?Criteria $criteria = null): array
+    public function getUserSessions(string $realm, string $clientUuid, Criteria|array|null $criteria = null): array
     {
         return $this->queryExecutor->executeQuery(
             new Query(
