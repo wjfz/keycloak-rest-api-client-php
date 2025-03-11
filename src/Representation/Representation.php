@@ -116,6 +116,7 @@ abstract class Representation implements JsonSerializable
 
     /**
      * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
+     * @throws \ReflectionException
      */
     private function withProperty(string $property, mixed $value): static
     {
@@ -129,6 +130,18 @@ abstract class Representation implements JsonSerializable
         }
 
         $this->throwExceptionIfPropertyDoesNotExist($property);
+
+        // format Map value: protected StringMap|null $config = null;
+        $reflectedClass = new ReflectionClass($this);
+        $propertyType = $reflectedClass->getProperty($property)->getType();
+
+        if ($propertyType instanceof \ReflectionNamedType) {
+            $propertyType = $propertyType->getName();
+
+            if (class_exists($propertyType) && is_subclass_of($propertyType, \Overtrue\Keycloak\Type\Map::class)) {
+                $value = $propertyType::make($value);
+            }
+        }
 
         $clone->$property = $value;
 

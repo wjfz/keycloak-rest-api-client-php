@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Overtrue\Keycloak\Representation;
 
 use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method int|null getChangedSyncPeriod()
@@ -28,15 +29,19 @@ use Overtrue\Keycloak\Type\Map;
  */
 class UserFederationProvider extends Representation
 {
+    protected ?StringMap $config = null;
+
     public function __construct(
         protected ?int $changedSyncPeriod = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $config = null,
+        /** @var StringMap|array<string, string>|null $config */
+        StringMap|array|null $config = null,
         protected ?string $displayName = null,
         protected ?int $fullSyncPeriod = null,
         protected ?string $id = null,
         protected ?int $lastSync = null,
         protected ?int $priority = null,
         protected ?string $providerName = null,
-    ) {}
+    ) {
+        $this->config = StringMap::make($config);
+    }
 }

@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace Overtrue\Keycloak\Representation;
 
 use Overtrue\Keycloak\Collection\ProtocolMapperCollection;
+use Overtrue\Keycloak\Type\BooleanMap;
+use Overtrue\Keycloak\Type\IntegerMap;
 use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method Map|null getAccess()
@@ -83,19 +86,25 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class Client extends Representation implements AttributesAwareInterface
+class Client extends Representation
 {
-    use HasAttributes;
+    protected ?BooleanMap $access = null;
+
+    protected ?StringMap $attributes = null;
+
+    protected ?StringMap $authenticationFlowBindingOverrides = null;
+
+    protected ?IntegerMap $registeredNodes = null;
 
     public function __construct(
-        /** @var Map|array<string,mixed>|null */
-        protected Map|array|null $access = null,
+        /** @var BooleanMap|array<string, bool>|null $access */
+        BooleanMap|array|null $access = null,
         protected ?string $adminUrl = null,
         protected ?bool $alwaysDisplayInConsole = null,
-        /** @var Map|array<string,mixed>|null */
-        protected Map|array|null $attributes = null,
-        /** @var Map|array<string,mixed>|null */
-        protected Map|array|null $authenticationFlowBindingOverrides = null,
+        /** @var StringMap|array<string, string|string[]>|null $attributes */
+        StringMap|array|null $attributes = null,
+        /** @var StringMap|array<string, string|string[]>|null $authenticationFlowBindingOverrides */
+        StringMap|array|null $authenticationFlowBindingOverrides = null,
         protected ?bool $authorizationServicesEnabled = null,
         protected ?ResourceServer $authorizationSettings = null,
         protected ?string $baseUrl = null,
@@ -123,8 +132,8 @@ class Client extends Representation implements AttributesAwareInterface
         protected ?bool $publicClient = null,
         /** @var string[]|null */
         protected ?array $redirectUris = null,
-        /** @var Map|array<string,mixed>|null */
-        protected Map|array|null $registeredNodes = null,
+        /** @var IntegerMap|array<string, int>|null $registeredNodes */
+        IntegerMap|array|null $registeredNodes = null,
         protected ?string $registrationAccessToken = null,
         protected ?string $rootUrl = null,
         protected ?string $secret = null,
@@ -133,5 +142,10 @@ class Client extends Representation implements AttributesAwareInterface
         protected ?bool $surrogateAuthRequired = null,
         /** @var string[]|null */
         protected ?array $webOrigins = null,
-    ) {}
+    ) {
+        $this->access = BooleanMap::make($access);
+        $this->attributes = StringMap::make($attributes);
+        $this->authenticationFlowBindingOverrides = StringMap::make($authenticationFlowBindingOverrides);
+        $this->registeredNodes = IntegerMap::make($registeredNodes);
+    }
 }

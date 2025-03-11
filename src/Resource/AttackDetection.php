@@ -7,7 +7,7 @@ namespace Overtrue\Keycloak\Resource;
 use Overtrue\Keycloak\Http\Command;
 use Overtrue\Keycloak\Http\Method;
 use Overtrue\Keycloak\Http\Query;
-use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 use Psr\Http\Message\ResponseInterface;
 
 class AttackDetection extends Resource
@@ -25,12 +25,12 @@ class AttackDetection extends Resource
         );
     }
 
-    public function userStatus(string $realm, string $userId): Map
+    public function userStatus(string $realm, string $userId): StringMap
     {
         return $this->queryExecutor->executeQuery(
             new Query(
                 '/admin/realms/{realm}/attack-detection/brute-force/users/{userId}',
-                Map::class,
+                StringMap::class,
                 [
                     'realm' => $realm,
                     'userId' => $userId,

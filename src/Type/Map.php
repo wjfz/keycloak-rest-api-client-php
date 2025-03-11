@@ -14,23 +14,30 @@ use Traversable;
 /**
  * @template T
  *
- * @implements IteratorAggregate<string, T[]>
+ * @implements IteratorAggregate<string, T>
  */
-class Map extends Type implements Countable, IteratorAggregate
+abstract class Map extends Type implements Countable, IteratorAggregate
 {
     /**
-     * @var array<string, T[]>
+     * @var array<string, T>
      */
-    private array $map = [];
+    protected array $map = [];
 
     /**
-     * @param  array<string, T[]|T>  $map
+     * @param  array<string, T>  $map
      */
     public function __construct(array $map = [])
     {
-        foreach ($map as $key => $value) {
-            $this->map[$key] = (array) $value;
+        $this->map = array_map($this->normalizeValue(...), $map);
+    }
+
+    public static function make(Map|array|null $map): ?static
+    {
+        if (! $map) {
+            return null;
         }
+
+        return is_array($map) ? new static($map) : $map;
     }
 
     #[ReturnTypeWillChange]
@@ -64,13 +71,7 @@ class Map extends Type implements Countable, IteratorAggregate
 
     public function containsValue(mixed $value): bool
     {
-        return array_any($this->map, function ($v) use ($value) {
-            if (! is_array($value)) {
-                return in_array($value, $v, true);
-            }
-
-            return $v == $value;
-        });
+        return in_array($value, $this->map, true);
     }
 
     public function get(string $key): mixed
@@ -91,16 +92,21 @@ class Map extends Type implements Countable, IteratorAggregate
     }
 
     /**
-     * @param  T|T[]  $value
+     * @param  T  $value
      * @return $this
      */
     public function with(string $key, mixed $value): self
     {
         $clone = clone $this;
 
-        $clone->map[$key] = (array) $value;
+        $clone->map[$key] = $this->normalizeValue($value);
 
         return $clone;
+    }
+
+    protected function normalizeValue(mixed $value): mixed
+    {
+        return $value;
     }
 
     public function without(string $key): self
@@ -113,18 +119,10 @@ class Map extends Type implements Countable, IteratorAggregate
     }
 
     /**
-     * @return array<string, T[]>
+     * @return array<string, T>
      */
     public function getMap(): array
     {
         return $this->map;
-    }
-
-    /**
-     * @return array<string>
-     */
-    public function nameSet(): array
-    {
-        return array_keys($this->map);
     }
 }

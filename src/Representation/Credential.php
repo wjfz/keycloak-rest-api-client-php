@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Overtrue\Keycloak\Representation;
 
-use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method int|null getCreatedDate()
@@ -44,6 +44,8 @@ use Overtrue\Keycloak\Type\Map;
  */
 class Credential extends Representation
 {
+    protected ?StringMap $config = null;
+
     public function __construct(
         protected ?string $id = null,
         protected ?string $type = null,
@@ -62,7 +64,9 @@ class Credential extends Representation
         protected ?string $algorithm = null,
         protected ?int $digits = null,
         protected ?int $period = null,
-        /** @var Map|array<string,mixed>|null */
-        protected Map|array|null $config = null,
-    ) {}
+        /** @var StringMap|array<string,string>|null $config */
+        StringMap|array|null $config = null,
+    ) {
+        $this->config = StringMap::make($config);
+    }
 }

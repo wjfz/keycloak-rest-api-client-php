@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Overtrue\Keycloak\Representation;
 
 use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method bool|null getAddReadTokenRoleOnCreate()
@@ -36,11 +37,13 @@ use Overtrue\Keycloak\Type\Map;
  */
 class IdentityProvider extends Representation
 {
+    protected ?StringMap $config = null;
+
     public function __construct(
         protected ?bool $addReadTokenRoleOnCreate = null,
         protected ?string $alias = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $config = null,
+        /** @var \Overtrue\Keycloak\Type\StringMap|array<string, string>|null $config */
+        StringMap|array|null $config = null,
         protected ?string $displayName = null,
         protected ?bool $enabled = null,
         protected ?string $firstBrokerLoginFlowAlias = null,
@@ -50,5 +53,7 @@ class IdentityProvider extends Representation
         protected ?string $providerId = null,
         protected ?bool $storeToken = null,
         protected ?bool $trustEmail = null,
-    ) {}
+    ) {
+        $this->config = StringMap::make($config);
+    }
 }

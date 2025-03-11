@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Overtrue\Keycloak\Representation;
 
 use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method Map|null getConfig()
@@ -22,12 +23,16 @@ use Overtrue\Keycloak\Type\Map;
  */
 class UserFederationMapper extends Representation
 {
+    protected ?StringMap $config = null;
+
     public function __construct(
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $config = null,
+        /** @var StringMap|array<string, string>|null $config */
+        StringMap|array|null $config = null,
         protected ?string $federationMapperType = null,
         protected ?string $federationProviderDisplayName = null,
         protected ?string $id = null,
         protected ?string $name = null,
-    ) {}
+    ) {
+        $this->config = StringMap::make($config);
+    }
 }

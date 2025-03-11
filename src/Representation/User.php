@@ -7,6 +7,8 @@ namespace Overtrue\Keycloak\Representation;
 use Overtrue\Keycloak\Collection\CredentialCollection;
 use Overtrue\Keycloak\Collection\FederatedIdentityCollection;
 use Overtrue\Keycloak\Collection\UserConsentCollection;
+use Overtrue\Keycloak\Type\ArrayMap;
+use Overtrue\Keycloak\Type\BooleanMap;
 use Overtrue\Keycloak\Type\Map;
 
 /**
@@ -59,18 +61,22 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class User extends Representation implements AttributesAwareInterface
+class User extends Representation
 {
-    use HasAttributes;
+    protected ?BooleanMap $access = null;
+
+    protected ?ArrayMap $attributes = null;
+
+    protected ?ArrayMap $clientRoles = null;
 
     public function __construct(
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $access = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $attributes = null,
+        /** @var BooleanMap|array<string, bool>|null $access */
+        BooleanMap|array|null $access = null,
+        /** @var ArrayMap|array<string, string|string[]>|null $attributes */
+        ArrayMap|array|null $attributes = null,
         protected ?UserConsentCollection $clientConsents = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $clientRoles = null,
+        /** @var ArrayMap|array<string, string|string[]>|null $clientRoles */
+        ArrayMap|array|null $clientRoles = null,
         protected ?int $createdTimestamp = null,
         protected ?CredentialCollection $credentials = null,
         /** @var string[]|null */
@@ -95,5 +101,9 @@ class User extends Representation implements AttributesAwareInterface
         protected ?string $serviceAccountClientId = null,
         protected ?bool $totp = null,
         protected ?string $username = null,
-    ) {}
+    ) {
+        $this->access = BooleanMap::make($access);
+        $this->attributes = ArrayMap::make($attributes);
+        $this->clientRoles = ArrayMap::make($clientRoles);
+    }
 }

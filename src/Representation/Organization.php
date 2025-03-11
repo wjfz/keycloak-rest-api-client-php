@@ -8,7 +8,7 @@ use Overtrue\Keycloak\Attribute\Since;
 use Overtrue\Keycloak\Collection\IdentityProviderCollection;
 use Overtrue\Keycloak\Collection\OrganizationDomainCollection;
 use Overtrue\Keycloak\Collection\UserCollection;
-use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\ArrayMap;
 
 /**
  * @method string|null getId()
@@ -32,17 +32,17 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class Organization extends Representation implements AttributesAwareInterface
+class Organization extends Representation
 {
-    use HasAttributes;
+    protected ?ArrayMap $attributes = null;
 
     public function __construct(
         protected ?string $id = null,
         protected ?string $name = null,
         protected ?bool $enabled = null,
         protected ?string $description = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $attributes = null,
+        /** @var \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $attributes */
+        ArrayMap|array|null $attributes = null,
         protected ?OrganizationDomainCollection $domains = null,
         protected ?UserCollection $members = null,
         protected ?IdentityProviderCollection $identityProviders = null,
@@ -50,5 +50,7 @@ class Organization extends Representation implements AttributesAwareInterface
         protected ?string $alias = null,
         #[Since('26.0.0')]
         protected ?string $redirectUrl = null,
-    ) {}
+    ) {
+        $this->attributes = ArrayMap::make($attributes);
+    }
 }

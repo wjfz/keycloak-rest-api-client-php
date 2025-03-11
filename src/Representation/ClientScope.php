@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Overtrue\Keycloak\Representation;
 
 use Overtrue\Keycloak\Collection\ProtocolMapperCollection;
-use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method string|null getDescription()
@@ -21,17 +21,19 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class ClientScope extends Representation implements AttributesAwareInterface
+class ClientScope extends Representation
 {
-    use HasAttributes;
+    protected ?StringMap $attributes = null;
 
     public function __construct(
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $attributes = null,
+        /** @var \Overtrue\Keycloak\Type\StringMap|array<string, string>|null $attributes */
+        StringMap|array|null $attributes = null,
         protected ?string $description = null,
         protected ?string $id = null,
         protected ?string $name = null,
         protected ?string $protocol = null,
         protected ?ProtocolMapperCollection $protocolMappers = null,
-    ) {}
+    ) {
+        $this->attributes = StringMap::make($attributes);
+    }
 }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Overtrue\Keycloak\Serializer;
 
+use Overtrue\Keycloak\Type\AnyMap;
 use Overtrue\Keycloak\Type\Map;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 
@@ -20,10 +21,10 @@ class MapDenormalizer implements DenormalizerInterface
         }
 
         if (! is_array($data) || empty($data)) {
-            return new Map;
+            return new AnyMap;
         }
 
-        return new Map($data);
+        return new $type($data);
     }
 
     /**
@@ -32,7 +33,7 @@ class MapDenormalizer implements DenormalizerInterface
     #[\Override]
     public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
-        return $type === Map::class;
+        return is_a($type, Map::class, true);
     }
 
     /**

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Overtrue\Keycloak\Representation;
 
+use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\Map;
 
 /**
@@ -23,13 +24,13 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class Role extends Representation implements AttributesAwareInterface
+class Role extends Representation
 {
-    use HasAttributes;
+    protected ?ArrayMap $attributes = null;
 
     public function __construct(
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $attributes = null,
+        /** @var ArrayMap|array<string, string|string[]>|null $attributes */
+        ArrayMap|array|null $attributes = null,
         protected ?bool $clientRole = null,
         protected ?bool $composite = null,
         protected ?RoleComposites $composites = null,
@@ -37,5 +38,7 @@ class Role extends Representation implements AttributesAwareInterface
         protected ?string $description = null,
         protected ?string $id = null,
         protected ?string $name = null,
-    ) {}
+    ) {
+        $this->attributes = ArrayMap::make($attributes);
+    }
 }

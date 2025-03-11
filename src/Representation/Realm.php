@@ -19,7 +19,9 @@ use Overtrue\Keycloak\Collection\ScopeMappingCollection;
 use Overtrue\Keycloak\Collection\UserCollection;
 use Overtrue\Keycloak\Collection\UserFederationMapperCollection;
 use Overtrue\Keycloak\Collection\UserFederationProviderCollection;
+use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method int|null getAccessCodeLifespan()
@@ -159,11 +161,10 @@ use Overtrue\Keycloak\Type\Map;
  * @method self withAdminEventsDetailsEnabled(?bool $value)
  * @method self withAdminEventsEnabled(?bool $value)
  * @method self withAdminTheme(?string $value)
- * @method self withAttributes(?Map $value)
  * @method self withAuthenticationFlows(?AuthenticationFlowCollection $value)
  * @method self withAuthenticatorConfig(?AuthenticatorConfigCollection $value)
  * @method self withBrowserFlow(?string $value)
- * @method self withBrowserSecurityHeaders(?Map $value)
+ * @method self withBrowserSecurityHeaders(?Map|array $value)
  * @method self withBruteForceProtected(?bool $value)
  * @method self withClientAuthenticationFlow(?string $value)
  * @method self withClientOfflineSessionIdleTimeout(?int $value)
@@ -240,7 +241,7 @@ use Overtrue\Keycloak\Type\Map;
  * @method self withRevokeRefreshToken(?bool $value)
  * @method self withRoles(?Roles $value)
  * @method self withScopeMappings(?ScopeMappingCollection $value)
- * @method self withSmtpServer(?Map $value)
+ * @method self withSmtpServer(?Map|array $value)
  * @method self withSslRequired(?string $value)
  * @method self withSsoSessionIdleTimeout(?int $value)
  * @method self withSsoSessionIdleTimeoutRememberMe(?int $value)
@@ -282,9 +283,15 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class Realm extends Representation implements AttributesAwareInterface
+class Realm extends Representation
 {
-    use HasAttributes;
+    protected ?StringMap $attributes = null;
+
+    protected ?StringMap $browserSecurityHeaders = null;
+
+    protected ?ArrayMap $clientScopeMappings = null;
+
+    protected ?StringMap $smtpServer = null;
 
     public function __construct(
         protected ?int $accessCodeLifespan = null,
@@ -298,21 +305,21 @@ class Realm extends Representation implements AttributesAwareInterface
         protected ?bool $adminEventsDetailsEnabled = null,
         protected ?bool $adminEventsEnabled = null,
         protected ?string $adminTheme = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $attributes = null,
+        /** @var StringMap|array<string, string>|null $attributes */
+        StringMap|array|null $attributes = null,
         protected ?AuthenticationFlowCollection $authenticationFlows = null,
         protected ?AuthenticatorConfigCollection $authenticatorConfig = null,
         protected ?string $browserFlow = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $browserSecurityHeaders = null,
+        /** @var StringMap|array<string, string>|null $browserSecurityHeaders */
+        StringMap|array|null $browserSecurityHeaders = null,
         protected ?bool $bruteForceProtected = null,
         protected ?string $clientAuthenticationFlow = null,
         protected ?int $clientOfflineSessionIdleTimeout = null,
         protected ?int $clientOfflineSessionMaxLifespan = null,
         protected ?ClientPolicies $clientPolicies = null,
         protected ?ClientProfiles $clientProfiles = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $clientScopeMappings = null,
+        /** @var \Overtrue\Keycloak\Type\ArrayMap|array<string, string>|null $clientScopeMappings */
+        ArrayMap|array|null $clientScopeMappings = null,
         protected ?ClientScopeCollection $clientScopes = null,
         protected ?int $clientSessionIdleTimeout = null,
         protected ?int $clientSessionMaxLifespan = null,
@@ -396,8 +403,8 @@ class Realm extends Representation implements AttributesAwareInterface
         protected ?bool $revokeRefreshToken = null,
         protected ?Roles $roles = null,
         protected ?ScopeMappingCollection $scopeMappings = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $smtpServer = null,
+        /** @var StringMap|array<string, string>|null $smtpServer */
+        StringMap|array|null $smtpServer = null,
         protected ?string $sslRequired = null,
         protected ?int $ssoSessionIdleTimeout = null,
         protected ?int $ssoSessionIdleTimeoutRememberMe = null,
@@ -441,5 +448,10 @@ class Realm extends Representation implements AttributesAwareInterface
         /** @var string[]|null */
         protected ?array $webAuthnPolicySignatureAlgorithms = null,
         protected ?string $webAuthnPolicyUserVerificationRequirement = null,
-    ) {}
+    ) {
+        $this->attributes = StringMap::make($attributes);
+        $this->browserSecurityHeaders = StringMap::make($browserSecurityHeaders);
+        $this->clientScopeMappings = ArrayMap::make($clientScopeMappings);
+        $this->smtpServer = StringMap::make($smtpServer);
+    }
 }

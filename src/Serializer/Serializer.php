@@ -42,10 +42,9 @@ class Serializer
         $this->serializer = new SymfonySerializer([
             new BackedEnumNormalizer,
             new ArrayDenormalizer,
+            new CollectionDenormalizer($propertyNormalizer),
             new MapNormalizer,
             new MapDenormalizer,
-            new AttributeNormalizer($propertyNormalizer),
-            new CollectionDenormalizer($propertyNormalizer),
             new VersionAttributeNormalizer($propertyNormalizer, $keycloakVersion),
             $propertyNormalizer,
         ], [

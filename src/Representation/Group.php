@@ -6,6 +6,8 @@ namespace Overtrue\Keycloak\Representation;
 
 use Overtrue\Keycloak\Attribute\Since;
 use Overtrue\Keycloak\Collection\GroupCollection;
+use Overtrue\Keycloak\Type\ArrayMap;
+use Overtrue\Keycloak\Type\BooleanMap;
 use Overtrue\Keycloak\Type\Map;
 
 /**
@@ -30,17 +32,21 @@ use Overtrue\Keycloak\Type\Map;
  *
  * @codeCoverageIgnore
  */
-class Group extends Representation implements AttributesAwareInterface
+class Group extends Representation
 {
-    use HasAttributes;
+    protected ?BooleanMap $access = null;
+
+    protected ?ArrayMap $attributes = null;
+
+    protected ?ArrayMap $clientRoles = null;
 
     public function __construct(
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $access = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $attributes = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $clientRoles = null,
+        /** @var \Overtrue\Keycloak\Type\BooleanMap|array<string, bool>|null $access */
+        BooleanMap|array|null $access = null,
+        /** @var \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $attributes */
+        ArrayMap|array|null $attributes = null,
+        /** @var \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $clientRoles */
+        ArrayMap|array|null $clientRoles = null,
         protected ?string $id = null,
         protected ?string $name = null,
         #[Since('23.0.0')]
@@ -51,5 +57,9 @@ class Group extends Representation implements AttributesAwareInterface
         #[Since('23.0.0')]
         protected ?int $subGroupCount = null,
         protected ?GroupCollection $subGroups = null,
-    ) {}
+    ) {
+        $this->access = BooleanMap::make($access);
+        $this->attributes = ArrayMap::make($attributes);
+        $this->clientRoles = ArrayMap::make($clientRoles);
+    }
 }

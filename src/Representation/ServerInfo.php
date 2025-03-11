@@ -7,6 +7,7 @@ namespace Overtrue\Keycloak\Representation;
 use Overtrue\Keycloak\Attribute\Since;
 use Overtrue\Keycloak\Collection\FeatureCollection;
 use Overtrue\Keycloak\Collection\PasswordPolicyTypeCollection;
+use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\Map;
 
 /**
@@ -31,34 +32,53 @@ use Overtrue\Keycloak\Type\Map;
  */
 class ServerInfo extends Representation
 {
+    protected ?ArrayMap $builtinProtocolMappers = null;
+
+    protected ?ArrayMap $clientInstallations = null;
+
+    protected ?ArrayMap $componentTypes = null;
+
+    protected ?ArrayMap $protocolMapperTypes = null;
+
+    protected ?ArrayMap $providers = null;
+
+    protected ?ArrayMap $themes = null;
+
     public function __construct(
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $builtinProtocolMappers = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $clientImporters = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $clientInstallations = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $componentTypes = null,
+        /** @var ArrayMap|array<string, mixed>|null $builtinProtocolMappers */
+        ArrayMap|array|null $builtinProtocolMappers = null,
+        /** @var array<\Overtrue\Keycloak\Type\StringMap>|null $clientImporters */
+        protected ?array $clientImporters = null,
+        /** @var ArrayMap|array<string, array>|null $clientInstallations */
+        ArrayMap|array|null $clientInstallations = null,
+        /** @var ArrayMap|array<string, array>|null $componentTypes */
+        ArrayMap|array|null $componentTypes = null,
         #[Since('20.0.0')]
         protected ?CryptoInfo $cryptoInfo = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $enums = null,
+        /** @var ArrayMap|array<string, string|string[]>|null $enums */
+        ArrayMap|array|null $enums = null,
         #[Since('22.0.4')]
         protected ?FeatureCollection $features = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $identityProviders = null,
+        /** @var array<\Overtrue\Keycloak\Type\StringMap>|null */
+        protected ?array $identityProviders = null,
         protected ?MemoryInfo $memoryInfo = null,
         protected ?PasswordPolicyTypeCollection $passwordPolicies = null,
         protected ?ProfileInfo $profileInfo = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $protocolMapperTypes = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $providers = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $socialProviders = null,
+        /** @var ArrayMap|array<string, array>|null $protocolMapperTypes */
+        ArrayMap|array|null $protocolMapperTypes = null,
+        /** @var ArrayMap|array<string, mixed>|null $providers */
+        ArrayMap|array|null $providers = null,
+        /** @var array<\Overtrue\Keycloak\Type\StringMap>|null */
+        protected ?array $socialProviders = null,
         protected ?SystemInfo $systemInfo = null,
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $themes = null,
-    ) {}
+        /** @var ArrayMap|array<string, array>|null $themes */
+        ArrayMap|array|null $themes = null,
+    ) {
+        $this->builtinProtocolMappers = ArrayMap::make($builtinProtocolMappers);
+        $this->clientInstallations = ArrayMap::make($clientInstallations);
+        $this->componentTypes = ArrayMap::make($componentTypes);
+        $this->protocolMapperTypes = ArrayMap::make($protocolMapperTypes);
+        $this->providers = ArrayMap::make($providers);
+        $this->themes = ArrayMap::make($themes);
+    }
 }

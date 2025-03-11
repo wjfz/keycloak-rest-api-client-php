@@ -9,6 +9,7 @@ use Overtrue\Keycloak\Collection\ScopeCollection;
 use Overtrue\Keycloak\Enum\DecisionStrategy;
 use Overtrue\Keycloak\Enum\Logic;
 use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method Map|null getConfig()
@@ -42,9 +43,11 @@ use Overtrue\Keycloak\Type\Map;
  */
 class Policy extends Representation
 {
+    protected ?StringMap $config = null;
+
     public function __construct(
-        /** @var Map|array<string, mixed>|null */
-        protected Map|array|null $config = null,
+        /** @var StringMap|array<string, string>|null $config */
+        StringMap|array|null $config = null,
         protected ?DecisionStrategy $decisionStrategy = null,
         protected ?string $description = null,
         protected ?string $id = null,
@@ -60,5 +63,7 @@ class Policy extends Representation
         protected ?array $scopes = null,
         protected ?ScopeCollection $scopesData = null,
         protected ?string $type = null,
-    ) {}
+    ) {
+        $this->config = StringMap::make($config);
+    }
 }

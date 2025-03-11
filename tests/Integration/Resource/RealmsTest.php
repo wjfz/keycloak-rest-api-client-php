@@ -7,7 +7,6 @@ namespace Overtrue\Keycloak\Test\Integration\Resource;
 use Overtrue\Keycloak\Collection\RealmCollection;
 use Overtrue\Keycloak\Representation\Realm;
 use Overtrue\Keycloak\Test\Integration\IntegrationTestBehaviour;
-use Overtrue\Keycloak\Type\Map;
 use PHPUnit\Framework\TestCase;
 
 class RealmsTest extends TestCase
@@ -111,9 +110,9 @@ class RealmsTest extends TestCase
 
         static::assertFalse($realm->getAttributes()->contains('termsUrl'));
 
-        $realm = $realm->withAttributes(new Map([
+        $realm = $realm->withAttributes([
             'termsUrl' => 'https://example.com/terms',
-        ]));
+        ]);
 
         $this->getKeycloak()->realms()->update($realm->getRealm(), $realm);
 
