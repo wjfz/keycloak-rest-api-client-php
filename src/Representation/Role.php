@@ -28,8 +28,10 @@ class Role extends Representation
 {
     protected ?ArrayMap $attributes = null;
 
+    /**
+     * @param ArrayMap|array<string, string|string[]>|null $attributes
+     */
     public function __construct(
-        /** @var ArrayMap|array<string, string|string[]>|null $attributes */
         ArrayMap|array|null $attributes = null,
         protected ?bool $clientRole = null,
         protected ?bool $composite = null,

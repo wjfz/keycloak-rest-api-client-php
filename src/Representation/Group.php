@@ -40,12 +40,14 @@ class Group extends Representation
 
     protected ?ArrayMap $clientRoles = null;
 
+    /**
+     * @param \Overtrue\Keycloak\Type\BooleanMap|array<string, bool>|null $access
+     * @param \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $attributes
+     * @param \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $clientRoles
+     */
     public function __construct(
-        /** @var \Overtrue\Keycloak\Type\BooleanMap|array<string, bool>|null $access */
         BooleanMap|array|null $access = null,
-        /** @var \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $attributes */
         ArrayMap|array|null $attributes = null,
-        /** @var \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $clientRoles */
         ArrayMap|array|null $clientRoles = null,
         protected ?string $id = null,
         protected ?string $name = null,

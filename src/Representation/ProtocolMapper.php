@@ -27,8 +27,10 @@ class ProtocolMapper extends Representation
 {
     protected ?StringMap $config = null;
 
+    /**
+     * @param \Overtrue\Keycloak\Type\StringMap|array<string, string>|null $config
+     */
     public function __construct(
-        /** @var \Overtrue\Keycloak\Type\StringMap|array<string, string>|null $config */
         StringMap|array|null $config = null,
         protected ?bool $consentRequired = null,
         protected ?string $id = null,

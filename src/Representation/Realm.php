@@ -164,7 +164,7 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method self withAuthenticationFlows(?AuthenticationFlowCollection $value)
  * @method self withAuthenticatorConfig(?AuthenticatorConfigCollection $value)
  * @method self withBrowserFlow(?string $value)
- * @method self withBrowserSecurityHeaders(?Map|array $value)
+ * @method self withBrowserSecurityHeaders(StringMap|array|null $value)
  * @method self withBruteForceProtected(?bool $value)
  * @method self withClientAuthenticationFlow(?string $value)
  * @method self withClientOfflineSessionIdleTimeout(?int $value)
@@ -241,7 +241,7 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method self withRevokeRefreshToken(?bool $value)
  * @method self withRoles(?Roles $value)
  * @method self withScopeMappings(?ScopeMappingCollection $value)
- * @method self withSmtpServer(?Map|array $value)
+ * @method self withSmtpServer(StringMap|array|null $value)
  * @method self withSslRequired(?string $value)
  * @method self withSsoSessionIdleTimeout(?int $value)
  * @method self withSsoSessionIdleTimeoutRememberMe(?int $value)
@@ -280,19 +280,21 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method self withOrganizations(?OrganizationCollection $organizations)
  * @method bool|null getOrganizationsEnabled()
  * @method self withOrganizationsEnabled(?bool $organizationsEnabled)
- *
  * @codeCoverageIgnore
  */
 class Realm extends Representation
 {
     protected ?StringMap $attributes = null;
-
     protected ?StringMap $browserSecurityHeaders = null;
-
     protected ?ArrayMap $clientScopeMappings = null;
-
     protected ?StringMap $smtpServer = null;
 
+    /**
+     * @param StringMap|array<string, string>|null $attributes
+     * @param StringMap|array<string, string>|null $browserSecurityHeaders
+     * @param \Overtrue\Keycloak\Type\ArrayMap|array<string, string>|null $clientScopeMappings
+     * @param StringMap|array<string, string>|null $smtpServer
+     */
     public function __construct(
         protected ?int $accessCodeLifespan = null,
         protected ?int $accessCodeLifespanLogin = null,
@@ -305,12 +307,10 @@ class Realm extends Representation
         protected ?bool $adminEventsDetailsEnabled = null,
         protected ?bool $adminEventsEnabled = null,
         protected ?string $adminTheme = null,
-        /** @var StringMap|array<string, string>|null $attributes */
         StringMap|array|null $attributes = null,
         protected ?AuthenticationFlowCollection $authenticationFlows = null,
         protected ?AuthenticatorConfigCollection $authenticatorConfig = null,
         protected ?string $browserFlow = null,
-        /** @var StringMap|array<string, string>|null $browserSecurityHeaders */
         StringMap|array|null $browserSecurityHeaders = null,
         protected ?bool $bruteForceProtected = null,
         protected ?string $clientAuthenticationFlow = null,
@@ -318,7 +318,6 @@ class Realm extends Representation
         protected ?int $clientOfflineSessionMaxLifespan = null,
         protected ?ClientPolicies $clientPolicies = null,
         protected ?ClientProfiles $clientProfiles = null,
-        /** @var \Overtrue\Keycloak\Type\ArrayMap|array<string, string>|null $clientScopeMappings */
         ArrayMap|array|null $clientScopeMappings = null,
         protected ?ClientScopeCollection $clientScopes = null,
         protected ?int $clientSessionIdleTimeout = null,
@@ -403,7 +402,6 @@ class Realm extends Representation
         protected ?bool $revokeRefreshToken = null,
         protected ?Roles $roles = null,
         protected ?ScopeMappingCollection $scopeMappings = null,
-        /** @var StringMap|array<string, string>|null $smtpServer */
         StringMap|array|null $smtpServer = null,
         protected ?string $sslRequired = null,
         protected ?int $ssoSessionIdleTimeout = null,

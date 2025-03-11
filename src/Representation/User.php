@@ -69,13 +69,15 @@ class User extends Representation
 
     protected ?ArrayMap $clientRoles = null;
 
+    /**
+     * @param BooleanMap|array<string, bool>|null $access
+     * @param ArrayMap|array<string, string|string[]>|null $attributes
+     * @param ArrayMap|array<string, string|string[]>|null $clientRoles
+     */
     public function __construct(
-        /** @var BooleanMap|array<string, bool>|null $access */
         BooleanMap|array|null $access = null,
-        /** @var ArrayMap|array<string, string|string[]>|null $attributes */
         ArrayMap|array|null $attributes = null,
         protected ?UserConsentCollection $clientConsents = null,
-        /** @var ArrayMap|array<string, string|string[]>|null $clientRoles */
         ArrayMap|array|null $clientRoles = null,
         protected ?int $createdTimestamp = null,
         protected ?CredentialCollection $credentials = null,

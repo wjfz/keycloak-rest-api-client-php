@@ -96,14 +96,17 @@ class Client extends Representation
 
     protected ?IntegerMap $registeredNodes = null;
 
+    /**
+     * @param BooleanMap|array<string, bool>|null $access
+     * @param StringMap|array<string, string|string[]>|null $attributes
+     * @param StringMap|array<string, string|string[]>|null $authenticationFlowBindingOverrides
+     * @param IntegerMap|array<string, int>|null $registeredNodes
+     */
     public function __construct(
-        /** @var BooleanMap|array<string, bool>|null $access */
         BooleanMap|array|null $access = null,
         protected ?string $adminUrl = null,
         protected ?bool $alwaysDisplayInConsole = null,
-        /** @var StringMap|array<string, string|string[]>|null $attributes */
         StringMap|array|null $attributes = null,
-        /** @var StringMap|array<string, string|string[]>|null $authenticationFlowBindingOverrides */
         StringMap|array|null $authenticationFlowBindingOverrides = null,
         protected ?bool $authorizationServicesEnabled = null,
         protected ?ResourceServer $authorizationSettings = null,
@@ -132,7 +135,6 @@ class Client extends Representation
         protected ?bool $publicClient = null,
         /** @var string[]|null */
         protected ?array $redirectUris = null,
-        /** @var IntegerMap|array<string, int>|null $registeredNodes */
         IntegerMap|array|null $registeredNodes = null,
         protected ?string $registrationAccessToken = null,
         protected ?string $rootUrl = null,

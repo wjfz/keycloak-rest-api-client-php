@@ -46,6 +46,9 @@ class Credential extends Representation
 {
     protected ?StringMap $config = null;
 
+    /**
+     * @param StringMap|array<string,string>|null $config
+     */
     public function __construct(
         protected ?string $id = null,
         protected ?string $type = null,
@@ -64,7 +67,6 @@ class Credential extends Representation
         protected ?string $algorithm = null,
         protected ?int $digits = null,
         protected ?int $period = null,
-        /** @var StringMap|array<string,string>|null $config */
         StringMap|array|null $config = null,
     ) {
         $this->config = StringMap::make($config);

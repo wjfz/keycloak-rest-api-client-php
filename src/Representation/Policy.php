@@ -45,8 +45,10 @@ class Policy extends Representation
 {
     protected ?StringMap $config = null;
 
+    /**
+     * @param StringMap|array<string, string>|null $config
+     */
     public function __construct(
-        /** @var StringMap|array<string, string>|null $config */
         StringMap|array|null $config = null,
         protected ?DecisionStrategy $decisionStrategy = null,
         protected ?string $description = null,

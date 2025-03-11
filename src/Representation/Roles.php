@@ -24,10 +24,12 @@ class Roles extends Representation
 
     protected ?ArrayMap $client = null;
 
+    /**
+     * @param \Overtrue\Keycloak\Type\ArrayMap|array<string, array<\Overtrue\Keycloak\Representation\Role>>|null $application
+     * @param \Overtrue\Keycloak\Type\ArrayMap|array<string, array<\Overtrue\Keycloak\Representation\Role>>|null $client
+     */
     public function __construct(
-        /** @var \Overtrue\Keycloak\Type\ArrayMap|array<string, array>|null $application */
         ArrayMap|array|null $application = null,
-        /** @var \Overtrue\Keycloak\Type\ArrayMap|array<string, array>|null $client */
         ArrayMap|array|null $client = null,
         protected ?RealmCollection $realm = null,
     ) {

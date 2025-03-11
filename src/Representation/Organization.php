@@ -36,12 +36,14 @@ class Organization extends Representation
 {
     protected ?ArrayMap $attributes = null;
 
+    /**
+     * @param \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $attributes
+     */
     public function __construct(
         protected ?string $id = null,
         protected ?string $name = null,
         protected ?bool $enabled = null,
         protected ?string $description = null,
-        /** @var \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $attributes */
         ArrayMap|array|null $attributes = null,
         protected ?OrganizationDomainCollection $domains = null,
         protected ?UserCollection $members = null,

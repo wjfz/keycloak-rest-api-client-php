@@ -25,8 +25,10 @@ class ClientScope extends Representation
 {
     protected ?StringMap $attributes = null;
 
+    /**
+     * @param \Overtrue\Keycloak\Type\StringMap|array<string, string>|null $attributes
+     */
     public function __construct(
-        /** @var \Overtrue\Keycloak\Type\StringMap|array<string, string>|null $attributes */
         StringMap|array|null $attributes = null,
         protected ?string $description = null,
         protected ?string $id = null,

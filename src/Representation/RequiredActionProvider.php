@@ -29,9 +29,11 @@ class RequiredActionProvider extends Representation
 {
     protected ?StringMap $config = null;
 
+    /**
+     * @param \Overtrue\Keycloak\Type\StringMap|array<string, mixed>|null $config
+     */
     public function __construct(
         protected ?string $alias = null,
-        /** @var \Overtrue\Keycloak\Type\StringMap|array<string, mixed>|null $config */
         StringMap|array|null $config = null,
         protected ?bool $defaultAction = null,
         protected ?bool $enabled = null,

@@ -15,10 +15,12 @@ class Resource extends Representation
 {
     protected ?ArrayMap $attributes = null;
 
+    /**
+     * @param ArrayMap|array<string, string|string[]>|null $attributes
+     */
     public function __construct(
         #[SerializedName('_id')]
         protected ?string $id = null,
-        /** @var ArrayMap|array<string, string|string[]>|null $attributes */
         ArrayMap|array|null $attributes = null,
         protected ?string $displayName = null,
         protected ?string $icon_uri = null,

@@ -39,10 +39,12 @@ class IdentityProvider extends Representation
 {
     protected ?StringMap $config = null;
 
+    /**
+     * @param \Overtrue\Keycloak\Type\StringMap|array<string, string>|null $config
+     */
     public function __construct(
         protected ?bool $addReadTokenRoleOnCreate = null,
         protected ?string $alias = null,
-        /** @var \Overtrue\Keycloak\Type\StringMap|array<string, string>|null $config */
         StringMap|array|null $config = null,
         protected ?string $displayName = null,
         protected ?bool $enabled = null,
