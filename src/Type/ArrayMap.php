@@ -20,4 +20,12 @@ class ArrayMap extends Map
     {
         return (array) $value;
     }
+
+    /**
+     * @return array<T>
+     */
+    public function flatten(): array
+    {
+        return array_map(fn(array $value) => $value[0] ?? null,  $this->map);
+    }
 }
