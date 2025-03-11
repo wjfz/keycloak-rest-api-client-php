@@ -6,7 +6,12 @@ namespace Overtrue\Keycloak\Test\Unit\Serializer;
 
 use Generator;
 use Overtrue\Keycloak\Serializer\MapDenormalizer;
+use Overtrue\Keycloak\Type\AnyMap;
+use Overtrue\Keycloak\Type\ArrayMap;
+use Overtrue\Keycloak\Type\BooleanMap;
+use Overtrue\Keycloak\Type\IntegerMap;
 use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -39,42 +44,72 @@ class MapDenormalizerTest extends TestCase
 
         self::assertEquals(
             $expected,
-            $denormalizer->denormalize($value, Map::class),
+            $denormalizer->denormalize($value, get_class($expected)),
         );
     }
 
     public static function maps(): Generator
     {
-        yield 'filled array' => [
+        yield 'filled integer map' => [
             [
                 'a' => 1,
                 'b' => 2,
                 'c' => 3,
             ],
-            new Map([
+            new IntegerMap([
                 'a' => 1,
                 'b' => 2,
                 'c' => 3,
             ]),
         ];
 
+        yield 'filled string map' => [
+            [
+                'a' => 'a1',
+                'b' => 'a2',
+                'c' => 'a3',
+            ],
+            new StringMap([
+                'a' => 'a1',
+                'b' => 'a2',
+                'c' => 'a3',
+            ])
+        ];
+
+        yield 'filled array map' => [
+            [
+                'a' => ['a1'],
+                'b' => ['a2'],
+                'c' => ['a3'],
+            ],
+            new ArrayMap([
+                'a' => ['a1'],
+                'b' => ['a2'],
+                'c' => ['a3'],
+            ]),
+        ];
+
+        yield 'filled boolean map' => [
+            [
+                'a' => true,
+                'b' => false,
+                'c' => false,
+            ],
+            new BooleanMap([
+                'a' => true,
+                'b' => false,
+                'c' => false,
+            ]),
+        ];
+
         yield 'empty array' => [
             [],
-            new Map,
+            new AnyMap(),
         ];
 
         yield 'non-array' => [
             1337,
-            new Map,
-        ];
-
-        yield Map::class => [
-            new Map([
-                'a' => 1,
-            ]),
-            new Map([
-                'a' => 1,
-            ]),
+            new AnyMap,
         ];
     }
 }

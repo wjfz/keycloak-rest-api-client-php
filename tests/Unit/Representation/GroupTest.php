@@ -6,7 +6,10 @@ namespace Overtrue\Keycloak\Test\Unit\Representation;
 
 use Overtrue\Keycloak\Collection\GroupCollection;
 use Overtrue\Keycloak\Representation\Group;
+use Overtrue\Keycloak\Type\ArrayMap;
+use Overtrue\Keycloak\Type\BooleanMap;
 use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -19,9 +22,9 @@ class GroupTest extends TestCase
     protected function setUp(): void
     {
         $subGroup = new Group(
-            access: new Map(['acl-a' => true, 'acl-b' => false]),
-            attributes: new Map(['attr-1' => 'val-1', 'attr-2' => 'val-2']),
-            clientRoles: new Map(['client-role-x' => ['foo', 'bar'], 'client-role-y' => ['foo', 'bar'], 'client-role-z' => ['foo', 'bar']]),
+            access: new BooleanMap(['acl-a' => true, 'acl-b' => false]),
+            attributes: new ArrayMap(['attr-1' => 'val-1', 'attr-2' => 'val-2']),
+            clientRoles: new ArrayMap(['client-role-x' => ['foo', 'bar'], 'client-role-y' => ['foo', 'bar'], 'client-role-z' => ['foo', 'bar']]),
             id: 'unique-id',
             name: 'unique-name',
             path: '/where/am/i',
@@ -30,9 +33,9 @@ class GroupTest extends TestCase
         $subGroup->withId('unique-id');
 
         $this->group = new Group(
-            access: new Map(['acl-a' => true, 'acl-b' => false]),
-            attributes: new Map(['attr-1' => 'val-1', 'attr-2' => 'val-2']),
-            clientRoles: new Map(['client-role-x' => ['foo', 'bar'], 'client-role-y' => ['foo', 'bar'], 'client-role-z' => ['foo', 'bar']]),
+            access: new BooleanMap(['acl-a' => true, 'acl-b' => false]),
+            attributes: new ArrayMap(['attr-1' => 'val-1', 'attr-2' => 'val-2']),
+            clientRoles: new ArrayMap(['client-role-x' => ['foo', 'bar'], 'client-role-y' => ['foo', 'bar'], 'client-role-z' => ['foo', 'bar']]),
             id: 'unique-id',
             name: 'unique-name',
             path: '/where/am/i',
@@ -42,9 +45,6 @@ class GroupTest extends TestCase
         $this->group->withId('unique-id');
     }
 
-    /**
-     * @param  array<string, mixed>  $properties
-     */
     #[DataProvider('provideProperties')]
     public function test_can_be_constructed_from_properties(array $properties): void
     {
@@ -53,9 +53,6 @@ class GroupTest extends TestCase
         static::assertEquals($this->group, $constructedGroup);
     }
 
-    /**
-     * @param  array<mixed>  $properties
-     */
     #[DataProvider('provideProperties')]
     public function test_can_be_built(array $properties): void
     {
@@ -68,21 +65,18 @@ class GroupTest extends TestCase
         self::assertEquals($this->group, $builtGroup);
     }
 
-    /**
-     * @return array<mixed>
-     */
     public static function provideProperties(): array
     {
         $group = [
-            'access' => new Map([
+            'access' => new BooleanMap([
                 'acl-a' => true,
                 'acl-b' => false,
             ]),
-            'attributes' => new Map([
+            'attributes' => new ArrayMap([
                 'attr-1' => 'val-1',
                 'attr-2' => 'val-2',
             ]),
-            'clientRoles' => new Map([
+            'clientRoles' => new ArrayMap([
                 'client-role-x' => ['foo', 'bar'],
                 'client-role-y' => ['foo', 'bar'],
                 'client-role-z' => ['foo', 'bar'],

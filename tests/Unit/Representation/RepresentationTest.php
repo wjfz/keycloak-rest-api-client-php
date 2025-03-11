@@ -7,7 +7,9 @@ namespace Overtrue\Keycloak\Test\Unit\Representation;
 use BadMethodCallException;
 use Overtrue\Keycloak\Exception\PropertyDoesNotExistException;
 use Overtrue\Keycloak\Test\Unit\Stub\Representation;
+use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -42,14 +44,14 @@ class RepresentationTest extends TestCase
     {
         $representation = new Representation;
         $modifiedRepresentation = $representation->withMap(
-            new Map([
+            new StringMap([
                 'key' => 'value',
             ]),
         );
 
         static::assertNull($representation->getMap());
         static::assertEquals(
-            new Map([
+            new StringMap([
                 'key' => 'value',
             ]),
             $modifiedRepresentation->getMap(),
@@ -104,7 +106,7 @@ class RepresentationTest extends TestCase
 
     public function test_json_serializes_map_correctly(): void
     {
-        $map = new Map([
+        $map = new ArrayMap([
             'key-1' => 'value-1',
             'key-2' => 'value-2',
             'key-3' => 'value-3',
@@ -134,10 +136,10 @@ class RepresentationTest extends TestCase
             'key-3' => 'value-3',
         ];
 
-        $map = new Map($array);
+        $map = new StringMap($array);
 
         $representation = new Representation;
-        $representation = $representation->with('map', new Map([
+        $representation = $representation->with('map', new StringMap([
             'key-1' => 'value-1',
             'key-2' => 'value-2',
             'key-3' => 'value-3',

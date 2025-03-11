@@ -94,7 +94,13 @@ abstract class Map extends Type implements Countable, IteratorAggregate
      */
     public function getFirst(string $key, mixed $default = null): mixed
     {
-        return $this->get($key)[0] ?? $default;
+        $value = $this->get($key) ?? null;
+
+        if (is_array($value)) {
+            return $value[0] ?? $default;
+        }
+
+        return $value ?? $default;
     }
 
     /**

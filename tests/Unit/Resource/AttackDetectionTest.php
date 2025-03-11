@@ -10,7 +10,9 @@ use Overtrue\Keycloak\Http\Method;
 use Overtrue\Keycloak\Http\Query;
 use Overtrue\Keycloak\Http\QueryExecutor;
 use Overtrue\Keycloak\Resource\AttackDetection;
+use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\Map;
+use Overtrue\Keycloak\Type\StringMap;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -66,7 +68,7 @@ class AttackDetectionTest extends TestCase
     {
         $query = new Query(
             '/admin/realms/{realm}/attack-detection/brute-force/users/{userId}',
-            Map::class,
+            StringMap::class,
             [
                 'realm' => 'realm',
                 'userId' => 'userId',
@@ -77,7 +79,7 @@ class AttackDetectionTest extends TestCase
         $queryExecutor->expects(static::once())
             ->method('executeQuery')
             ->with($query)
-            ->willReturn(new Map);
+            ->willReturn(new StringMap());
 
         $attackDetection = new AttackDetection(
             $this->createMock(CommandExecutor::class),
