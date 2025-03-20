@@ -11,16 +11,14 @@ namespace Overtrue\Keycloak\Representation;
  * @method self withAuthenticatorConfig(?string $authenticatorConfig)
  * @method bool|null getAuthenticatorFlow()
  * @method self withAuthenticatorFlow(?bool $authenticatorFlow)
- * @method string|null getFlowId()
- * @method self withFlowId(?string $flowId)
- * @method string|null getId()
- * @method self withId(?string $id)
- * @method string|null getParentFlow()
- * @method self withParentFlow(?string $parentFlow)
+ * @method string|null getFlowAlias()
+ * @method self withFlowAlias(?string $flowAlias)
  * @method int|null getPriority()
  * @method self withPriority(?int $priority)
  * @method string|null getRequirement()
  * @method self withRequirement(?string $requirement)
+ * @method bool|null getUserSetupAllowed()
+ * @method self withUserSetupAllowed(?bool $userSetupAllowed)
  *
  * @codeCoverageIgnore
  */
@@ -30,10 +28,9 @@ class AuthenticationExecutionExport extends Representation
         protected ?string $authenticator = null,
         protected ?string $authenticatorConfig = null,
         protected ?bool $authenticatorFlow = null,
-        protected ?string $flowId = null,
-        protected ?string $id = null,
-        protected ?string $parentFlow = null,
+        protected ?string $flowAlias = null,
         protected ?int $priority = null,
         protected ?string $requirement = null,
+        protected ?bool $userSetupAllowed = null,
     ) {}
 }
