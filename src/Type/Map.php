@@ -80,10 +80,10 @@ abstract class Map extends Type implements Countable, IteratorAggregate
         return in_array($value, $this->map, true);
     }
 
-    public function get(string $key): mixed
+    public function get(string $key, mixed $default = null): mixed
     {
         if (! $this->contains($key)) {
-            throw new OutOfBoundsException(sprintf('Key "%s" does not exist in map', $key));
+            return $default;
         }
 
         return $this->map[$key];
@@ -94,7 +94,7 @@ abstract class Map extends Type implements Countable, IteratorAggregate
      */
     public function getFirst(string $key, mixed $default = null): mixed
     {
-        $value = $this->get($key) ?? null;
+        $value = $this->get($key, $default);
 
         if (is_array($value)) {
             return $value[0] ?? $default;

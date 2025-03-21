@@ -151,6 +151,8 @@ class MapTest extends TestCase
 
         static::assertSame('value-1', $map->get('key-1'));
         static::assertSame('value-2', $map->get('key-2'));
+
+        static::assertSame('default-value', $map->get('key-22222', 'default-value'));
     }
 
     public function test_get_first()
@@ -159,6 +161,7 @@ class MapTest extends TestCase
 
         static::assertSame('value-1', $map->getFirst('key-1'));
         static::assertSame('value-3', $map->getFirst('key-2'));
+        static::assertSame('default-value', $map->getFirst('key-6666', 'default-value'));
     }
 
     public function test_contains_key()
@@ -168,16 +171,6 @@ class MapTest extends TestCase
         static::assertTrue($map->containsKey('key-1'));
         static::assertTrue($map->containsKey('key-2'));
         static::assertFalse($map->containsKey('key-3'));
-    }
-
-    public function test_get_throws(): void
-    {
-        $map = new StringMap(['key-1' => 'value-1', 'key-2' => 'value-2']);
-
-        static::expectException(OutOfBoundsException::class);
-        static::expectExceptionMessage('Key "key-3" does not exist in map');
-
-        $map->get('key-3');
     }
 
     public function test_with(): void
