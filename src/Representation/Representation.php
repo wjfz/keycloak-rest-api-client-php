@@ -16,7 +16,7 @@ abstract class Representation implements JsonSerializable
     abstract public function __construct();
 
     /**
-     * @param array<string, mixed> $properties
+     * @param  array<string, mixed>  $properties
      *
      * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
      * @throws \ReflectionException
@@ -76,7 +76,7 @@ abstract class Representation implements JsonSerializable
     }
 
     /**
-     * @param string[] $arguments
+     * @param  string[]  $arguments
      *
      * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
      * @throws \ReflectionException
@@ -134,7 +134,7 @@ abstract class Representation implements JsonSerializable
 
         $this->throwExceptionIfPropertyDoesNotExist($property);
 
-        // format Map value: protected StringMap|null $config = null;
+        // format Map value: protected StringMap $config = null;
         $reflectedClass = new ReflectionClass($this);
         $propertyType = $reflectedClass->getProperty($property)->getType();
 

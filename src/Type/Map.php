@@ -7,13 +7,14 @@ namespace Overtrue\Keycloak\Type;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
-use OutOfBoundsException;
 use ReturnTypeWillChange;
 use Traversable;
 
 /**
  * @template T
+ *
  * @implements IteratorAggregate<string, T>
+ *
  * @phpstan-consistent-constructor
  */
 abstract class Map extends Type implements Countable, IteratorAggregate
@@ -24,22 +25,20 @@ abstract class Map extends Type implements Countable, IteratorAggregate
     protected array $map = [];
 
     /**
-     * @param  array<string, T>  $map
+     * @param array<string, T>|null $map
      */
-    public function __construct(array $map = [])
+    public function __construct(array|null $map = [])
     {
-        $this->map = array_map($this->normalizeValue(...), $map);
+        $this->map = array_map($this->normalizeValue(...), $map ?? []);
     }
 
     /**
-     * @param \Overtrue\Keycloak\Type\Map|array<string, mixed>|null $map
-     *
-     * @return static|null
+     * @param  \Overtrue\Keycloak\Type\Map|array<string, mixed>|null  $map
      */
     public static function make(Map|array|null $map): ?static
     {
         if (! $map) {
-            return null;
+            return new static();
         }
 
         // @phpstan-ignore return.type

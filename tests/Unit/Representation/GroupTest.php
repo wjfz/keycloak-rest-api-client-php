@@ -8,8 +8,6 @@ use Overtrue\Keycloak\Collection\GroupCollection;
 use Overtrue\Keycloak\Representation\Group;
 use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\BooleanMap;
-use Overtrue\Keycloak\Type\Map;
-use Overtrue\Keycloak\Type\StringMap;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

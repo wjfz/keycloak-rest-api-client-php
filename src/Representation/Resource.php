@@ -9,7 +9,7 @@ use Overtrue\Keycloak\Type\ArrayMap;
 use Symfony\Component\Serializer\Attribute\SerializedName;
 
 /**
- * @method ArrayMap|null getAttributes()
+ * @method ArrayMap getAttributes()
  * @method self withAttributes(ArrayMap|array|null $value)
  * @method string|null getDisplayName()
  * @method self withDisplayName(?string $value)
@@ -32,10 +32,10 @@ use Symfony\Component\Serializer\Attribute\SerializedName;
  */
 class Resource extends Representation
 {
-    protected ?ArrayMap $attributes = null;
+    protected ArrayMap $attributes;
 
     /**
-     * @param ArrayMap|array<string, string|string[]>|null $attributes
+     * @param  ArrayMap|array<string, string|string[]>|null  $attributes
      */
     public function __construct(
         #[SerializedName('_id')]

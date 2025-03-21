@@ -41,7 +41,7 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method self withPeriod(?string $period)
  * @method string|null getHashedSaltedValue()
  * @method self withHashedSaltedValue(?string $hashedSaltedValue)
- * @method StringMap|null getConfig()
+ * @method StringMap getConfig()
  * @method self withConfig(StringMap|array|null $config)
  *
  * @codeCoverageIgnore
@@ -51,7 +51,7 @@ class Credential extends Representation
     protected ?StringMap $config = null;
 
     /**
-     * @param StringMap|array<string,string>|null $config
+     * @param  StringMap|array<string,string>|null  $config
      */
     public function __construct(
         protected ?string $id = null,

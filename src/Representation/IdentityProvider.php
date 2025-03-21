@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Overtrue\Keycloak\Representation;
 
-use Overtrue\Keycloak\Type\Map;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
@@ -12,7 +11,7 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method self withAddReadTokenRoleOnCreate(?bool $addReadTokenRoleOnCreate)
  * @method string|null getAlias()
  * @method self withAlias(?string $alias)
- * @method StringMap|null getConfig()
+ * @method StringMap getConfig()
  * @method self withConfig(StringMap|array|null $config)
  * @method string|null getDisplayName()
  * @method self withDisplayName(?string $displayName)
@@ -40,7 +39,7 @@ class IdentityProvider extends Representation
     protected ?StringMap $config = null;
 
     /**
-     * @param \Overtrue\Keycloak\Type\StringMap|array<string, string>|null $config
+     * @param  \Overtrue\Keycloak\Type\StringMap|array<string, string>|null  $config
      */
     public function __construct(
         protected ?bool $addReadTokenRoleOnCreate = null,

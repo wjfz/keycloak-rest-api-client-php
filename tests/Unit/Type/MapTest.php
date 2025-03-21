@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Overtrue\Keycloak\Test\Unit\Type;
 
-use OutOfBoundsException;
 use Overtrue\Keycloak\Type\AnyMap;
 use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\BooleanMap;
@@ -19,7 +18,7 @@ class MapTest extends TestCase
 {
     public function test_can_be_constructed_from_empty_array(): void
     {
-        $maps = [new StringMap(), new ArrayMap(), new BooleanMap(), new IntegerMap(), new AnyMap()];
+        $maps = [new StringMap, new ArrayMap, new BooleanMap, new IntegerMap, new AnyMap];
 
         foreach ($maps as $map) {
             self::assertEquals(
@@ -38,7 +37,7 @@ class MapTest extends TestCase
                     'key-1' => ['value-1'],
                     'key-2' => 'value-2',
                     'key-3' => ['value-3'],
-                ])
+                ]),
             ],
 
             'boolean map' => [
@@ -48,7 +47,7 @@ class MapTest extends TestCase
                     'key-2' => false,
                     'key-3' => 1,
                     'key-4' => 0,
-                ])
+                ]),
             ],
 
             'integer map' => [
@@ -57,7 +56,7 @@ class MapTest extends TestCase
                     'key-1' => 1,
                     'key-2' => 2,
                     'key-3' => '3a',
-                ])
+                ]),
             ],
 
             'string map' => [
@@ -66,7 +65,7 @@ class MapTest extends TestCase
                     'key-1' => 'value-1',
                     'key-2' => 'value-2',
                     'key-3' => 'value-3',
-                ])
+                ]),
             ],
 
             'any map' => [
@@ -75,7 +74,7 @@ class MapTest extends TestCase
                     'key-1' => 'value-1',
                     'key-2' => ['value-2'],
                     'key-3' => 'value-3',
-                ])
+                ]),
             ],
         ];
     }

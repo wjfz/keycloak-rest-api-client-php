@@ -35,7 +35,7 @@ class MapNormalizerTest extends TestCase
     {
         $normalizer = new MapNormalizer;
 
-        static::assertTrue($normalizer->supportsNormalization(new StringMap()));
+        static::assertTrue($normalizer->supportsNormalization(new StringMap));
         static::assertFalse($normalizer->supportsNormalization([]));
     }
 
@@ -128,7 +128,7 @@ class MapNormalizerTest extends TestCase
         ];
 
         yield 'empty map' => [
-            new IntegerMap(),
+            new IntegerMap,
             new ArrayObject,
         ];
     }

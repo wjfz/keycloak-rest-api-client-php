@@ -29,17 +29,17 @@ use Overtrue\Keycloak\Type\ArrayMap;
  * @method self withAlias(?string $alias)
  * @method string|null getRedirectUrl()
  * @method self withRedirectUrl(?string $redirectUrl)
- * @method ArrayMap|null getAttributes()
+ * @method ArrayMap getAttributes()
  * @method self withAttributes(ArrayMap|array|null $attributes)
  *
  * @codeCoverageIgnore
  */
 class Organization extends Representation
 {
-    protected ?ArrayMap $attributes = null;
+    protected ArrayMap $attributes;
 
     /**
-     * @param \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $attributes
+     * @param  \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null  $attributes
      */
     public function __construct(
         protected ?string $id = null,

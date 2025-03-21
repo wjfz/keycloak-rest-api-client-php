@@ -8,7 +8,7 @@ use Overtrue\Keycloak\Collection\ProtocolMapperCollection;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
- * @method StringMap|null getAttributes()
+ * @method StringMap getAttributes()
  * @method self withAttributes(StringMap|array|null $attributes)
  * @method string|null getDescription()
  * @method self withDescription(?string $description)
@@ -25,10 +25,10 @@ use Overtrue\Keycloak\Type\StringMap;
  */
 class ClientScope extends Representation
 {
-    protected ?StringMap $attributes = null;
+    protected StringMap $attributes;
 
     /**
-     * @param \Overtrue\Keycloak\Type\StringMap|array<string, string>|null $attributes
+     * @param  \Overtrue\Keycloak\Type\StringMap|array<string, string>|null  $attributes
      */
     public function __construct(
         StringMap|array|null $attributes = null,

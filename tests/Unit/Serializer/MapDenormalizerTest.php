@@ -73,7 +73,7 @@ class MapDenormalizerTest extends TestCase
                 'a' => 'a1',
                 'b' => 'a2',
                 'c' => 'a3',
-            ])
+            ]),
         ];
 
         yield 'filled array map' => [
@@ -104,7 +104,7 @@ class MapDenormalizerTest extends TestCase
 
         yield 'empty array' => [
             [],
-            new AnyMap(),
+            new AnyMap,
         ];
 
         yield 'non-array' => [

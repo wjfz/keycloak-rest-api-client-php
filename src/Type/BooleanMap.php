@@ -6,14 +6,13 @@ namespace Overtrue\Keycloak\Type;
 
 /**
  * @template T extends boolean
+ *
  * @template-extends Map<T>
  */
 class BooleanMap extends Map
 {
     /**
-     * @param boolean $value
-     *
-     * @return bool
+     * @param  bool  $value
      */
     #[\Override]
     protected function normalizeValue(mixed $value): bool

@@ -11,13 +11,13 @@ use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\BooleanMap;
 
 /**
- * @method BooleanMap|null getAccess()
+ * @method BooleanMap getAccess()
  * @method self withAccess(BooleanMap|array|null $access)
- * @method ArrayMap|null getAttributes()
+ * @method ArrayMap getAttributes()
  * @method self withAttributes(ArrayMap|array|null $attributes)
  * @method UserConsentCollection|null getClientConsents()
  * @method self withClientConsents(?UserConsentCollection $clientConsents)
- * @method ArrayMap|null getClientRoles()
+ * @method ArrayMap getClientRoles()
  * @method self withClientRoles(ArrayMap|array|null $clientRoles)
  * @method int|null getCreatedTimestamp()
  * @method self withCreatedTimestamp(?int $createdTimestamp)
@@ -64,16 +64,16 @@ use Overtrue\Keycloak\Type\BooleanMap;
  */
 class Member extends Representation
 {
-    protected ?BooleanMap $access = null;
+    protected BooleanMap $access;
 
-    protected ?ArrayMap $attributes = null;
+    protected ArrayMap $attributes;
 
-    protected ?ArrayMap $clientRoles = null;
+    protected ArrayMap $clientRoles;
 
     /**
-     * @param BooleanMap|array<string, bool>|null $access
-     * @param ArrayMap|array<string, string|string[]>|null $attributes
-     * @param ArrayMap|array<string, string|string[]>|null $clientRoles
+     * @param  BooleanMap|array<string, bool>|null  $access
+     * @param  ArrayMap|array<string, string|string[]>|null  $attributes
+     * @param  ArrayMap|array<string, string|string[]>|null  $clientRoles
      */
     public function __construct(
         protected ?string $id = null,
@@ -83,7 +83,7 @@ class Member extends Representation
         protected ?string $email = null,
         protected ?bool $emailVerified = null,
         ArrayMap|array|null $attributes = null,
-        //todo: userProfileMetadata
+        // todo: userProfileMetadata
         protected ?string $self = null,
         protected ?string $origin = null,
         protected ?int $createdTimestamp = null,
@@ -102,12 +102,12 @@ class Member extends Representation
         ArrayMap|array|null $clientRoles = null,
         protected ?UserConsentCollection $clientConsents = null,
         protected ?int $notBefore = null,
-//        ArrayMap|array|null $applicationRoles = null,
+        //        ArrayMap|array|null $applicationRoles = null,
         // todo: socialLinks
         /** @var string[]|null */
         protected ?array $groups = null,
         BooleanMap|array|null $access = null,
-        //todo: membershipType
+        // todo: membershipType
     ) {
         $this->access = BooleanMap::make($access);
         $this->attributes = ArrayMap::make($attributes);

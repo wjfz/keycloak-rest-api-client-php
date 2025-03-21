@@ -7,7 +7,7 @@ namespace Overtrue\Keycloak\Representation;
 use Overtrue\Keycloak\Type\ArrayMap;
 
 /**
- * @method ArrayMap|null getAttributes()
+ * @method ArrayMap getAttributes()
  * @method self withAttributes(ArrayMap|array|null $value)
  * @method bool|null getClientRole()
  * @method self withClientRole(?bool $value)
@@ -26,10 +26,10 @@ use Overtrue\Keycloak\Type\ArrayMap;
  */
 class Role extends Representation
 {
-    protected ?ArrayMap $attributes = null;
+    protected ArrayMap $attributes;
 
     /**
-     * @param ArrayMap|array<string, string|string[]>|null $attributes
+     * @param  ArrayMap|array<string, string|string[]>|null  $attributes
      */
     public function __construct(
         ArrayMap|array|null $attributes = null,

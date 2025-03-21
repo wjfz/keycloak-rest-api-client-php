@@ -20,11 +20,10 @@ use Overtrue\Keycloak\Collection\UserCollection;
 use Overtrue\Keycloak\Collection\UserFederationMapperCollection;
 use Overtrue\Keycloak\Collection\UserFederationProviderCollection;
 use Overtrue\Keycloak\Type\ArrayMap;
-use Overtrue\Keycloak\Type\Map;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
- * @method ArrayMap|null getAttributes()
+ * @method ArrayMap getAttributes()
  * @method self withAttributes(StringMap|array|null $attributes)
  * @method int|null getAccessCodeLifespan()
  * @method int|null getAccessCodeLifespanLogin()
@@ -40,7 +39,7 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method AuthenticationFlowCollection|null getAuthenticationFlows()
  * @method AuthenticatorConfigCollection|null getAuthenticatorConfig()
  * @method string|null getBrowserFlow()
- * @method StringMap|null getBrowserSecurityHeaders()
+ * @method StringMap getBrowserSecurityHeaders()
  * @method bool|null getBruteForceProtected()
  * @method string|null getClientAuthenticationFlow()
  * @method int|null getClientOfflineSessionIdleTimeout()
@@ -52,7 +51,7 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method int|null getClientSessionIdleTimeout()
  * @method int|null getClientSessionMaxLifespan()
  * @method ClientCollection|null getClients()
- * @method MultivaluedHashMap|null getComponents()
+ * @method MultivaluedHashMap getComponents()
  * @method string[]|null getDefaultDefaultClientScopes()
  * @method string[]|null getDefaultGroups()
  * @method string|null getDefaultLocale()
@@ -117,7 +116,7 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method bool|null getRevokeRefreshToken()
  * @method Roles|null getRoles()
  * @method ScopeMappingCollection|null getScopeMappings()
- * @method StringMap|null getSmtpServer()
+ * @method StringMap getSmtpServer()
  * @method string|null getSslRequired()
  * @method int|null getSsoSessionIdleTimeout()
  * @method int|null getSsoSessionIdleTimeoutRememberMe()
@@ -282,20 +281,24 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method self withOrganizations(?OrganizationCollection $organizations)
  * @method bool|null getOrganizationsEnabled()
  * @method self withOrganizationsEnabled(?bool $organizationsEnabled)
+ *
  * @codeCoverageIgnore
  */
 class Realm extends Representation
 {
-    protected ?StringMap $attributes = null;
-    protected ?StringMap $browserSecurityHeaders = null;
-    protected ?ArrayMap $clientScopeMappings = null;
-    protected ?StringMap $smtpServer = null;
+    protected StringMap $attributes;
+
+    protected StringMap $browserSecurityHeaders;
+
+    protected ArrayMap $clientScopeMappings;
+
+    protected StringMap $smtpServer;
 
     /**
-     * @param StringMap|array<string, string>|null $attributes
-     * @param StringMap|array<string, string>|null $browserSecurityHeaders
-     * @param \Overtrue\Keycloak\Type\ArrayMap|array<string, string>|null $clientScopeMappings
-     * @param StringMap|array<string, string>|null $smtpServer
+     * @param  StringMap|array<string, string>|null  $attributes
+     * @param  StringMap|array<string, string>|null  $browserSecurityHeaders
+     * @param  \Overtrue\Keycloak\Type\ArrayMap|array<string, string>|null  $clientScopeMappings
+     * @param  StringMap|array<string, string>|null  $smtpServer
      */
     public function __construct(
         protected ?int $accessCodeLifespan = null,

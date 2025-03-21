@@ -6,13 +6,13 @@ namespace Overtrue\Keycloak\Type;
 
 /**
  * @template T extends array<mixed>
+ *
  * @template-extends Map<T>
  */
 class ArrayMap extends Map
 {
     /**
-     * @param array<T>|T $value
-     *
+     * @param  array<T>|T  $value
      * @return array<T>
      */
     #[\Override]
@@ -26,6 +26,6 @@ class ArrayMap extends Map
      */
     public function flatten(): array
     {
-        return array_map(fn(array $value) => $value[0] ?? null,  $this->map);
+        return array_map(fn (array $value) => $value[0] ?? null, $this->map);
     }
 }

@@ -8,14 +8,13 @@ use Overtrue\Keycloak\Attribute\Since;
 use Overtrue\Keycloak\Collection\GroupCollection;
 use Overtrue\Keycloak\Type\ArrayMap;
 use Overtrue\Keycloak\Type\BooleanMap;
-use Overtrue\Keycloak\Type\Map;
 
 /**
- * @method BooleanMap|null getAccess()
+ * @method BooleanMap getAccess()
  * @method self withAccess(BooleanMap|array|null $access)
- * @method ArrayMap|null getAttributes()
+ * @method ArrayMap getAttributes()
  * @method self withAttributes(ArrayMap|array|null $attributes)
- * @method ArrayMap|null getClientRoles()
+ * @method ArrayMap getClientRoles()
  * @method self withClientRoles(ArrayMap|array|null $clientRoles)
  * @method string|null getId()
  * @method self withId(?string $id)
@@ -37,13 +36,15 @@ use Overtrue\Keycloak\Type\Map;
 class Group extends Representation
 {
     protected ?BooleanMap $access = null;
+
     protected ?ArrayMap $attributes = null;
+
     protected ?ArrayMap $clientRoles = null;
 
     /**
-     * @param \Overtrue\Keycloak\Type\BooleanMap|array<string, bool>|null $access
-     * @param \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $attributes
-     * @param \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null $clientRoles
+     * @param  \Overtrue\Keycloak\Type\BooleanMap|array<string, bool>|null  $access
+     * @param  \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null  $attributes
+     * @param  \Overtrue\Keycloak\Type\ArrayMap|array<string, string|string[]>|null  $clientRoles
      */
     public function __construct(
         BooleanMap|array|null $access = null,

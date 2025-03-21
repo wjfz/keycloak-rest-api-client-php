@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Overtrue\Keycloak\Representation;
 
-use Overtrue\Keycloak\Type\Map;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method string|null getAlias()
  * @method self withAlias(?string $alias)
- * @method StringMap|null getConfig()
+ * @method StringMap getConfig()
  * @method self withConfig(StringMap|array|null $config)
  * @method string|null getId()
  * @method self withId(?string $id)

@@ -7,19 +7,18 @@ namespace Overtrue\Keycloak\Representation;
 use Overtrue\Keycloak\Collection\ProtocolMapperCollection;
 use Overtrue\Keycloak\Type\BooleanMap;
 use Overtrue\Keycloak\Type\IntegerMap;
-use Overtrue\Keycloak\Type\Map;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
- * @method BooleanMap|null getAccess()
+ * @method BooleanMap getAccess()
  * @method self withAccess(BooleanMap|array|null $access)
- * @method StringMap|null getAttributes()
+ * @method StringMap getAttributes()
  * @method self withAttributes(StringMap|array|null $attributes)
  * @method string|null getAdminUrl()
  * @method self withAdminUrl(?string $adminUrl)
  * @method bool|null getAlwaysDisplayInConsole()
  * @method self withAlwaysDisplayInConsole(?bool $alwaysDisplayInConsole)
- * @method StringMap|null getAuthenticationFlowBindingOverrides()
+ * @method StringMap getAuthenticationFlowBindingOverrides()
  * @method self withAuthenticationFlowBindingOverrides(StringMap|array|null $authenticationFlowBindingOverrides)
  * @method bool|null getAuthorizationServicesEnabled()
  * @method self withAuthorizationServicesEnabled(?bool $authorizationServicesEnabled)
@@ -69,7 +68,7 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method self withPublicClient(?bool $publicClient)
  * @method string[]|null getRedirectUris()
  * @method self withRedirectUris(?string[] $redirectUris)
- * @method IntegerMap|null getRegisteredNodes()
+ * @method IntegerMap getRegisteredNodes()
  * @method self withRegisteredNodes(IntegerMap|array|null $registeredNodes)
  * @method string|null getRegistrationAccessToken()
  * @method self withRegistrationAccessToken(?string $registrationAccessToken)
@@ -90,19 +89,19 @@ use Overtrue\Keycloak\Type\StringMap;
  */
 class Client extends Representation
 {
-    protected ?BooleanMap $access = null;
+    protected BooleanMap $access;
 
-    protected ?StringMap $attributes = null;
+    protected StringMap $attributes;
 
-    protected ?StringMap $authenticationFlowBindingOverrides = null;
+    protected StringMap $authenticationFlowBindingOverrides;
 
-    protected ?IntegerMap $registeredNodes = null;
+    protected IntegerMap $registeredNodes;
 
     /**
-     * @param BooleanMap|array<string, bool>|null $access
-     * @param StringMap|array<string, string|string[]>|null $attributes
-     * @param StringMap|array<string, string|string[]>|null $authenticationFlowBindingOverrides
-     * @param IntegerMap|array<string, int>|null $registeredNodes
+     * @param  BooleanMap|array<string, bool>|null  $access
+     * @param  StringMap|array<string, string|string[]>|null  $attributes
+     * @param  StringMap|array<string, string|string[]>|null  $authenticationFlowBindingOverrides
+     * @param  IntegerMap|array<string, int>|null  $registeredNodes
      */
     public function __construct(
         BooleanMap|array|null $access = null,

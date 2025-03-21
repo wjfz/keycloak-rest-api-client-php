@@ -8,11 +8,10 @@ use Overtrue\Keycloak\Collection\ResourceCollection;
 use Overtrue\Keycloak\Collection\ScopeCollection;
 use Overtrue\Keycloak\Enum\DecisionStrategy;
 use Overtrue\Keycloak\Enum\Logic;
-use Overtrue\Keycloak\Type\Map;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
- * @method StringMap|null getConfig()
+ * @method StringMap getConfig()
  * @method self withConfig(StringMap|array|null $config)
  * @method DecisionStrategy|null getDecisionStrategy()
  * @method self withDecisionStrategy(?DecisionStrategy $decisionStrategy)
@@ -43,10 +42,10 @@ use Overtrue\Keycloak\Type\StringMap;
  */
 class Policy extends Representation
 {
-    protected ?StringMap $config = null;
+    protected StringMap $config;
 
     /**
-     * @param StringMap|array<string, string>|null $config
+     * @param  StringMap|array<string, string>|null  $config
      */
     public function __construct(
         StringMap|array|null $config = null,

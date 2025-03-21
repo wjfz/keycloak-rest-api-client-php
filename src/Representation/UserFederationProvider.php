@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Overtrue\Keycloak\Representation;
 
-use Overtrue\Keycloak\Type\Map;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method int|null getChangedSyncPeriod()
  * @method self withChangedSyncPeriod(?int $changedSyncPeriod)
- * @method StringMap|null getConfig()
+ * @method StringMap getConfig()
  * @method self withConfig(StringMap|array|null $config)
  * @method string|null getDisplayName()
  * @method self withDisplayName(?string $displayName)
@@ -24,11 +23,12 @@ use Overtrue\Keycloak\Type\StringMap;
  * @method self withPriority(?int $priority)
  * @method string|null getProviderName()
  * @method self withProviderName(?string $providerName)
+ *
  * @codeCoverageIgnore
  */
 class UserFederationProvider extends Representation
 {
-    protected ?StringMap $config = null;
+    protected StringMap $config;
 
     /** @param StringMap|array<string, string>|null $config */
     public function __construct(

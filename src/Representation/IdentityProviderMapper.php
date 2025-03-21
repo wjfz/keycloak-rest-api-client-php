@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Overtrue\Keycloak\Representation;
 
-use Overtrue\Keycloak\Type\Map;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
- * @method StringMap|null getConfig()
+ * @method StringMap getConfig()
  * @method self withConfig(StringMap|array|null $config)
  * @method string|null getId()
  * @method self withId(?string $id)
@@ -26,7 +25,7 @@ class IdentityProviderMapper extends Representation
     protected ?StringMap $config = null;
 
     /**
-     * @param StringMap|array<string, string>|null $config
+     * @param  StringMap|array<string, string>|null  $config
      */
     public function __construct(
         StringMap|array|null $config = null,

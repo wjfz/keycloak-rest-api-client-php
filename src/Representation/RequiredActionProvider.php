@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace Overtrue\Keycloak\Representation;
 
-use Overtrue\Keycloak\Type\Map;
 use Overtrue\Keycloak\Type\StringMap;
 
 /**
  * @method string|null getAlias()
  * @method self withAlias(?string $alias)
- * @method StringMap|null getConfig()
+ * @method StringMap getConfig()
  * @method self withConfig(StringMap|array|null $config)
  * @method bool|null getDefaultAction()
  * @method self withDefaultAction(?bool $defaultAction)
@@ -27,10 +26,10 @@ use Overtrue\Keycloak\Type\StringMap;
  */
 class RequiredActionProvider extends Representation
 {
-    protected ?StringMap $config = null;
+    protected StringMap $config;
 
     /**
-     * @param \Overtrue\Keycloak\Type\StringMap|array<string, mixed>|null $config
+     * @param  \Overtrue\Keycloak\Type\StringMap|array<string, mixed>|null  $config
      */
     public function __construct(
         protected ?string $alias = null,

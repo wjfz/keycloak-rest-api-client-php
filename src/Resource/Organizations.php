@@ -45,7 +45,7 @@ class Organizations extends Resource
     }
 
     /**
-     * @param \Overtrue\Keycloak\Representation\Organization|array<string, mixed> $organization
+     * @param  \Overtrue\Keycloak\Representation\Organization|array<string, mixed>  $organization
      *
      * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
      * @throws \ReflectionException
@@ -75,11 +75,8 @@ class Organizations extends Resource
     }
 
     /**
-     * @param string                                               $realm
-     * @param string                                               $id
-     * @param \Overtrue\Keycloak\Representation\Organization|array<string,mixed> $organization
+     * @param  \Overtrue\Keycloak\Representation\Organization|array<string,mixed>  $organization
      *
-     * @return \Overtrue\Keycloak\Representation\Organization
      * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
      * @throws \ReflectionException
      */
