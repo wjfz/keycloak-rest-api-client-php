@@ -42,12 +42,11 @@ readonly class Query
         if (! $this->criteria) {
             return '';
         }
-
-        if ($this->criteria instanceof Criteria) {
-            return '?'.http_build_query($this->criteria->toArray());
+        if (is_array($this->criteria)) {
+            $this->criteria = new Criteria($this->criteria);
         }
 
-        return '?'.http_build_query($this->criteria);
+        return '?'.http_build_query($this->criteria->toArray());
     }
 
     public function getReturnType(): string
