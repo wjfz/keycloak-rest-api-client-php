@@ -82,4 +82,22 @@ class QueryTest extends TestCase
             ))->getPath(),
         );
     }
+
+    public function test_builds_query_with_array(): void
+    {
+        static::assertSame(
+            '/admin/realms/master/groups?username=foo&exact=true',
+            (new Query(
+                '/admin/realms/{realm}/groups',
+                GroupCollection::class,
+                [
+                    'realm' => 'master',
+                ],
+                [
+                    'username' => 'foo',
+                    'exact' => true,
+                ],
+            ))->getPath(),
+        );
+    }
 }

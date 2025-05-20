@@ -7,7 +7,7 @@ namespace Overtrue\Keycloak\Http;
 /**
  * @internal
  */
-readonly class Query
+class Query
 {
     /**
      * @param  array<string, string>  $parameters
@@ -42,6 +42,7 @@ readonly class Query
         if (! $this->criteria) {
             return '';
         }
+
         if (is_array($this->criteria)) {
             $this->criteria = new Criteria($this->criteria);
         }
