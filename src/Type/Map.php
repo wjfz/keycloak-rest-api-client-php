@@ -25,9 +25,9 @@ abstract class Map extends Type implements Countable, IteratorAggregate
     protected array $map = [];
 
     /**
-     * @param array<string, T>|null $map
+     * @param  array<string, T>|null  $map
      */
-    public function __construct(array|null $map = [])
+    public function __construct(?array $map = [])
     {
         $this->map = array_map($this->normalizeValue(...), $map ?? []);
     }
@@ -38,7 +38,7 @@ abstract class Map extends Type implements Countable, IteratorAggregate
     public static function make(Map|array|null $map): ?static
     {
         if (! $map) {
-            return new static();
+            return new static;
         }
 
         // @phpstan-ignore return.type
