@@ -7,9 +7,6 @@ namespace Overtrue\Keycloak\Http;
 use Overtrue\Keycloak\Serializer\Serializer;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * @internal
- */
 class CommandExecutor
 {
     public function __construct(

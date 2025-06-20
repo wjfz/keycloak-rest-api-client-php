@@ -7,9 +7,6 @@ namespace Overtrue\Keycloak\Http;
 use Overtrue\Keycloak\Json\JsonDecoder;
 use Overtrue\Keycloak\Serializer\Serializer;
 
-/**
- * @internal
- */
 class QueryExecutor
 {
     public function __construct(

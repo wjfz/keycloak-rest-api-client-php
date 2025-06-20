@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Overtrue\Keycloak\Http;
 
-/**
- * @internal
- */
 enum Method: string
 {
     case GET = 'GET';

@@ -7,9 +7,6 @@ namespace Overtrue\Keycloak\Http;
 use DateTimeInterface;
 use Stringable;
 
-/**
- * @internal
- */
 class Criteria
 {
     /**

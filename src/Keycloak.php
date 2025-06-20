@@ -127,7 +127,10 @@ class Keycloak
     }
 
     /**
-     * @param  class-string<resource>  $resource
+     * @template T of Resource
+     *
+     * @param  class-string<T>  $resource
+     * @return T
      */
     public function resource(string $resource): Resource
     {

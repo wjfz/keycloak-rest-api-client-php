@@ -7,9 +7,6 @@ namespace Overtrue\Keycloak\Http;
 use Overtrue\Keycloak\Collection\Collection;
 use Overtrue\Keycloak\Representation\Representation;
 
-/**
- * @internal
- */
 readonly class Command
 {
     public function __construct(

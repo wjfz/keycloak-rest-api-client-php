@@ -13,9 +13,6 @@ use Overtrue\Keycloak\Keycloak;
 use Overtrue\Keycloak\OAuth\TokenStorageInterface;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * @internal
- */
 class Client
 {
     public function __construct(
