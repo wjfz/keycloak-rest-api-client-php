@@ -247,6 +247,7 @@ class Organizations extends Resource
     }
 
     /**
+     * @param array<int, \Overtrue\Keycloak\Representation\IdentityProvider> $identityProviders
      * @throws \ReflectionException
      * @throws \Overtrue\Keycloak\Exception\PropertyDoesNotExistException
      */

@@ -8,6 +8,8 @@ use DateInterval;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\ClientInterface;
 use Overtrue\Keycloak\Cache\CacheManager;
+use Symfony\Component\Cache\Adapter\ArrayAdapter;
+use Symfony\Component\Cache\Psr16Cache;
 use Overtrue\Keycloak\Http\Client;
 use Overtrue\Keycloak\Http\CommandExecutor;
 use Overtrue\Keycloak\Http\QueryExecutor;
@@ -22,8 +24,6 @@ use Overtrue\Keycloak\Resource\ServerInfo;
 use Overtrue\Keycloak\Resource\Users;
 use Overtrue\Keycloak\Serializer\Serializer;
 use Psr\SimpleCache\CacheInterface;
-use Symfony\Component\Cache\Adapter\ArrayAdapter;
-use Symfony\Component\Cache\Psr16Cache;
 
 /**
  * @codeCoverageIgnore
@@ -42,6 +42,15 @@ class Keycloak
 
     private CacheManager $cacheManager;
 
+    /**
+     * @param string $baseUrl
+     * @param string $username
+     * @param string $password
+     * @param ClientInterface|null $guzzleClient
+     * @param CacheInterface|null $cache
+     * @param array<string, mixed> $cacheConfig
+     * @phpstan-param array<string, mixed> $cacheConfig
+     */
     public function __construct(
         private readonly string $baseUrl,
         private readonly string $username,
@@ -50,25 +59,25 @@ class Keycloak
         ?CacheInterface $cache = null,
         array $cacheConfig = []
     ) {
-        // 初始化缓存 - 使用 Symfony Cache ArrayAdapter 作为默认实现
-        $cache = $cache ?? new Psr16Cache(new ArrayAdapter);
+        // Initialize cache - use Symfony Cache ArrayAdapter as default implementation
+        $cache = $cache ?? new Psr16Cache(new ArrayAdapter());
 
-        // 合并默认配置和用户配置
+        // Merge default configuration with user configuration
         $mergedConfig = array_merge([
             'ttl' => [
-                'version' => new DateInterval('PT24H'),       // 版本缓存24小时
-                'server_info' => new DateInterval('PT1H'),    // 服务器信息缓存1小时
-                'access_token' => new DateInterval('PT1H'),   // 访问token缓存1小时
-                'refresh_token' => new DateInterval('P1D'),   // 刷新token缓存1天
-            ],
+                'version' => new DateInterval('PT24H'),       // Version cache for 24 hours
+                'server_info' => new DateInterval('PT1H'),    // Server info cache for 1 hour
+                'access_token' => new DateInterval('PT1H'),   // Access token cache for 1 hour
+                'refresh_token' => new DateInterval('P1D'),   // Refresh token cache for 1 day
+            ]
         ], $cacheConfig);
 
-        // 获取前缀配置，默认为 'keycloak_'
+        // Get prefix configuration, default to 'keycloak_'
         $prefix = $mergedConfig['prefix'] ?? 'keycloak_';
 
         $this->cacheManager = new CacheManager($cache, $mergedConfig, $prefix);
 
-        $guzzleClient = $guzzleClient ?? new GuzzleClient;
+        $guzzleClient = $guzzleClient ?? new GuzzleClient();
 
         $this->client = new Client($this, $guzzleClient, $this->cacheManager);
         $this->serializer = new Serializer($this->version);
@@ -165,16 +174,19 @@ class Keycloak
         return new $resource($this->commandExecutor, $this->queryExecutor, $this->cacheManager);
     }
 
+
+
     /**
-     * 清除版本缓存
+     * Clear version cache
      */
     public function clearVersionCache(): bool
     {
         $cleared = $this->cacheManager->delete('version');
-        $this->version = null; // 重置内存中的版本
-
+        $this->version = null; // Reset version in memory
         return $cleared;
     }
+
+
 
     private function fetchVersion(): void
     {
@@ -182,9 +194,9 @@ class Keycloak
             return;
         }
 
-        // 使用缓存获取版本信息
+        // Use cache to get version information
         $cacheKey = 'version';
-        $this->version = $this->cacheManager->get($cacheKey, function () {
+        $this->version = $this->cacheManager->get($cacheKey, function() {
             return $this->serverInfo()->get()->getSystemInfo()->getVersion();
         }, $this->cacheManager->getTtl('version', new DateInterval('PT24H')));
 

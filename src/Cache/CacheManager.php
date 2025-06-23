@@ -12,6 +12,9 @@ use Psr\SimpleCache\CacheInterface;
  */
 class CacheManager
 {
+    /**
+     * @param array<string, mixed> $cacheConfig
+     */
     public function __construct(
         private readonly CacheInterface $cache,
         private readonly array $cacheConfig = [],
@@ -95,22 +98,15 @@ class CacheManager
     }
 
     /**
-     * Get cache configuration value
-     */
-    private function getCacheConfigValue(string $key, mixed $default = null): mixed
-    {
-        return $this->cacheConfig[$key] ?? $default;
-    }
-
-    /**
      * Get all cache configuration
+     * @return array<string, mixed>
      */
     public function getCacheConfig(): array
     {
         return $this->cacheConfig;
     }
 
-    /**
+        /**
      * Get TTL value from configuration
      */
     public function getTtl(string $key, ?DateInterval $default = null): ?DateInterval
@@ -123,7 +119,7 @@ class CacheManager
      */
     private function prefixKey(string $key): string
     {
-        return $this->prefix.$key;
+        return $this->prefix . $key;
     }
 
     /**
