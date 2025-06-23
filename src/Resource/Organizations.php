@@ -199,7 +199,21 @@ class Organizations extends Resource
         );
     }
 
-    public function memberOrganizations(string $realm, string $id, string $memberId): OrganizationCollection
+    public function memberOrganizations(string $realm, string $memberId): OrganizationCollection
+    {
+        return $this->queryExecutor->executeQuery(
+            new Query(
+                '/admin/realms/{realm}/organizations/members/{memberId}/organizations',
+                OrganizationCollection::class,
+                [
+                    'realm' => $realm,
+                    'memberId' => $memberId,
+                ],
+            ),
+        );
+    }
+
+    public function orgMemberOrganizations(string $realm, string $id, string $memberId): OrganizationCollection
     {
         return $this->queryExecutor->executeQuery(
             new Query(
