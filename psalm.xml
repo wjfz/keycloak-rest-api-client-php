@@ -19,7 +19,7 @@
         <UnusedClass errorLevel="info" />
         <UnusedProperty>
             <errorLevel type="info">
-                <referencedProperty name="Overtrue\Keycloak\Keycloak::$tokenStorage" />
+
             </errorLevel>
         </UnusedProperty>
         <PossiblyUnusedProperty>
