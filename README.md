@@ -182,7 +182,8 @@ $myCustomRepresentation = $myCustomResource->myCustomEndpoint();
 | `GET /admin/realms/{realm}/organizations/{orgId}/members/{memberId}` | Member | [Organizations::member()](src/Resource/Organizations.php) |
 | `POST /admin/realms/{realm}/organizations/{orgId}/members` | ResponseInterface | [Organizations::addMember()](src/Resource/Organizations.php) |
 | `DELETE /admin/realms/{realm}/organizations/{orgId}/members/{memberId}` | ResponseInterface | [Organizations::deleteMember()](src/Resource/Organizations.php) |
-| `GET /admin/realms/{realm}/organizations/{orgId}/members/{memberId}/organizations` | [OrganizationCollection](src/Collection/OrganizationCollection.php) | [Organizations::memberOrganizations()](src/Resource/Organizations.php) |
+| `GET /admin/realms/{realm}/organizations/members/{memberId}/organizations` | [OrganizationCollection](src/Collection/OrganizationCollection.php) | [Organizations::memberOrganizations()](src/Resource/Organizations.php) |
+| `GET /admin/realms/{realm}/organizations/{orgId}/members/{memberId}/organizations` | [OrganizationCollection](src/Collection/OrganizationCollection.php) | [Organizations::orgMemberOrganizations()](src/Resource/Organizations.php) |
 | `POST /admin/realms/{realm}/organizations/{id}/members/invite-user` | ResponseInterface | [Organizations::inviteUser()](src/Resource/Organizations.php) |
 | `POST /admin/realms/{realm}/organizations/{id}/members/invite-existing-user` | ResponseInterface | [Organizations::inviteExistingUser()](src/Resource/Organizations.php) |
 | `POST /admin/realms/{realm}/organizations/{id}/identity-providers` | ResponseInterface | [Organizations::linkIdp()](src/Resource/Organizations.php) |
@@ -222,6 +223,7 @@ $myCustomRepresentation = $myCustomResource->myCustomEndpoint();
 | `POST /admin/realms/{realm}/users/{userId}/role-mappings/realm` | ResponseInterface | [Users::addRealmRoles()](src/Resource/Users.php) |
 | `DELETE /admin/realms/{realm}/users/{userId}/role-mappings/realm` | ResponseInterface | [Users::removeRealmRoles()](src/Resource/Users.php) |
 | `PUT /admin/realms/{realm}/users/{userId}/execute-actions-email` | ResponseInterface | [Users::executeActionsEmail()](src/Resource/Users.php) |
+| `DELETE /admin/realms/{realm}/users/{userId}/federated-identity/{provider}` | ResponseInterface | [Users::removeFederatedIdentity()](src/Resource/Users.php) |
 | `GET /admin/realms/{realm}/users/{userId}/credentials` | [CredentialCollection](src/Collection/CredentialCollection.php) | [Users::credentials()](src/Resource/Users.php) |
 
 ### [Roles](https://www.keycloak.org/docs-api/26.0.0/rest-api/index.html#_roles)

@@ -268,6 +268,27 @@ class Users extends Resource
         );
     }
 
+    /**
+     * @param string $realm
+     * @param string $userId
+     * @param string $provider
+     * @return ResponseInterface
+     */
+    public function removeFederatedIdentity(string $realm, string $userId, string $provider): ResponseInterface
+    {
+        return $this->commandExecutor->executeCommand(
+            new Command(
+                '/admin/realms/{realm}/users/{userId}/federated-identity/{provider}',
+                Method::DELETE,
+                [
+                    'realm' => $realm,
+                    'userId' => $userId,
+                    'provider' => $provider,
+                ],
+            ),
+        );
+    }
+
     public function credentials(string $realm, string $userId): CredentialCollection
     {
         return $this->queryExecutor->executeQuery(

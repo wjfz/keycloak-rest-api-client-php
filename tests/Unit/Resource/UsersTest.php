@@ -474,6 +474,34 @@ class UsersTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
+    public function test_remove_user_federated_identity(): void
+    {
+        $command = new Command(
+            '/admin/realms/{realm}/users/{userId}/federated-identity/{provider}',
+            Method::DELETE,
+            [
+                'realm' => 'test-realm',
+                'userId' => 'test-user',
+                'provider' => 'test-provider',
+            ],
+        );
+
+        $commandExecutor = $this->createMock(CommandExecutor::class);
+        $commandExecutor->expects(static::once())
+            ->method('executeCommand')
+            ->with($command)
+            ->willReturn(new Response(204));
+
+        $users = new Users(
+            $commandExecutor,
+            $this->createMock(QueryExecutor::class),
+        );
+
+        $response = $users->removeFederatedIdentity('test-realm', 'test-user', 'test-provider');
+
+        static::assertSame(204, $response->getStatusCode());
+    }
+
     public function test_credentials(): void
     {
         $query = new Query(
