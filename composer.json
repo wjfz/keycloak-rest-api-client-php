@@ -3,7 +3,7 @@
     "description": "PHP client to interact with Keycloak's Admin REST API.",
     "type": "library",
     "require": {
-        "php": "^8.4",
+        "php": "^8.3",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^7.9",
         "lcobucci/jwt": "^5.5",
@@ -13,12 +13,12 @@
         "psr/simple-cache": "^3.0"
     },
     "require-dev": {
-        "phpmetrics/phpmetrics": "^v3.0.0rc8",
+        "phpmetrics/phpmetrics": "^2.8",
         "phpstan/phpstan": "^2.1",
         "ramsey/uuid": "^4.7",
         "phpunit/phpunit": "^10",
         "phpstan/phpstan-deprecation-rules": "^2.0",
-        "vimeo/psalm": "^6.8.8",
+        "vimeo/psalm": "^5.26",
         "laravel/pint": "^1.21",
         "symfony/var-dumper": "^7.2"
     },
