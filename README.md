@@ -223,6 +223,7 @@ $myCustomRepresentation = $myCustomResource->myCustomEndpoint();
 | `POST /admin/realms/{realm}/users/{userId}/role-mappings/realm` | ResponseInterface | [Users::addRealmRoles()](src/Resource/Users.php) |
 | `DELETE /admin/realms/{realm}/users/{userId}/role-mappings/realm` | ResponseInterface | [Users::removeRealmRoles()](src/Resource/Users.php) |
 | `PUT /admin/realms/{realm}/users/{userId}/execute-actions-email` | ResponseInterface | [Users::executeActionsEmail()](src/Resource/Users.php) |
+| `POST /admin/realms/{realm}/users/{userId}/federated-identity/{provider}` | ResponseInterface | [Users::addFederatedIdentity()](src/Resource/Users.php) |
 | `DELETE /admin/realms/{realm}/users/{userId}/federated-identity/{provider}` | ResponseInterface | [Users::removeFederatedIdentity()](src/Resource/Users.php) |
 | `GET /admin/realms/{realm}/users/{userId}/credentials` | [CredentialCollection](src/Collection/CredentialCollection.php) | [Users::credentials()](src/Resource/Users.php) |
 
