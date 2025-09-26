@@ -300,7 +300,7 @@ class OrganizationsTest extends TestCase
         static::assertSame(204, $response->getStatusCode());
     }
 
-    public function test_list_member_organizations()
+    public function test_list_org_member_organizations()
     {
         $query = new Query(
             '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}/organizations',
@@ -330,7 +330,7 @@ class OrganizationsTest extends TestCase
 
         static::assertSame(
             $organizationCollection,
-            $organizations->memberOrganizations('test-realm', 'uuid', 'test-member-1'),
+            $organizations->orgMemberOrganizations('test-realm', 'uuid', 'test-member-1'),
         );
     }
 
