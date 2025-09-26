@@ -12,6 +12,7 @@ use Overtrue\Keycloak\Http\Command;
 use Overtrue\Keycloak\Http\Criteria;
 use Overtrue\Keycloak\Http\Method;
 use Overtrue\Keycloak\Http\Query;
+use Overtrue\Keycloak\Representation\FederatedIdentity;
 use Overtrue\Keycloak\Representation\User as UserRepresentation;
 use Psr\Http\Message\ResponseInterface;
 
@@ -264,6 +265,31 @@ class Users extends Resource
                 ],
                 $actions,
                 $criteria,
+            ),
+        );
+    }
+
+    /**
+     * @param string $realm
+     * @param string $userId
+     * @param FederatedIdentity $federatedIdentity
+     * @return ResponseInterface
+     */
+    public function addFederatedIdentity(string $realm, string $userId, FederatedIdentity $federatedIdentity): ResponseInterface
+    {
+        return $this->commandExecutor->executeCommand(
+            new Command(
+                '/admin/realms/{realm}/users/{userId}/federated-identity/{provider}',
+                Method::POST,
+                [
+                    'realm' => $realm,
+                    'userId' => $userId,
+                    'provider' => $federatedIdentity->getIdentityProvider(),
+                ],
+                payload: [
+                    'userId' => $federatedIdentity->getUserId(),
+                    'userName' => $federatedIdentity->getUserName(),
+                ],
             ),
         );
     }

@@ -15,6 +15,7 @@ use Overtrue\Keycloak\Http\Criteria;
 use Overtrue\Keycloak\Http\Method;
 use Overtrue\Keycloak\Http\Query;
 use Overtrue\Keycloak\Http\QueryExecutor;
+use Overtrue\Keycloak\Representation\FederatedIdentity;
 use Overtrue\Keycloak\Representation\Group;
 use Overtrue\Keycloak\Representation\Role;
 use Overtrue\Keycloak\Representation\User;
@@ -470,6 +471,44 @@ class UsersTest extends TestCase
         );
 
         $response = $users->executeActionsEmail('test-realm', 'test-user-id');
+
+        static::assertSame(204, $response->getStatusCode());
+    }
+
+    public function test_add_user_federated_identity(): void
+    {
+        $federatedIdentity = new FederatedIdentity(
+            identityProvider: 'test-provider',
+            userId: 'federated-user-id',
+            userName: 'federated-user-name',
+        );
+
+        $command = new Command(
+            '/admin/realms/{realm}/users/{userId}/federated-identity/{provider}',
+            Method::POST,
+            [
+                'realm' => 'test-realm',
+                'userId' => 'test-user',
+                'provider' => 'test-provider',
+            ],
+            payload: [
+                'userId' => 'federated-user-id',
+                'userName' => 'federated-user-name',
+            ],
+        );
+
+        $commandExecutor = $this->createMock(CommandExecutor::class);
+        $commandExecutor->expects(static::once())
+            ->method('executeCommand')
+            ->with($command)
+            ->willReturn(new Response(204));
+
+        $users = new Users(
+            $commandExecutor,
+            $this->createMock(QueryExecutor::class),
+        );
+
+        $response = $users->addFederatedIdentity('test-realm', 'test-user', $federatedIdentity);
 
         static::assertSame(204, $response->getStatusCode());
     }
