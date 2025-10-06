@@ -63,6 +63,7 @@ class OrganizationsTest extends TestCase
                 'realm' => 'test-realm',
                 'id' => 'test-organization-1',
             ],
+            ['flag' => true],
         );
 
         $organization = new Organization(id: 'test-organization-1');
@@ -81,6 +82,37 @@ class OrganizationsTest extends TestCase
         static::assertSame(
             $organization,
             $organizations->get('test-realm', 'test-organization-1'),
+        );
+    }
+
+    public function test_get_organization_with_flag_false(): void
+    {
+        $query = new Query(
+            '/admin/realms/{realm}/organizations/{id}',
+            Organization::class,
+            [
+                'realm' => 'test-realm',
+                'id' => 'test-organization-1',
+            ],
+            ['flag' => false],
+        );
+
+        $organization = new Organization(id: 'test-organization-1');
+
+        $queryExecutor = $this->createMock(QueryExecutor::class);
+        $queryExecutor->expects(static::once())
+            ->method('executeQuery')
+            ->with($query)
+            ->willReturn($organization);
+
+        $organizations = new Organizations(
+            $this->createMock(CommandExecutor::class),
+            $queryExecutor,
+        );
+
+        static::assertSame(
+            $organization,
+            $organizations->get('test-realm', 'test-organization-1', false),
         );
     }
 
@@ -111,7 +143,7 @@ class OrganizationsTest extends TestCase
             ->getMock();
         $organizations->expects(static::once())
             ->method('get')
-            ->with('test-realm', 'uuid')
+            ->with('test-realm', 'uuid', true)
             ->willReturn($createdOrganization);
 
         $organization = $organizations->create('test-realm', $createdOrganization);

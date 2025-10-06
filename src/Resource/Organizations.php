@@ -33,13 +33,14 @@ class Organizations extends Resource
         );
     }
 
-    public function get(string $realm, string $id): Organization
+    public function get(string $realm, string $id, bool $flag = true): Organization
     {
         return $this->queryExecutor->executeQuery(
             new Query(
                 '/admin/realms/{realm}/organizations/{id}',
                 Organization::class,
                 ['realm' => $realm, 'id' => $id],
+                ['flag' => $flag],
             ),
         );
     }
